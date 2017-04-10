@@ -30,6 +30,9 @@
     <ClInclude Include="spline.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="SinInterpolate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -45,6 +48,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="spline.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SinInterpolate.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

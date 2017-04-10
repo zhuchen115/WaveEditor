@@ -30,6 +30,10 @@ namespace TimeSeriesShared
         /// </summary>
         public object Tag;
 
+        public double MinValue { get; set; }
+        public double MaxValue { get; set; }
+        public ushort SampleBits { get; set; }
+
         public T Value
         {
             get
@@ -77,8 +81,25 @@ namespace TimeSeriesShared
                 }
                 else
                 {
-                    throw new ArgumentException("Typr not supported");
+                    throw new ArgumentException("Type not supported");
                 }
+            }
+        }
+
+        public double RealValue
+        {
+            get
+            {
+                if (typeof(T) == typeof(double) || typeof(T) == typeof(float))
+                {
+                    return Value.ToDouble(null);
+                }
+                ulong TVal = Value.ToUInt64(null);
+                if (TVal >= ((ulong)1 << SampleBits))
+                {
+                    throw new ArgumentOutOfRangeException("value", "Out of Storage Range");
+                }
+                return ((double)TVal) * (MaxValue - MinValue) / ((1 << SampleBits) - 1);
             }
         }
 

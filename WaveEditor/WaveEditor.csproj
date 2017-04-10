@@ -81,7 +81,6 @@
     </Compile>
     <Compile Include="IInterpolation.cs" />
     <Compile Include="IWaveOutput.cs" />
-    <Compile Include="LinearInter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleSeries.cs" />

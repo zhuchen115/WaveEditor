@@ -136,6 +136,7 @@
     <ClInclude Include="CubicInterpolate.h" />
     <ClInclude Include="LinearInterpolate.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SinInterpolate.h" />
     <ClInclude Include="spline.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
@@ -143,6 +144,7 @@
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="CubicInterpolate.cpp" />
     <ClCompile Include="LinearInterpolate.cpp" />
+    <ClCompile Include="SinInterpolate.cpp" />
     <ClCompile Include="spline.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

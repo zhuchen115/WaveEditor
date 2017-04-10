@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IInterpolate.cs" />
+    <Compile Include="IWaveIO.cs" />
     <Compile Include="SampleSeries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

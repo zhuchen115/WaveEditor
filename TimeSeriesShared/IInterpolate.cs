@@ -37,7 +37,7 @@ namespace TimeSeriesShared
         /// <remarks> The function should return include the first point without final point</remarks>
         T[] Calculate(uint start, uint stop, SamplePoint<T>[] point);
 
-        double[] CalculateDisp(uint start, uint stop, SamplePoint<T>[] points, int num,double[] range);
+        double[] CalculateDisp(uint start, uint stop, SamplePoint<T>[] points, int num);
     }
 
     /// <summary>

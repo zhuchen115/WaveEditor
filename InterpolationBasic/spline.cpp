@@ -1,4 +1,6 @@
+#include "Stdafx.h"
 #include "spline.h"
+
 namespace InterpolationBasic {
 
 	band_matrix::band_matrix(int dim, int n_u, int n_l)
@@ -13,10 +15,10 @@ namespace InterpolationBasic {
 		assert(n_l >= 0);
 		m_upper.resize(n_u + 1);
 		m_lower.resize(n_l + 1);
-		for (size_t i = 0; i<m_upper.size(); i++) {
+		for (int i = 0; i<m_upper.size(); i++) {
 			m_upper[i].resize(dim);
 		}
-		for (size_t i = 0; i<m_lower.size(); i++) {
+		for (int i = 0; i<m_lower.size(); i++) {
 			m_lower[i].resize(dim);
 		}
 	}
@@ -142,13 +144,13 @@ namespace InterpolationBasic {
 				rhs[i] = (y[i + 1] - y[i]) / (x[i + 1] - x[i]) - (y[i] - y[i - 1]) / (x[i] - x[i - 1]);
 			}
 			// boundary conditions
-			if (m_left == spline::second_deriv) {
+			if (m_left == spline::bd_type::second_deriv) {
 				// 2*b[0] = f''
 				A[0, 0] = 2.0;
 				A[0, 1] = 0.0;
 				rhs[0] = m_left_value;
 			}
-			else if (m_left == spline::first_deriv) {
+			else if (m_left == spline::bd_type::first_deriv) {
 				// c[0] = f', needs to be re-expressed in terms of b:
 				// (2b[0]+b[1])(x[1]-x[0]) = 3 ((y[1]-y[0])/(x[1]-x[0]) - f')
 				A[0, 0] = 2.0*(x[1] - x[0]);
@@ -158,13 +160,13 @@ namespace InterpolationBasic {
 			else {
 				assert(false);
 			}
-			if (m_right == spline::second_deriv) {
+			if (m_right == spline::bd_type::second_deriv) {
 				// 2*b[n-1] = f''
 				A[n - 1, n - 1] = 2.0;
 				A[n - 1, n - 2] = 0.0;
 				rhs[n - 1] = m_right_value;
 			}
-			else if (m_right == spline::first_deriv) {
+			else if (m_right == spline::bd_type::first_deriv) {
 				// c[n-1] = f', needs to be re-expressed in terms of b:
 				// (b[n-2]+2b[n-1])(x[n-1]-x[n-2])
 				// = 3 (f' - (y[n-1]-y[n-2])/(x[n-1]-x[n-2]))
@@ -238,14 +240,14 @@ namespace InterpolationBasic {
 				break;
 			}
 		}
-		else if (x>m_x[n - 1]) {
+		else if (x>m_x[(int)n - 1]) {
 			// extrapolation to the right
 			switch (order) {
 			case 1:
-				interpol = 2.0*m_b[n - 1] * h + m_c[n - 1];
+				interpol = 2.0*m_b[(int)n - 1] * h + m_c[(int)n - 1];
 				break;
 			case 2:
-				interpol = 2.0*m_b[n - 1];
+				interpol = 2.0*m_b[(int)n - 1];
 				break;
 			default:
 				interpol = 0.0;

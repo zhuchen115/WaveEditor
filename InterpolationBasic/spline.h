@@ -1,7 +1,8 @@
 #pragma once
-
+#pragma warning( disable: 4484)
 #include <cliext\algorithm>
 #include <cliext\vector>
+#pragma warning( default: 4484)
 #include <cassert>
 #include <cstdio>
 
@@ -84,7 +85,7 @@ namespace InterpolationBasic {
 		cliext::vector<double> r_solve(cliext::vector<double> %b);
 		cliext::vector<double> l_solve( cliext::vector<double> %b);
 		cliext::vector<double> lu_solve(cliext::vector<double> %b, bool is_lu_decomposed);
-		cliext::vector<double> lu_solve(cliext::vector<double> %b) { this->lu_solve(b, false); }
+		cliext::vector<double> lu_solve(cliext::vector<double> %b) {return this->lu_solve(b, false); }
 	};
 
 
@@ -92,7 +93,7 @@ namespace InterpolationBasic {
 ref class spline
 	{
 	public:
-		enum bd_type {
+		enum class bd_type {
 			first_deriv = 1,
 			second_deriv = 2
 		};
@@ -109,7 +110,7 @@ ref class spline
 
 	public:
 		// set default boundary condition to be zero curvature at both ends
-		spline() : m_left(second_deriv), m_right(second_deriv),
+		spline() : m_left(bd_type::second_deriv), m_right(bd_type::second_deriv),
 			m_left_value(0.0), m_right_value(0.0),
 			m_force_linear_extrapolation(false)
 		{
@@ -143,9 +144,9 @@ ref class spline
 				// extrapolation to the left
 				interpol = (m_b0*h + m_c0)*h + m_y[0];
 			}
-			else if (x>m_x[n - 1]) {
+			else if (x>m_x[(int)n - 1]) {
 				// extrapolation to the right
-				interpol = (m_b[n - 1] * h + m_c[n - 1])*h + m_y[n - 1];
+				interpol = (m_b[(int)n - 1] * h + m_c[(int)n - 1])*h + m_y[(int)n - 1];
 			}
 			else {
 				// interpolation
