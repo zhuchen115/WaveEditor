@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace WaveEditor
 {
-    public partial class frmEditor : Form
+    public partial class FrmEditor : Form
     {
-        public frmEditor()
+        public FrmEditor()
         {
             InitializeComponent();
         }
 
-        private void frmEditor_Load(object sender, EventArgs e)
+        private void FrmEditor_Load(object sender, EventArgs e)
         {
 
         }

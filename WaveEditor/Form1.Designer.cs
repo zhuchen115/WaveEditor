@@ -1,6 +1,6 @@
 ﻿namespace WaveEditor
 {
-    partial class frmEditor
+    partial class FrmEditor
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditor));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEditor));
             this.menuTop = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -508,7 +508,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmEditor";
             this.Text = "WaveEditor";
-            this.Load += new System.EventHandler(this.frmEditor_Load);
+            this.Load += new System.EventHandler(this.FrmEditor_Load);
             this.menuTop.ResumeLayout(false);
             this.menuTop.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);

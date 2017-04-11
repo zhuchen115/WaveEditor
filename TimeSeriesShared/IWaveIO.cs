@@ -1,4 +1,4 @@
-﻿using  System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -67,20 +67,14 @@ namespace TimeSeriesShared
         void ReadWrite(int length, byte[] datain, ref byte[] dataout);
     }
 
-    public enum ConfigType
-    {
-        NUMERIC,
-        ENUM,
-        STRING
-    }
 
     /// <summary>
     /// The configuration class for the IWaveIO
     /// </summary>
     public class WaveIOConfig
     {
-        private Dictionary<string, object> _config = new Dictionary<string, object>();
-        private Dictionary<string, ConfigType> _types = new Dictionary<string, ConfigType>();
+        protected Dictionary<string, object> _config = new Dictionary<string, object>();
+
         public Dictionary<string, object> Config
         {
             get { return _config; }
@@ -97,9 +91,9 @@ namespace TimeSeriesShared
                 _config[idx] = value;
             }
         }
-
-
-
-
+    }
+    public abstract class WaveIOConfigForm : System.Windows.Forms.Form
+    {
+        public WaveIOConfig Config { get; set; }
     }
 }
