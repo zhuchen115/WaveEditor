@@ -37,8 +37,24 @@ namespace WaveEditor
             if (mode == OpMode.Change)
             {
                 txtTime.ReadOnly = true;
+                txtTime.Text = time.ToString();
+                txtValue.Text = Value.ToString();
+                this.Text = "Change Point";
             }
-                
+            else if(mode == OpMode.Add)
+            {
+                txtTime.ReadOnly = false;
+                this.Text = "Add Point";
+            }
+            else
+            {
+                txtTime.ReadOnly = false;
+                txtValue.Enabled = false;
+                txtTime.Text = time.ToString();
+                txtValue.Text = Value.ToString();
+                this.Text = "Delete Point";
+                btnSave.Text = "Delete";
+            }
 
         }
         private void chkRealTime_CheckedChanged(object sender, EventArgs e)
