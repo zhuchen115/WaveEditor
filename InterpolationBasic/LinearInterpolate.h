@@ -46,8 +46,12 @@ namespace InterpolationBasic {
 			double coef = (points[1]->RealValue - points[0]->RealValue) / (points[1]->time - points[0]->time);
 			double y0 = points[0]->RealValue;
 			unsigned int x0 = points[0]->time;
-			double step = ((double)(stop - start)) / num;
+			if (num < 1)
+			{
+				return gcnew array<double, 1>(0);
+			}
 			array<double, 1> ^result = gcnew array<double, 1>(num);
+			double step = ((double)(stop - start)) / num;
 			for (int i = 0;i < num; i++)
 			{
 				double res = y0 + coef*(step*i); // Real

@@ -1,10 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.IO;
 using System.ComponentModel;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Linq;
 
 namespace TimeSeriesShared
 {
@@ -32,7 +31,38 @@ namespace TimeSeriesShared
 
         public double MinValue { get; set; }
         public double MaxValue { get; set; }
-        public ushort SampleBits { get; set; }
+        public ushort SampleBits {
+            get { return _sample_bits; }
+            set {
+                int maxbits;
+                if (typeof(T) == typeof(uint))
+                {
+                    maxbits = 32;
+                }
+                else if (typeof(T) == typeof(ushort))
+                {
+                    maxbits = 16;
+                }
+                else if (typeof(T) == typeof(ulong))
+                {
+                    maxbits = 64;
+                }
+                else if (typeof(T) == typeof(byte))
+                {
+                    maxbits = 8;
+                }
+                else
+                {
+                    throw new ArgumentException("Type not support for sample bits");
+                }
+                if (value > maxbits)
+                    throw new ArgumentOutOfRangeException("Bits overflow");
+                else
+                    _sample_bits = value;
+            }
+        }
+
+        private ushort _sample_bits;
 
         public T Value
         {
@@ -101,6 +131,24 @@ namespace TimeSeriesShared
                 }
                 return ((double)TVal) * (MaxValue - MinValue) / ((1 << SampleBits) - 1);
             }
+            set
+            {
+                if (typeof(T) == typeof(double))
+                {
+                    data = BitConverter.GetBytes(value);
+                }
+                else if (typeof(T) == typeof(float))
+                {
+                    data = BitConverter.GetBytes((float)value);
+                }
+                else
+                {
+                    if (value > MaxValue || value < MinValue)
+                        throw new ArgumentOutOfRangeException("Arguments Outof Range");
+                    ulong Tval = (ulong)( value * ((1 << SampleBits) - 1) / (MaxValue - MinValue));
+                    this.Value = (T)((Object)Tval);
+                }
+            }
         }
 
         /// <summary>
@@ -108,8 +156,11 @@ namespace TimeSeriesShared
         /// </summary>
         public bool Group { get; set; }
 
-        public SamplePoint(uint time, T data,bool group = false)
+        public SamplePoint(uint time, T data,bool group = false,double Min=0,double Max=5,ushort len=1)
         {
+            MinValue = Min;
+            MaxValue = Max;
+            SampleBits = len;
             if (typeof(T) == typeof(uint))
             {
                 this.data = new byte[4];
@@ -305,7 +356,7 @@ namespace TimeSeriesShared
                 throw new ArgumentOutOfRangeException("value", "Value is outof the sample bits");
             if (time == 0)
                 throw new ArgumentOutOfRangeException("time", "Time cannot be zero");
-            ctrldata.Add(new SamplePoint<T>(time, value,group));
+            ctrldata.Add(new SamplePoint<T>(time, value,group,MinValue,MaxValue,SampleBits));
             // Make sure the data is in time order.
             ctrldata.Sort();
             // Make sure the data has no distinct.
@@ -347,9 +398,9 @@ namespace TimeSeriesShared
                 throw new ArgumentOutOfRangeException("time", "Time cannot be zero");
             int loc = ctrldata.FindIndex((SamplePoint<T> point) => { return point.time == time; });
             if (loc >= 0)
-                ctrldata[loc] = new SamplePoint<T>(time, value,group);
+                ctrldata[loc] = new SamplePoint<T>(time, value,group, MinValue, MaxValue, SampleBits);
             else
-                ctrldata.Add(new SamplePoint<T>(time, value,group));
+                ctrldata.Add(new SamplePoint<T>(time, value,group, MinValue, MaxValue, SampleBits));
             
         }
 
@@ -376,7 +427,7 @@ namespace TimeSeriesShared
             return ((double)time / SampleRate);
         }
 
-        BackgroundWorker worker = null;
+        BackgroundWorker worker0 = null;
 
         /// <summary>
         /// Interpolate the time series
@@ -388,19 +439,23 @@ namespace TimeSeriesShared
         {
             
             DoWorkEventArgs es = new DoWorkEventArgs(endtime);
-            worker = new BackgroundWorker();
-            worker.DoWork += _genseries_background;
-            worker.WorkerSupportsCancellation = true;
-            worker.WorkerReportsProgress = true;
+            worker0 = new BackgroundWorker();
+            worker0.DoWork += _genseries_background;
+            worker0.WorkerSupportsCancellation = true;
+            worker0.WorkerReportsProgress = true;
             if (process != null)
-                worker.ProgressChanged += process;
+                worker0.ProgressChanged += process;
             if (done != null)
-                worker.RunWorkerCompleted += done;
+                worker0.RunWorkerCompleted += done;
 
         }
 
 
-
+        /// <summary>
+        /// The background task for signal generation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void _genseries_background(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
@@ -455,6 +510,135 @@ namespace TimeSeriesShared
                 }
             }
             e.Result = result;
+        }
+
+
+        public double[] GenerateDispSeries(uint start, uint stop,uint DispNum=1000)
+        {
+
+            double[] disp = new double[DispNum];
+            if (stop <= start)
+                throw new InvalidOperationException("Time Start must smaller than Time Stop");
+            // find out the control point within range
+            List<SamplePoint<T>> ctldata = new List<SamplePoint<T>>();
+            List<double> result = new List<double>();
+            if (start > ctrldata.Last().time)
+            {
+                // Zero order holder
+                disp[0] =  ctrldata.Last().RealValue;
+                ArrayList.Repeat(disp[0], disp.Length).CopyTo(disp);
+                return disp;
+            }
+            // Find all the control point
+            var dispctrl_e = from disppoint in ctrldata
+                             where disppoint.time >= start && disppoint.time <= stop
+                             orderby disppoint.time
+                             select disppoint;
+            List<SamplePoint<T>> dispctrl = dispctrl_e.ToList();
+            //bool injl = false;
+            if (dispctrl.Count() >= 1)
+            {
+                if (dispctrl.First().time > start)
+                {
+                    // Find out the previous point 
+                    int idx = ctrldata.FindIndex((SamplePoint<T> point) => { return point.time == dispctrl.First().time; });
+                    if (idx < 1) //This can never happen,except the series is not initialized correctly.
+                        throw new Exception();
+                    dispctrl.Insert(0, ctrldata[idx - 1]);
+                    //injl = true;
+                }
+
+                if (dispctrl.Last().time < stop)
+                {
+                    // Find out the next point
+                    int idx = ctrldata.FindIndex((SamplePoint<T> point) => { return point.time == dispctrl.Last().time; });
+                    if (idx < 1) //This can never happen
+                        throw new Exception();
+                    if (idx == ctrldata.Count() - 1) //The last point
+                    {
+                        dispctrl.Add(new SamplePoint<T>(stop, dispctrl.Last().Value,false, MinValue, MaxValue, SampleBits));
+                    }
+                }
+            }
+            else //The Start time and stop time is between two control point
+            {
+                dispctrl_e = from disppoint in ctrldata
+                             where disppoint.time < start
+                             orderby disppoint.time descending
+                             select disppoint;
+                if (dispctrl_e.Count() < 1)
+                    throw new ArgumentException("Time Start is not found");
+                int idx = ctrldata.FindIndex((SamplePoint<T> point) => { return point.time == dispctrl.First().time; });
+                dispctrl.Clear();
+                dispctrl.Add(ctrldata[idx]);
+                if (idx == ctrldata.Count() - 1)
+                    dispctrl.Add(new SamplePoint<T>(stop, ctrldata[idx].Value,false,MinValue,MaxValue,SampleBits));
+                else
+                    dispctrl.Add(ctrldata[idx + 1]);
+                //injl = true;
+            }
+            // Now start interpolate
+            dispctrl.Sort();
+            int i = 0;
+            bool end = false;
+            double ts = (stop - start) / DispNum;
+            int j=0;
+            while (i < ctrldata.Count())
+            {
+                ctldata.Add(ctrldata[i]);
+                if (ctrldata.Count() == 0)
+                {
+                    end = false;
+                    i++;
+                }
+                else
+                {
+                    if (ctrldata[i].Group)
+                    {
+                        end = false;
+                        i++;
+                    }
+                    else
+                        end = true;
+                }
+                if (end)
+                {
+                    if (ctrldata[i].Tag is IInterpolate<T> sr)
+                    {
+                        if (sr.MultiPoint > 0 && sr.MultiPoint < ctldata.Count())
+                        {
+                            throw new ArgumentException(String.Format("Group member exceed maxinum value in {0}", i));
+                        }
+                        else
+                        {
+                            int num = 0;
+                            //Calculate No of points in this reigon
+                            while(j<DispNum)
+                            {
+                                if (start + ts * j >= ctldata.Last().time)
+                                    break;
+                                else
+                                {
+                                    num++;
+                                    j++;
+                                }   
+                            }
+                            if (num > 0)
+                            {
+                                double[] res = sr.CalculateDisp(ctldata.First().time, ctldata.Last().time, ctldata.ToArray(), num);
+                                result.AddRange(res);
+                            }
+                            ctldata.Clear();
+                        }
+                    }
+                    else
+                    {
+                        //The interp not initialized.
+                        throw new InvalidOperationException();
+                    }
+                }
+            }
+            return result.ToArray();
         }
     }
 }

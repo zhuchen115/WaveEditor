@@ -51,14 +51,6 @@
     <ApplicationIcon>ass\波次处理.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="KeraLua, Version=1.3.2.0, Culture=neutral, PublicKeyToken=04d04586786c6f34, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLua.1.3.2.1\lib\net45\KeraLua.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NLua, Version=1.3.2.0, Culture=neutral, PublicKeyToken=8df2ab518030ea95, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLua.1.3.2.1\lib\net45\NLua.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
@@ -79,11 +71,19 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPoint.Designer.cs">
+      <DependentUpon>FrmPoint.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleSeries.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPoint.resx">
+      <DependentUpon>FrmPoint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -127,10 +127,20 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InterpolationBasic\InterpolationBasic.vcxproj">
+      <Project>{527950f3-c099-4ccd-a1ad-cef2aa1b2d38}</Project>
+      <Name>InterpolationBasic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TimeSeriesShared\TimeSeriesShared.csproj">
+      <Project>{6fb83247-bd9b-4724-b77b-70c311a375f5}</Project>
+      <Name>TimeSeriesShared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-xcopy /s /y "D:\code\vsproj\WaveEditor\packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
+xcopy /s /y "$(SolutionDir)packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

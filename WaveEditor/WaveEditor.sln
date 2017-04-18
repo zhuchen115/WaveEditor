@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.0
+VisualStudioVersion = 15.0.26403.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveEditor", "WaveEditor.csproj", "{C678497C-32C9-4EBF-B0A9-5DBE48831C91}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6FB83247-BD9B-4724-B77B-70C311A375F5} = {6FB83247-BD9B-4724-B77B-70C311A375F5}
+		{527950F3-C099-4CCD-A1AD-CEF2AA1B2D38} = {527950F3-C099-4CCD-A1AD-CEF2AA1B2D38}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSeriesShared", "..\TimeSeriesShared\TimeSeriesShared.csproj", "{6FB83247-BD9B-4724-B77B-70C311A375F5}"
 EndProject
