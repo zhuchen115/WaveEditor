@@ -27,10 +27,10 @@
     <ClInclude Include="CubicInterpolate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="spline.h">
+    <ClInclude Include="SinInterpolate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="SinInterpolate.h">
+    <ClInclude Include="spline2.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,10 +47,10 @@
     <ClCompile Include="CubicInterpolate.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="spline.cpp">
+    <ClCompile Include="SinInterpolate.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="SinInterpolate.cpp">
+    <ClCompile Include="spline2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="DispNum" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1000</Value>
+      <Value Profile="(Default)">100</Value>
     </Setting>
     <Setting Name="CacheNum" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">268435456</Value>

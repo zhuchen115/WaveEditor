@@ -5,7 +5,11 @@
 #pragma warning( default: 4484)
 #include <cassert>
 #include <cstdio>
-
+#ifdef _DEBUG
+#define CLIASSERT(condition, ...) System::Diagnostics::Debug::Assert(condition, ##__VA_ARGS__)
+#else
+#define CLIASSERT(condition, ...) // This macro will completely evaporate in Release.
+#endif
 /* The managed (cliextend) spline library */
 
 namespace InterpolationBasic {
@@ -52,8 +56,8 @@ namespace InterpolationBasic {
 			void set(int i, int j, double value)
 			{
 				int k = j - i;       // what band is the entry
-				assert((i >= 0) && (i<dim()) && (j >= 0) && (j<dim()));
-				assert((-num_lower() <= k) && (k <= num_upper()));
+				CLIASSERT((i >= 0) && (i<dim()) && (j >= 0) && (j<dim()));
+				CLIASSERT((-num_lower() <= k) && (k <= num_upper()));
 				// k=0 -> diogonal, k<0 lower left part, k>0 upper right part
 				if (k >= 0) {
 					cliext::vector<double> ^t = %m_upper[k];

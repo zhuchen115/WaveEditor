@@ -2,8 +2,9 @@
 #pragma warning( disable: 4484)
 #include <cmath>
 #include <cliext\vector>
+#include <vector>
 #include "Stdafx.h"
-#include "spline.h"
+#include "spline2.h"
 #pragma warning( default: 4484)
 
 using namespace System;
@@ -27,7 +28,7 @@ namespace InterpolationBasic {
 				if (start >= stop)
 					throw gcnew ArgumentException("Start Time must smaller than stop time");
 				
-				cliext::vector<double> x, y;
+				std::vector<double> x, y;
 				for (int i = 0; i < point->Length; i++)
 				{
 					x.push_back((double)(point[i]->time));
@@ -38,7 +39,7 @@ namespace InterpolationBasic {
 				System::Collections::Generic::List<NumType>^ rslt = gcnew System::Collections::Generic::List<NumType>();
 				for (unsigned int i = start; i < stop; i++)
 				{
-					rslt->Add((NumType)((System::Object^)s[i]));
+					rslt->Add((NumType)((System::Object^)s(i)));
 				}
 				return rslt->ToArray();
 				
@@ -48,7 +49,7 @@ namespace InterpolationBasic {
 			{
 				if (start >= stop)
 					throw gcnew ArgumentException("Start Time must smaller than stop time");
-				cliext::vector<double> x, y;
+				std::vector<double> x, y;
 				for (int i = 0; i < points->Length; i++)
 				{
 					x.push_back((double)(points[i]->time));
@@ -60,7 +61,7 @@ namespace InterpolationBasic {
 				double step = ((double)stop - start) / num;
 				for (int i = 0; i < num; i++)
 				{
-					rslt->Add(std::round(s[i*step+start]));
+					rslt->Add(std::round(s(i*step+start)));
 				}
 				return rslt->ToArray();
 			}

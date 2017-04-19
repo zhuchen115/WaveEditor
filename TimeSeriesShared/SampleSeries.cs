@@ -276,7 +276,7 @@ namespace TimeSeriesShared
     /// If the type is a real number (float, double) Min Max is the range of data.
     /// </remarks>
     public class SampleSeries<T>
-        where T: IComparable,IEquatable<T>,IConvertible
+        where T: IComparable,IEquatable<T>,IConvertible,IFormattable,new()
     {
         /// <summary>
         /// The Sample Rate of Signal, unit SPS
@@ -349,19 +349,72 @@ namespace TimeSeriesShared
         /// </summary>
         /// <param name="time"></param>
         /// <param name="value"></param>
-        public void AddCtrlPoint(uint time, T value,bool group = false)
+        public void AddCtrlPoint(uint time, T value,bool group = false,IInterpolate<T> interp = null)
         {
             //Check the value can be expressed
-            if (value.ToDouble(null) >= MaxValue)
+            if (value.ToDouble(null) > MaxValue)
                 throw new ArgumentOutOfRangeException("value", "Value is outof the sample bits");
-            if (time == 0)
-                throw new ArgumentOutOfRangeException("time", "Time cannot be zero");
-            ctrldata.Add(new SamplePoint<T>(time, value,group,MinValue,MaxValue,SampleBits));
+            //if (time == 0)
+              //  throw new ArgumentOutOfRangeException("time", "Time cannot be zero");
+            SamplePoint<T> sp = new SamplePoint<T>(time, value, group, MinValue, MaxValue, SampleBits)
+            {
+                Tag = interp
+            };
+            ctrldata.Add(sp);
             // Make sure the data is in time order.
             ctrldata.Sort();
             // Make sure the data has no distinct.
             ctrldata = ctrldata.Distinct().ToList();
             
+        }
+        public void AddCtrlPointD(uint time, double value, bool group = false, IInterpolate<T> interp = null)
+        {
+            //Check the value can be expressed
+            if (value > MaxValue)
+                throw new ArgumentOutOfRangeException("value", "Value is outof the sample bits");
+            if (time == 0)
+                throw new ArgumentOutOfRangeException("time", "Time cannot be zero");
+            
+            var obv = (value * ((double)(1 << SampleBits) - 1) / (MaxValue - MinValue));
+            object obj;
+            if (typeof(T) == typeof(uint))
+            {
+                obj = Convert.ToUInt32(obv);
+            }
+            else if (typeof(T) == typeof(ushort))
+            {
+                obj = Convert.ToUInt16(obv);
+            }
+            else if (typeof(T) == typeof(ulong))
+            {
+                obj = Convert.ToUInt64(obv);
+            }
+            else if (typeof(T) == typeof(byte))
+            {
+                obj = Convert.ToByte(obv);
+            }
+            else if (typeof(T) == typeof(double))
+            {
+                obj = obv;
+            }
+            else if (typeof(T) == typeof(float))
+            {
+                obj = (float)obv;
+            }
+            else
+            {
+                throw new ArgumentException("Type not available for Sample Point");
+            }
+            SamplePoint<T> sp = new SamplePoint<T>(time, (T)obj, group, MinValue, MaxValue, SampleBits)
+            {
+                Tag = interp
+            };
+            ctrldata.Add(sp);
+            // Make sure the data is in time order.
+            ctrldata.Sort();
+            // Make sure the data has no distinct.
+            ctrldata = ctrldata.Distinct().ToList();
+
         }
 
         /// <summary>
@@ -397,11 +450,55 @@ namespace TimeSeriesShared
             if (time == 0)
                 throw new ArgumentOutOfRangeException("time", "Time cannot be zero");
             int loc = ctrldata.FindIndex((SamplePoint<T> point) => { return point.time == time; });
+
             if (loc >= 0)
                 ctrldata[loc] = new SamplePoint<T>(time, value,group, MinValue, MaxValue, SampleBits);
             else
                 ctrldata.Add(new SamplePoint<T>(time, value,group, MinValue, MaxValue, SampleBits));
             
+        }
+
+        public void EditCtrlPointD(uint time, double value, bool group = false,IInterpolate < T > interp = null)
+        {
+            //if (time == 0)
+              //  throw new ArgumentOutOfRangeException("time", "Time cannot be zero");
+            
+            int loc = ctrldata.FindIndex((SamplePoint<T> point) => { return point.time == time; });
+            var obv = (value * ((double)(1 << SampleBits) - 1) / (MaxValue - MinValue));
+            object obj;
+            if (typeof(T) == typeof(uint))
+            {
+                obj = Convert.ToUInt32(obv);
+            }
+            else if (typeof(T) == typeof(ushort))
+            {
+                obj = Convert.ToUInt16(obv);
+            }
+            else if (typeof(T) == typeof(ulong))
+            {
+                obj = Convert.ToUInt64(obv);
+            }
+            else if (typeof(T) == typeof(byte))
+            {
+                obj = Convert.ToByte(obv);
+            }
+            else if (typeof(T) == typeof(double))
+            {
+                obj = obv;
+            }
+            else if (typeof(T) == typeof(float))
+            {
+                obj = (float)obv;
+            }
+            else
+            {
+                throw new ArgumentException("Type not available for Sample Point");
+            }
+            if (loc >= 0)
+                ctrldata[loc] = new SamplePoint<T>(time, (T)obj, group, MinValue, MaxValue, SampleBits) { Tag = interp};
+            else
+                ctrldata.Add(new SamplePoint<T>(time, (T)obj, group, MinValue, MaxValue, SampleBits) { Tag = interp});
+
         }
 
         /// <summary>
@@ -513,7 +610,7 @@ namespace TimeSeriesShared
         }
 
 
-        public double[] GenerateDispSeries(uint start, uint stop,uint DispNum=1000)
+        public double[] GenerateDispSeries(uint start, uint stop,int DispNum=1000)
         {
 
             double[] disp = new double[DispNum];
@@ -556,7 +653,7 @@ namespace TimeSeriesShared
                         throw new Exception();
                     if (idx == ctrldata.Count() - 1) //The last point
                     {
-                        dispctrl.Add(new SamplePoint<T>(stop, dispctrl.Last().Value,false, MinValue, MaxValue, SampleBits));
+                        dispctrl.Add(new SamplePoint<T>(stop, dispctrl.Last().Value, false, MinValue, MaxValue, SampleBits) { Tag = dispctrl.Last().Tag});
                     }
                 }
             }
@@ -583,17 +680,17 @@ namespace TimeSeriesShared
             bool end = false;
             double ts = (stop - start) / DispNum;
             int j=0;
-            while (i < ctrldata.Count())
+            while (i < dispctrl.Count())
             {
-                ctldata.Add(ctrldata[i]);
-                if (ctrldata.Count() == 0)
+                ctldata.Add(dispctrl[i]);
+                if (ctldata.Count() ==1)
                 {
                     end = false;
                     i++;
                 }
                 else
                 {
-                    if (ctrldata[i].Group)
+                    if (dispctrl[i].Group)
                     {
                         end = false;
                         i++;
@@ -603,7 +700,7 @@ namespace TimeSeriesShared
                 }
                 if (end)
                 {
-                    if (ctrldata[i].Tag is IInterpolate<T> sr)
+                    if (dispctrl[i].Tag is IInterpolate<T> sr)
                     {
                         if (sr.MultiPoint > 0 && sr.MultiPoint < ctldata.Count())
                         {

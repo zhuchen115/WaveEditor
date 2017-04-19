@@ -22,14 +22,27 @@ namespace WaveEditor
         {
             InitializeComponent();
             this.mode = mode;
-            this.time = time;
+            this.Time = time;
             this.Value = value;
             _SampleRate = SampleRate;
         }
 
         OpMode mode;
-        uint time;
+        public uint Time { get; set; }
         public double Value { get; set; }
+        public bool Group {
+            get
+            {
+                return chkGroup.Checked;
+            }
+        }
+        public int Interpolate
+        {
+            get
+            {
+                return cmbInterpo.SelectedIndex;
+            }
+        }
         uint _SampleRate;
 
         private void FrmPoint_Load(object sender, EventArgs e)
@@ -37,7 +50,7 @@ namespace WaveEditor
             if (mode == OpMode.Change)
             {
                 txtTime.ReadOnly = true;
-                txtTime.Text = time.ToString();
+                txtTime.Text = Time.ToString();
                 txtValue.Text = Value.ToString();
                 this.Text = "Change Point";
             }
@@ -50,23 +63,60 @@ namespace WaveEditor
             {
                 txtTime.ReadOnly = false;
                 txtValue.Enabled = false;
-                txtTime.Text = time.ToString();
+                txtTime.Text = Time.ToString();
                 txtValue.Text = Value.ToString();
                 this.Text = "Delete Point";
                 btnSave.Text = "Delete";
             }
-
+            cmbInterpo.Items.AddRange(InterpolateC.GetNames());
         }
         private void chkRealTime_CheckedChanged(object sender, EventArgs e)
         {
-            if(chkRealTime.Checked)
+            try
             {
-                txtTime.Text = String.Format("{0}",((double)UInt32.Parse(txtTime.Text) / _SampleRate));
+                if (chkRealTime.Checked)
+                {
+                    txtTime.Text = String.Format("{0}", ((double)UInt32.Parse(txtTime.Text) / _SampleRate));
+                }
+                else
+                {
+                    txtTime.Text = String.Format("{0}", ((UInt32)Double.Parse(txtTime.Text) * _SampleRate));
+                }
             }
-            else
+            catch (FormatException ex)
             {
-                txtTime.Text = String.Format("{0}",((UInt32)Double.Parse(txtTime.Text)*_SampleRate));
+                MessageBox.Show($"Error in formatting Value! {ex.Message}", "Value Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (chkRealTime.Checked)
+                    Time = ((UInt32)Double.Parse(txtTime.Text) * _SampleRate);
+                else
+                    Time = UInt32.Parse(txtTime.Text);
+                this.Value = Double.Parse(txtValue.Text);
+            }catch(FormatException ex)
+            {
+                MessageBox.Show($"Error in formatting Value! {ex.Message}", "Value Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private void txtDoubleVal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)8 && e.KeyChar != '.')
+                e.Handled = true;
         }
     }
 }
