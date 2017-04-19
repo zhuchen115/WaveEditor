@@ -92,23 +92,21 @@
             this.fileToolStripMenuItem});
             this.menuTop.Location = new System.Drawing.Point(0, 0);
             this.menuTop.Name = "menuTop";
-            this.menuTop.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
-            this.menuTop.Size = new System.Drawing.Size(1251, 30);
+            this.menuTop.Size = new System.Drawing.Size(938, 25);
             this.menuTop.TabIndex = 0;
             this.menuTop.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(39, 21);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 30);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 25);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -118,9 +116,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tblpProp);
-            this.splitContainer1.Size = new System.Drawing.Size(1251, 710);
-            this.splitContainer1.SplitterDistance = 875;
-            this.splitContainer1.SplitterWidth = 5;
+            this.splitContainer1.Size = new System.Drawing.Size(938, 530);
+            this.splitContainer1.SplitterDistance = 562;
             this.splitContainer1.TabIndex = 1;
             // 
             // splitContainer2
@@ -128,7 +125,6 @@
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -141,25 +137,24 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer2.Size = new System.Drawing.Size(875, 710);
-            this.splitContainer2.SplitterDistance = 579;
-            this.splitContainer2.SplitterWidth = 5;
+            this.splitContainer2.Size = new System.Drawing.Size(562, 530);
+            this.splitContainer2.SplitterDistance = 399;
             this.splitContainer2.TabIndex = 0;
             // 
             // vScrChart
             // 
             this.vScrChart.Dock = System.Windows.Forms.DockStyle.Right;
-            this.vScrChart.Location = new System.Drawing.Point(858, 0);
+            this.vScrChart.Location = new System.Drawing.Point(545, 0);
             this.vScrChart.Name = "vScrChart";
-            this.vScrChart.Size = new System.Drawing.Size(17, 562);
+            this.vScrChart.Size = new System.Drawing.Size(17, 382);
             this.vScrChart.TabIndex = 2;
             // 
             // hScrChart
             // 
             this.hScrChart.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.hScrChart.Location = new System.Drawing.Point(0, 562);
+            this.hScrChart.Location = new System.Drawing.Point(0, 382);
             this.hScrChart.Name = "hScrChart";
-            this.hScrChart.Size = new System.Drawing.Size(875, 17);
+            this.hScrChart.Size = new System.Drawing.Size(562, 17);
             this.hScrChart.TabIndex = 1;
             // 
             // chartSignal
@@ -170,9 +165,8 @@
             this.chartSignal.ChartAreas.Add(chartArea1);
             this.chartSignal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartSignal.Location = new System.Drawing.Point(0, 0);
-            this.chartSignal.Margin = new System.Windows.Forms.Padding(4);
             this.chartSignal.Name = "chartSignal";
-            this.chartSignal.Padding = new System.Windows.Forms.Padding(0, 0, 27, 27);
+            this.chartSignal.Padding = new System.Windows.Forms.Padding(0, 0, 20, 20);
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.MarkerBorderColor = System.Drawing.Color.Blue;
@@ -180,7 +174,7 @@
             series1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             series1.Name = "TSEdit";
             this.chartSignal.Series.Add(series1);
-            this.chartSignal.Size = new System.Drawing.Size(875, 579);
+            this.chartSignal.Size = new System.Drawing.Size(562, 399);
             this.chartSignal.TabIndex = 0;
             this.chartSignal.Text = "chart1";
             this.chartSignal.GetToolTipText += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs>(this.chartSignal_GetToolTipText);
@@ -202,23 +196,22 @@
             this.tableLayoutPanel1.Controls.Add(this.btnGenSeries, 4, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(875, 126);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(562, 127);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // btnAddPoint
             // 
             this.btnAddPoint.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddPoint.Enabled = false;
-            this.btnAddPoint.Location = new System.Drawing.Point(11, 41);
-            this.btnAddPoint.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
+            this.btnAddPoint.Location = new System.Drawing.Point(8, 41);
+            this.btnAddPoint.Margin = new System.Windows.Forms.Padding(8, 3, 8, 3);
             this.btnAddPoint.Name = "btnAddPoint";
-            this.btnAddPoint.Size = new System.Drawing.Size(153, 42);
+            this.btnAddPoint.Size = new System.Drawing.Size(96, 44);
             this.btnAddPoint.TabIndex = 0;
             this.btnAddPoint.Text = "Add Point (&A)";
             this.btnAddPoint.UseVisualStyleBackColor = true;
@@ -228,10 +221,10 @@
             // 
             this.btnEditPoint.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnEditPoint.Enabled = false;
-            this.btnEditPoint.Location = new System.Drawing.Point(186, 41);
-            this.btnEditPoint.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
+            this.btnEditPoint.Location = new System.Drawing.Point(120, 41);
+            this.btnEditPoint.Margin = new System.Windows.Forms.Padding(8, 3, 8, 3);
             this.btnEditPoint.Name = "btnEditPoint";
-            this.btnEditPoint.Size = new System.Drawing.Size(153, 42);
+            this.btnEditPoint.Size = new System.Drawing.Size(96, 44);
             this.btnEditPoint.TabIndex = 1;
             this.btnEditPoint.Text = "Edit Point (&E)";
             this.btnEditPoint.UseVisualStyleBackColor = true;
@@ -241,10 +234,10 @@
             // 
             this.btnDelPoint.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDelPoint.Enabled = false;
-            this.btnDelPoint.Location = new System.Drawing.Point(361, 41);
-            this.btnDelPoint.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
+            this.btnDelPoint.Location = new System.Drawing.Point(232, 41);
+            this.btnDelPoint.Margin = new System.Windows.Forms.Padding(8, 3, 8, 3);
             this.btnDelPoint.Name = "btnDelPoint";
-            this.btnDelPoint.Size = new System.Drawing.Size(153, 42);
+            this.btnDelPoint.Size = new System.Drawing.Size(96, 44);
             this.btnDelPoint.TabIndex = 2;
             this.btnDelPoint.Text = "Delete Point (&D)";
             this.btnDelPoint.UseVisualStyleBackColor = true;
@@ -253,10 +246,10 @@
             // 
             this.btnClrPoint.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClrPoint.Enabled = false;
-            this.btnClrPoint.Location = new System.Drawing.Point(536, 41);
-            this.btnClrPoint.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
+            this.btnClrPoint.Location = new System.Drawing.Point(344, 41);
+            this.btnClrPoint.Margin = new System.Windows.Forms.Padding(8, 3, 8, 3);
             this.btnClrPoint.Name = "btnClrPoint";
-            this.btnClrPoint.Size = new System.Drawing.Size(153, 42);
+            this.btnClrPoint.Size = new System.Drawing.Size(96, 44);
             this.btnClrPoint.TabIndex = 3;
             this.btnClrPoint.Text = "Clear All (&C)";
             this.btnClrPoint.UseVisualStyleBackColor = true;
@@ -265,10 +258,10 @@
             // 
             this.btnGenSeries.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnGenSeries.Enabled = false;
-            this.btnGenSeries.Location = new System.Drawing.Point(711, 41);
-            this.btnGenSeries.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
+            this.btnGenSeries.Location = new System.Drawing.Point(456, 41);
+            this.btnGenSeries.Margin = new System.Windows.Forms.Padding(8, 3, 8, 3);
             this.btnGenSeries.Name = "btnGenSeries";
-            this.btnGenSeries.Size = new System.Drawing.Size(153, 42);
+            this.btnGenSeries.Size = new System.Drawing.Size(98, 44);
             this.btnGenSeries.TabIndex = 4;
             this.btnGenSeries.Text = "Generate (&G)";
             this.btnGenSeries.UseVisualStyleBackColor = true;
@@ -302,24 +295,23 @@
             this.tblpProp.Controls.Add(this.txtYRange, 1, 12);
             this.tblpProp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblpProp.Location = new System.Drawing.Point(0, 0);
-            this.tblpProp.Margin = new System.Windows.Forms.Padding(4);
             this.tblpProp.Name = "tblpProp";
             this.tblpProp.RowCount = 14;
-            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tblpProp.Size = new System.Drawing.Size(371, 710);
+            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
+            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tblpProp.Size = new System.Drawing.Size(372, 530);
             this.tblpProp.TabIndex = 0;
             // 
             // lbSigProp
@@ -328,11 +320,11 @@
             this.tblpProp.SetColumnSpan(this.lbSigProp, 2);
             this.lbSigProp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbSigProp.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSigProp.Location = new System.Drawing.Point(4, 0);
-            this.lbSigProp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 3);
+            this.lbSigProp.Location = new System.Drawing.Point(3, 0);
+            this.lbSigProp.Margin = new System.Windows.Forms.Padding(3, 0, 3, 2);
             this.lbSigProp.Name = "lbSigProp";
-            this.lbSigProp.Padding = new System.Windows.Forms.Padding(0, 0, 0, 7);
-            this.lbSigProp.Size = new System.Drawing.Size(363, 57);
+            this.lbSigProp.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.lbSigProp.Size = new System.Drawing.Size(366, 43);
             this.lbSigProp.TabIndex = 0;
             this.lbSigProp.Text = "Discrete Signal Property";
             this.lbSigProp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -342,26 +334,25 @@
             this.lbSigSampleRate.AutoSize = true;
             this.lbSigSampleRate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbSigSampleRate.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSigSampleRate.Location = new System.Drawing.Point(4, 95);
-            this.lbSigSampleRate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 3);
+            this.lbSigSampleRate.Location = new System.Drawing.Point(3, 71);
+            this.lbSigSampleRate.Margin = new System.Windows.Forms.Padding(3, 0, 3, 2);
             this.lbSigSampleRate.Name = "lbSigSampleRate";
-            this.lbSigSampleRate.Padding = new System.Windows.Forms.Padding(0, 0, 0, 7);
-            this.lbSigSampleRate.Size = new System.Drawing.Size(166, 32);
+            this.lbSigSampleRate.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.lbSigSampleRate.Size = new System.Drawing.Size(168, 24);
             this.lbSigSampleRate.TabIndex = 0;
             this.lbSigSampleRate.Text = "Sample Rate (SPS)";
             this.lbSigSampleRate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // numSampleR
             // 
-            this.numSampleR.Location = new System.Drawing.Point(178, 99);
-            this.numSampleR.Margin = new System.Windows.Forms.Padding(4);
+            this.numSampleR.Location = new System.Drawing.Point(177, 74);
             this.numSampleR.Maximum = new decimal(new int[] {
             100000000,
             0,
             0,
             0});
             this.numSampleR.Name = "numSampleR";
-            this.numSampleR.Size = new System.Drawing.Size(160, 22);
+            this.numSampleR.Size = new System.Drawing.Size(120, 21);
             this.numSampleR.TabIndex = 1;
             this.numSampleR.Value = new decimal(new int[] {
             1000000,
@@ -375,20 +366,18 @@
             this.lbSigSampleTime.AutoSize = true;
             this.lbSigSampleTime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbSigSampleTime.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSigSampleTime.Location = new System.Drawing.Point(4, 130);
-            this.lbSigSampleTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbSigSampleTime.Location = new System.Drawing.Point(3, 97);
             this.lbSigSampleTime.Name = "lbSigSampleTime";
-            this.lbSigSampleTime.Size = new System.Drawing.Size(166, 35);
+            this.lbSigSampleTime.Size = new System.Drawing.Size(168, 26);
             this.lbSigSampleTime.TabIndex = 2;
             this.lbSigSampleTime.Text = "Total Time (s)";
             this.lbSigSampleTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtSampleT
             // 
-            this.txtSampleT.Location = new System.Drawing.Point(178, 134);
-            this.txtSampleT.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSampleT.Location = new System.Drawing.Point(177, 100);
             this.txtSampleT.Name = "txtSampleT";
-            this.txtSampleT.Size = new System.Drawing.Size(159, 22);
+            this.txtSampleT.Size = new System.Drawing.Size(120, 21);
             this.txtSampleT.TabIndex = 3;
             this.txtSampleT.Text = "1";
             this.txtSampleT.TextChanged += new System.EventHandler(this.txtDoubleVal_TextChanged);
@@ -399,18 +388,16 @@
             this.lbSampleB.AutoSize = true;
             this.lbSampleB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbSampleB.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSampleB.Location = new System.Drawing.Point(4, 165);
-            this.lbSampleB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbSampleB.Location = new System.Drawing.Point(3, 123);
             this.lbSampleB.Name = "lbSampleB";
-            this.lbSampleB.Size = new System.Drawing.Size(166, 35);
+            this.lbSampleB.Size = new System.Drawing.Size(168, 26);
             this.lbSampleB.TabIndex = 4;
             this.lbSampleB.Text = "Sample Bits (bit)";
             this.lbSampleB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // numSampleB
             // 
-            this.numSampleB.Location = new System.Drawing.Point(178, 169);
-            this.numSampleB.Margin = new System.Windows.Forms.Padding(4);
+            this.numSampleB.Location = new System.Drawing.Point(177, 126);
             this.numSampleB.Maximum = new decimal(new int[] {
             32,
             0,
@@ -422,7 +409,7 @@
             0,
             0});
             this.numSampleB.Name = "numSampleB";
-            this.numSampleB.Size = new System.Drawing.Size(160, 22);
+            this.numSampleB.Size = new System.Drawing.Size(120, 21);
             this.numSampleB.TabIndex = 5;
             this.numSampleB.Value = new decimal(new int[] {
             16,
@@ -435,20 +422,18 @@
             this.lbSampleMin.AutoSize = true;
             this.lbSampleMin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbSampleMin.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSampleMin.Location = new System.Drawing.Point(4, 200);
-            this.lbSampleMin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbSampleMin.Location = new System.Drawing.Point(3, 149);
             this.lbSampleMin.Name = "lbSampleMin";
-            this.lbSampleMin.Size = new System.Drawing.Size(166, 35);
+            this.lbSampleMin.Size = new System.Drawing.Size(168, 26);
             this.lbSampleMin.TabIndex = 6;
             this.lbSampleMin.Text = "Mininum Value";
             this.lbSampleMin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtSMinVal
             // 
-            this.txtSMinVal.Location = new System.Drawing.Point(178, 204);
-            this.txtSMinVal.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSMinVal.Location = new System.Drawing.Point(177, 152);
             this.txtSMinVal.Name = "txtSMinVal";
-            this.txtSMinVal.Size = new System.Drawing.Size(159, 22);
+            this.txtSMinVal.Size = new System.Drawing.Size(120, 21);
             this.txtSMinVal.TabIndex = 7;
             this.txtSMinVal.Text = "0";
             this.txtSMinVal.TextChanged += new System.EventHandler(this.txtDoubleVal_TextChanged);
@@ -459,20 +444,18 @@
             this.lbSampleMax.AutoSize = true;
             this.lbSampleMax.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbSampleMax.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSampleMax.Location = new System.Drawing.Point(4, 235);
-            this.lbSampleMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbSampleMax.Location = new System.Drawing.Point(3, 175);
             this.lbSampleMax.Name = "lbSampleMax";
-            this.lbSampleMax.Size = new System.Drawing.Size(166, 35);
+            this.lbSampleMax.Size = new System.Drawing.Size(168, 26);
             this.lbSampleMax.TabIndex = 8;
             this.lbSampleMax.Text = "Maxinum Value";
             this.lbSampleMax.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtSMaxVal
             // 
-            this.txtSMaxVal.Location = new System.Drawing.Point(178, 239);
-            this.txtSMaxVal.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSMaxVal.Location = new System.Drawing.Point(177, 178);
             this.txtSMaxVal.Name = "txtSMaxVal";
-            this.txtSMaxVal.Size = new System.Drawing.Size(159, 22);
+            this.txtSMaxVal.Size = new System.Drawing.Size(120, 21);
             this.txtSMaxVal.TabIndex = 9;
             this.txtSMaxVal.Text = "5";
             this.txtSMaxVal.TextChanged += new System.EventHandler(this.txtDoubleVal_TextChanged);
@@ -483,10 +466,9 @@
             this.lbSampleTime.AutoSize = true;
             this.lbSampleTime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbSampleTime.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSampleTime.Location = new System.Drawing.Point(4, 270);
-            this.lbSampleTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbSampleTime.Location = new System.Drawing.Point(3, 201);
             this.lbSampleTime.Name = "lbSampleTime";
-            this.lbSampleTime.Size = new System.Drawing.Size(166, 35);
+            this.lbSampleTime.Size = new System.Drawing.Size(168, 26);
             this.lbSampleTime.TabIndex = 10;
             this.lbSampleTime.Text = "Sample Time Ts";
             this.lbSampleTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -495,10 +477,9 @@
             // 
             this.lbSampleTimeVal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbSampleTimeVal.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSampleTimeVal.Location = new System.Drawing.Point(178, 270);
-            this.lbSampleTimeVal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbSampleTimeVal.Location = new System.Drawing.Point(177, 201);
             this.lbSampleTimeVal.Name = "lbSampleTimeVal";
-            this.lbSampleTimeVal.Size = new System.Drawing.Size(189, 35);
+            this.lbSampleTimeVal.Size = new System.Drawing.Size(192, 26);
             this.lbSampleTimeVal.TabIndex = 0;
             this.lbSampleTimeVal.Text = "1E-0006";
             this.lbSampleTimeVal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -508,10 +489,9 @@
             this.lbInteropM.AutoSize = true;
             this.lbInteropM.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbInteropM.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbInteropM.Location = new System.Drawing.Point(4, 305);
-            this.lbInteropM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbInteropM.Location = new System.Drawing.Point(3, 227);
             this.lbInteropM.Name = "lbInteropM";
-            this.lbInteropM.Size = new System.Drawing.Size(166, 35);
+            this.lbInteropM.Size = new System.Drawing.Size(168, 26);
             this.lbInteropM.TabIndex = 11;
             this.lbInteropM.Text = "Data Type";
             this.lbInteropM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -526,20 +506,20 @@
             "DWORD",
             "QWORD",
             "Real"});
-            this.cmbDataType.Location = new System.Drawing.Point(178, 309);
-            this.cmbDataType.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbDataType.Location = new System.Drawing.Point(177, 230);
             this.cmbDataType.Name = "cmbDataType";
-            this.cmbDataType.Size = new System.Drawing.Size(159, 24);
+            this.cmbDataType.Size = new System.Drawing.Size(120, 20);
             this.cmbDataType.TabIndex = 12;
             // 
             // btnSigInit
             // 
             this.tblpProp.SetColumnSpan(this.btnSigInit, 2);
             this.btnSigInit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSigInit.Location = new System.Drawing.Point(3, 343);
+            this.btnSigInit.Location = new System.Drawing.Point(2, 255);
+            this.btnSigInit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSigInit.Name = "btnSigInit";
-            this.btnSigInit.Padding = new System.Windows.Forms.Padding(5);
-            this.btnSigInit.Size = new System.Drawing.Size(365, 39);
+            this.btnSigInit.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSigInit.Size = new System.Drawing.Size(368, 30);
             this.btnSigInit.TabIndex = 13;
             this.btnSigInit.Text = "Initialize";
             this.btnSigInit.UseVisualStyleBackColor = true;
@@ -549,9 +529,10 @@
             // 
             this.lbSigRealT.AutoSize = true;
             this.lbSigRealT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbSigRealT.Location = new System.Drawing.Point(3, 385);
+            this.lbSigRealT.Location = new System.Drawing.Point(2, 287);
+            this.lbSigRealT.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbSigRealT.Name = "lbSigRealT";
-            this.lbSigRealT.Size = new System.Drawing.Size(168, 35);
+            this.lbSigRealT.Size = new System.Drawing.Size(170, 26);
             this.lbSigRealT.TabIndex = 14;
             this.lbSigRealT.Text = "Real Time ";
             this.lbSigRealT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -560,9 +541,10 @@
             // 
             this.chkSigRealT.AutoSize = true;
             this.chkSigRealT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chkSigRealT.Location = new System.Drawing.Point(177, 388);
+            this.chkSigRealT.Location = new System.Drawing.Point(176, 289);
+            this.chkSigRealT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkSigRealT.Name = "chkSigRealT";
-            this.chkSigRealT.Size = new System.Drawing.Size(191, 29);
+            this.chkSigRealT.Size = new System.Drawing.Size(194, 22);
             this.chkSigRealT.TabIndex = 15;
             this.chkSigRealT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkSigRealT.UseVisualStyleBackColor = true;
@@ -571,9 +553,10 @@
             // 
             this.lbDispXRange.AutoSize = true;
             this.lbDispXRange.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbDispXRange.Location = new System.Drawing.Point(3, 420);
+            this.lbDispXRange.Location = new System.Drawing.Point(2, 313);
+            this.lbDispXRange.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbDispXRange.Name = "lbDispXRange";
-            this.lbDispXRange.Size = new System.Drawing.Size(168, 35);
+            this.lbDispXRange.Size = new System.Drawing.Size(170, 26);
             this.lbDispXRange.TabIndex = 16;
             this.lbDispXRange.Text = "X Range";
             this.lbDispXRange.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -582,18 +565,20 @@
             // 
             this.lbDispYRange.AutoSize = true;
             this.lbDispYRange.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbDispYRange.Location = new System.Drawing.Point(3, 455);
+            this.lbDispYRange.Location = new System.Drawing.Point(2, 339);
+            this.lbDispYRange.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbDispYRange.Name = "lbDispYRange";
-            this.lbDispYRange.Size = new System.Drawing.Size(168, 35);
+            this.lbDispYRange.Size = new System.Drawing.Size(170, 26);
             this.lbDispYRange.TabIndex = 17;
             this.lbDispYRange.Text = "Y Range";
             this.lbDispYRange.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtXRange
             // 
-            this.txtXRange.Location = new System.Drawing.Point(177, 423);
+            this.txtXRange.Location = new System.Drawing.Point(176, 315);
+            this.txtXRange.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtXRange.Name = "txtXRange";
-            this.txtXRange.Size = new System.Drawing.Size(160, 22);
+            this.txtXRange.Size = new System.Drawing.Size(121, 21);
             this.txtXRange.TabIndex = 18;
             this.txtXRange.Text = "0,1000";
             this.toolChart.SetToolTip(this.txtXRange, "Expression: Min,Max");
@@ -601,9 +586,10 @@
             // 
             // txtYRange
             // 
-            this.txtYRange.Location = new System.Drawing.Point(177, 458);
+            this.txtYRange.Location = new System.Drawing.Point(176, 341);
+            this.txtYRange.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtYRange.Name = "txtYRange";
-            this.txtYRange.Size = new System.Drawing.Size(161, 22);
+            this.txtYRange.Size = new System.Drawing.Size(122, 21);
             this.txtYRange.TabIndex = 19;
             this.txtYRange.Text = "0,5";
             this.toolChart.SetToolTip(this.txtYRange, "Expression: Min,Max");
@@ -611,14 +597,13 @@
             // 
             // FrmEditor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1251, 740);
+            this.ClientSize = new System.Drawing.Size(938, 555);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuTop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuTop;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmEditor";
             this.Text = "WaveEditor";
             this.Load += new System.EventHandler(this.FrmEditor_Load);

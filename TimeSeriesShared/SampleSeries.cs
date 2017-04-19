@@ -653,7 +653,7 @@ namespace TimeSeriesShared
                         throw new Exception();
                     if (idx == ctrldata.Count() - 1) //The last point
                     {
-                        dispctrl.Add(new SamplePoint<T>(stop, dispctrl.Last().Value, false, MinValue, MaxValue, SampleBits) { Tag = dispctrl.Last().Tag});
+                        dispctrl.Add(new SamplePoint<T>(stop, dispctrl.Last().Value, false, MinValue, MaxValue, SampleBits) { Tag = new ZeroOrderHolder<T>()});
                     }
                 }
             }

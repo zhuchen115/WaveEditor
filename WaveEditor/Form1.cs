@@ -28,6 +28,7 @@ namespace WaveEditor
             DispRange[1] = 1000;
             DispRange[2] = 0;
             DispRange[3] = 5;
+            cmbDataType.SelectedIndex = 1;
         }
 
         private void txtDoubleVal_TextChanged(object sender, EventArgs e)
