@@ -35,24 +35,35 @@ namespace WaveEditor
             {
                 return chkGroup.Checked;
             }
+            set
+            {
+                chkGroup.Checked = value;
+            }
         }
+        private int interpolate_init = -1;
         public int Interpolate
         {
             get
             {
                 return cmbInterpo.SelectedIndex;
             }
+            set
+            {
+                interpolate_init = value;
+            }
         }
         uint _SampleRate;
 
         private void FrmPoint_Load(object sender, EventArgs e)
         {
+            cmbInterpo.Items.AddRange(InterpolateC.GetNames());
             if (mode == OpMode.Change)
             {
                 txtTime.ReadOnly = true;
                 txtTime.Text = Time.ToString();
                 txtValue.Text = Value.ToString();
                 this.Text = "Change Point";
+                cmbInterpo.SelectedIndex = interpolate_init;
             }
             else if(mode == OpMode.Add)
             {
@@ -68,7 +79,7 @@ namespace WaveEditor
                 this.Text = "Delete Point";
                 btnSave.Text = "Delete";
             }
-            cmbInterpo.Items.AddRange(InterpolateC.GetNames());
+            
         }
         private void chkRealTime_CheckedChanged(object sender, EventArgs e)
         {
