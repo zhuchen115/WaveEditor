@@ -114,6 +114,15 @@ namespace WaveEditor
             chkSigRealT.Enabled = true;
             txtXRange.Enabled = true;
             txtYRange.Enabled = true;
+            btnSigInit.Enabled = false;
+            numSampleB.Enabled = false;
+            numSampleR.Enabled = false;
+            txtSampleT.Enabled = false;
+            txtSMaxVal.Enabled = false;
+            txtSMinVal.Enabled = false;
+            txtXRange.Enabled = true;
+            txtYRange.Enabled = true;
+            cmbDataType.Enabled = false;
         }
 
         private void btnAddPoint_Click(object sender, EventArgs e)
@@ -439,7 +448,78 @@ namespace WaveEditor
 
         private void chkSigRealT_CheckedChanged(object sender, EventArgs e)
         {
+            try
+            {
+                string[] chm = txtYRange.Text.Split(',');
+                if (chm.Count() != 2)
+                    throw new FormatException("Expression Error, the number are not 2");
+                double min = Double.Parse(chm[0]);
+                double max = Double.Parse(chm[1]);
+                if (min > max)
+                    throw new FormatException("Min > Max");
+                if (chkSigRealT.Checked)
+                {
+                    txtXRange.Text = String.Format("{0},{1}", min / (double)numSampleR.Value, max / (double)numSampleR.Value);
+                }
+                else
+                {
+                    txtXRange.Text = String.Format("{0},{1}", min * (double)numSampleR.Value, max * (double)numSampleR.Value);
+                    
+                }
+                
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show(ex.Message, "Error Format!");
+                
+                return;
+            }
+            foreach(DataPoint dp in chartSignal.Series[0].Points)
+            {
+                if(chkSigRealT.Checked)
+                {
+                    dp.XValue = dp.XValue / (double)numSampleR.Value;
+                }
+                else
+                {
+                    dp.XValue = dp.XValue * (double)numSampleR.Value;
+                }
+            }
+            foreach (DataPoint dp in chartSignal.Series[1].Points)
+            {
+                if (chkSigRealT.Checked)
+                {
+                    dp.XValue = dp.XValue / (double)numSampleR.Value;
+                }
+                else
+                {
+                    dp.XValue = dp.XValue * (double)numSampleR.Value;
+                }
+            }
+        }
 
+        private void btnGenSeries_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnClrPoint_Click(object sender, EventArgs e)
+        {
+            _sample_series_object = null;
+            btnAddPoint.Enabled = false;
+            btnClrPoint.Enabled = false;
+            btnDelPoint.Enabled = false;
+            btnEditPoint.Enabled = false;
+            btnGenSeries.Enabled = false;
+            btnSigInit.Enabled = true;
+            numSampleB.Enabled = true;
+            numSampleR.Enabled = true;
+            txtSampleT.Enabled = true;
+            txtSMaxVal.Enabled = true;
+            txtSMinVal.Enabled = true;
+            txtXRange.Enabled = false;
+            txtYRange.Enabled = false;
+            cmbDataType.Enabled = true;
         }
     }
 }
