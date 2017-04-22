@@ -108,9 +108,21 @@ namespace WaveEditor
             _sample_series_object.AddCtrlPoint(0, 0, false);
             btnAddPoint.Enabled = true;
             btnClrPoint.Enabled = true;
-            btnDelPoint.Enabled = true;
-            btnEditPoint.Enabled = true;
+            //btnDelPoint.Enabled = true;
+            //btnEditPoint.Enabled = true;
             btnGenSeries.Enabled = true;
+            chkSigRealT.Enabled = true;
+            txtXRange.Enabled = true;
+            txtYRange.Enabled = true;
+            btnSigInit.Enabled = false;
+            numSampleB.Enabled = false;
+            numSampleR.Enabled = false;
+            txtSampleT.Enabled = false;
+            txtSMaxVal.Enabled = false;
+            txtSMinVal.Enabled = false;
+            txtXRange.Enabled = true;
+            txtYRange.Enabled = true;
+            cmbDataType.Enabled = false;
         }
 
         private void btnAddPoint_Click(object sender, EventArgs e)
@@ -145,10 +157,19 @@ namespace WaveEditor
                     MessageBox.Show(ex.Message);
                 }
                 //Then the display series
-                /*if(chkSigRealT.Checked)
-                    chartSignal.Series[0].Points.AddXY(fmp.Time/(double)numSampleR.Value, fmp.Value);
+                DataPoint dp;
+                if (chkSigRealT.Checked)
+                {
+                    dp = new DataPoint(fmp.Time / (double)numSampleR.Value, fmp.Value) { Tag = fmp.Interpolate };
+                    chartSignal.Series[0].Points.Add(dp);
+                }
                 else
-                    chartSignal.Series[0].Points.AddXY(fmp.Time, fmp.Value);*/
+                {
+                    dp = new DataPoint(fmp.Time, fmp.Value) { Tag = fmp.Interpolate };
+                    chartSignal.Series[0].Points.Add(dp);
+                }
+                    
+
                 if(!fmp.Group)
                     RefreshDisp();
             }
@@ -171,46 +192,73 @@ namespace WaveEditor
 
         private void btnEditPoint_Click(object sender, EventArgs e)
         {
-            FrmPoint fmp = new FrmPoint(FrmPoint.OpMode.Change, 0, 0, (uint)numSampleR.Value);
-
+            uint time;double value;
+            if (point_click == null)
+                return;
+            if (chkSigRealT.Checked)
+            {
+                time = (uint)(point_click.XValue * (double)numSampleR.Value);
+            }
+            else
+            {
+                time = (uint)point_click.XValue;
+            }
+            value = point_click.YValues[0];
+            //Initialize a form to edit it.
+            FrmPoint fmp = new FrmPoint(FrmPoint.OpMode.Change, time, value, (uint)numSampleR.Value)
+            {
+                Interpolate = (int)point_click.Tag
+            };
             if (fmp.ShowDialog() == DialogResult.OK)
             {
-                try
+                switch (dataType)
                 {
-                    //First Add to the sample series
-                    switch (dataType)
-                    {
-                        case 0:
-                            _sample_series_object.AddCtrlPointD(fmp.Time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<byte>(fmp.Interpolate));
-                            break;
-                        case 1:
-                            _sample_series_object.AddCtrlPointD(fmp.Time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<ushort>(fmp.Interpolate));
-                            break;
-                        case 2:
-                            _sample_series_object.AddCtrlPointD(fmp.Time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<uint>(fmp.Interpolate));
-                            break;
-                        case 3:
-                            _sample_series_object.AddCtrlPointD(fmp.Time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<ulong>(fmp.Interpolate));
-                            break;
-                        default:
-                            _sample_series_object.AddCtrlPointD(fmp.Time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<double>(fmp.Interpolate));
-                            break;
-                    }
+                    case 0:
+                        _sample_series_object.EditCtrlPointD(time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<byte>(fmp.Interpolate));
+                        break;
+                    case 1:
+                        _sample_series_object.EditCtrlPointD(time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<ushort>(fmp.Interpolate));
+                        break;
+                    case 2:
+                        _sample_series_object.EditCtrlPointD(time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<uint>(fmp.Interpolate));
+                        break;
+                    case 3:
+                        _sample_series_object.EditCtrlPointD(time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<ulong>(fmp.Interpolate));
+                        break;
+                    default:
+                        _sample_series_object.AddCtrlPointD(fmp.Time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<double>(fmp.Interpolate));
+                        break;
                 }
-                catch (ArgumentException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                //Then the display series
+                
+                point_click.YValues[0] = fmp.Value;
                 RefreshDisp();
             }
         }
 
+        DataPoint point_click = null;
         private void chartSignal_MouseClick(object sender, MouseEventArgs e)
         {
             HitTestResult rslt = chartSignal.HitTest(e.X, e.Y);
             if(rslt!=null)
             {
+                if (rslt.Series == null)
+                    return;
+                if (rslt.Series.Name == "TSCtrl")
+                {
+                    if(point_click!=null)
+                        point_click.MarkerSize = 5;
+                    point_click = rslt.Series.Points[rslt.PointIndex];
+                    btnDelPoint.Enabled = true;
+                    btnEditPoint.Enabled = true;
+                    rslt.Series.Points[rslt.PointIndex].MarkerSize = 15;
+                }
+                else
+                {
+                    if (point_click != null)
+                        point_click.MarkerSize = 5;
+                    btnDelPoint.Enabled = false;
+                    btnEditPoint.Enabled = false;
+                }
                 
             }
         }
@@ -220,21 +268,46 @@ namespace WaveEditor
             HitTestResult rslt = chartSignal.HitTest(e.X, e.Y);
             if (rslt != null)
             {
+                //Check if it is a control point
+                if (rslt.Series == null || rslt.Series.Name != "TSCtrl")
+                    return;
                 uint time; double value;
+                //First Convert the time
                 if (chkSigRealT.Checked)
                 {
                     time = (uint)(rslt.Series.Points[rslt.PointIndex].XValue * (double)numSampleR.Value);
-
                 }
                 else
                 {
                     time = (uint)rslt.Series.Points[rslt.PointIndex].XValue;
                 }
                 value = rslt.Series.Points[rslt.PointIndex].YValues[0];
-                FrmPoint fmp = new FrmPoint(FrmPoint.OpMode.Change, time, value, (uint)numSampleR.Value);
+                //Initialize a form to edit it.
+                FrmPoint fmp = new FrmPoint(FrmPoint.OpMode.Change, time, value, (uint)numSampleR.Value)
+                {
+                    Interpolate = (int)rslt.Series.Points[rslt.PointIndex].Tag
+                };
                 if(fmp.ShowDialog()==DialogResult.OK)
                 {
-                    _sample_series_object.EditCtrlPointD(time, fmp.Value, fmp.Group, fmp.Interpolate);
+                    switch (dataType)
+                    {
+                        case 0:
+                            _sample_series_object.EditCtrlPointD(time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<byte>(fmp.Interpolate));
+                            break;
+                        case 1:
+                            _sample_series_object.EditCtrlPointD(time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<ushort>(fmp.Interpolate));
+                            break;
+                        case 2:
+                            _sample_series_object.EditCtrlPointD(time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<uint>(fmp.Interpolate));
+                            break;
+                        case 3:
+                            _sample_series_object.EditCtrlPointD(time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<ulong>(fmp.Interpolate));
+                            break;
+                        default:
+                            _sample_series_object.EditCtrlPointD(fmp.Time, fmp.Value, fmp.Group, InterpolateC.GetInstanceById<double>(fmp.Interpolate));
+                            break;
+                    }
+                    rslt.Series.Points[rslt.PointIndex].YValues[0] = fmp.Value;
                     RefreshDisp();
                 }
             }
@@ -243,8 +316,8 @@ namespace WaveEditor
         private void RefreshDisp()
         {
             //First Clean the display
-            chartSignal.Series[0].Points.Clear();
-            double[] value; uint start, stop;int i = 0;
+            chartSignal.Series[1].Points.Clear();
+            double[] value = null; uint start, stop;int i = 0;
             double step = (DispRange[1]-DispRange[0])/ Properties.Settings.Default.DispNum;
             //Now Define the time range in uint
             if (chkSigRealT.Checked)
@@ -257,11 +330,20 @@ namespace WaveEditor
                 stop = (uint)DispRange[1];
             }
             //Generate Series
-            value = _sample_series_object.GenerateDispSeries(start, stop, Properties.Settings.Default.DispNum);
+            try
+            {
+                value = _sample_series_object.GenerateDispSeries(start, stop, Properties.Settings.Default.DispNum);
+
+            } catch(ArgumentException ex)
+            {
+                MessageBox.Show("An Error occurred when genenerating series!\n"+ex.Message+"\n Did you forget groupping the points?","Time Series Generation Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
+            
             //Display Value
             foreach (double v in value)
             {
-                chartSignal.Series[0].Points.AddXY(DispRange[0]+(i*step),v);
+                chartSignal.Series[1].Points.AddXY(DispRange[0]+(i*step),v);
                 i++;
             }
             // Set Range
@@ -270,6 +352,7 @@ namespace WaveEditor
             chartSignal.ChartAreas[0].AxisY.Minimum = DispRange[2];
             chartSignal.ChartAreas[0].AxisY.Maximum = DispRange[3];
         }
+
         private double[] DispRange = new double[4];
         private void txtXRange_TextChanged(object sender, EventArgs e)
         {
@@ -282,8 +365,8 @@ namespace WaveEditor
                 double max = Double.Parse(chm[1]);
                 if (min > max)
                     throw new FormatException("Min > Max");
-                DispRange[0] = min;
-                DispRange[1] = max;
+                DispRange[2] = min;
+                DispRange[3] = max;
             }
             catch (FormatException ex)
             {
@@ -315,6 +398,128 @@ namespace WaveEditor
                 return;
             }
             RefreshDisp();
+        }
+
+        private void btnDelPoint_Click(object sender, EventArgs e)
+        {
+            uint time; double value;
+            if (point_click == null)
+                return;
+            if (chkSigRealT.Checked)
+            {
+                time = (uint)(point_click.XValue * (double)numSampleR.Value);
+            }
+            else
+            {
+                time = (uint)point_click.XValue;
+            }
+            value = point_click.YValues[0];
+            //Initialize a form to edit it.
+            FrmPoint fmp = new FrmPoint(FrmPoint.OpMode.Delete, time, value, (uint)numSampleR.Value)
+            {
+                Interpolate = (int)point_click.Tag
+            };
+            if (fmp.ShowDialog() == DialogResult.OK)
+            {
+                _sample_series_object.DelCtrlPoint(time);
+                try
+                {
+                    chartSignal.Series[0].Points.Remove(point_click);
+                    point_click = null;
+                }catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                RefreshDisp();
+            }
+        }
+
+        private void txtYRange_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                txtYRange_TextChanged(null, null);
+        }
+
+        private void txtXRange_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                txtXRange_TextChanged(null, null);
+        }
+
+        private void chkSigRealT_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string[] chm = txtYRange.Text.Split(',');
+                if (chm.Count() != 2)
+                    throw new FormatException("Expression Error, the number are not 2");
+                double min = Double.Parse(chm[0]);
+                double max = Double.Parse(chm[1]);
+                if (min > max)
+                    throw new FormatException("Min > Max");
+                if (chkSigRealT.Checked)
+                {
+                    txtXRange.Text = String.Format("{0},{1}", min / (double)numSampleR.Value, max / (double)numSampleR.Value);
+                }
+                else
+                {
+                    txtXRange.Text = String.Format("{0},{1}", min * (double)numSampleR.Value, max * (double)numSampleR.Value);
+                    
+                }
+                
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show(ex.Message, "Error Format!");
+                
+                return;
+            }
+            foreach(DataPoint dp in chartSignal.Series[0].Points)
+            {
+                if(chkSigRealT.Checked)
+                {
+                    dp.XValue = dp.XValue / (double)numSampleR.Value;
+                }
+                else
+                {
+                    dp.XValue = dp.XValue * (double)numSampleR.Value;
+                }
+            }
+            foreach (DataPoint dp in chartSignal.Series[1].Points)
+            {
+                if (chkSigRealT.Checked)
+                {
+                    dp.XValue = dp.XValue / (double)numSampleR.Value;
+                }
+                else
+                {
+                    dp.XValue = dp.XValue * (double)numSampleR.Value;
+                }
+            }
+        }
+
+        private void btnGenSeries_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnClrPoint_Click(object sender, EventArgs e)
+        {
+            _sample_series_object = null;
+            btnAddPoint.Enabled = false;
+            btnClrPoint.Enabled = false;
+            btnDelPoint.Enabled = false;
+            btnEditPoint.Enabled = false;
+            btnGenSeries.Enabled = false;
+            btnSigInit.Enabled = true;
+            numSampleB.Enabled = true;
+            numSampleR.Enabled = true;
+            txtSampleT.Enabled = true;
+            txtSMaxVal.Enabled = true;
+            txtSMinVal.Enabled = true;
+            txtXRange.Enabled = false;
+            txtYRange.Enabled = false;
+            cmbDataType.Enabled = true;
         }
     }
 }

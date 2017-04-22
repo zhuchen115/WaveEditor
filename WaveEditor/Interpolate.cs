@@ -14,6 +14,7 @@ namespace WaveEditor
 
         static InterpolateC()
         {
+            //Add internal interpolate
             dwInterpolate.Add(new LinearInterpolate<uint>());
             dwInterpolate.Add(new SplineInterpolate<uint>());
             dwInterpolate.Add(new SinInterpolate<uint>());
@@ -32,6 +33,13 @@ namespace WaveEditor
             }
             return names.ToArray();
         }
+
+        /// <summary>
+        /// Get an instance of the Interpolator
+        /// </summary>
+        /// <typeparam name="T">The type of number</typeparam>
+        /// <param name="id">The id of Interpolator</param>
+        /// <returns>An instance of interpolator</returns>
         public static IInterpolate<T> GetInstanceById<T>(int id)
             where T : IComparable, IEquatable<T>, IConvertible
         {
@@ -41,6 +49,29 @@ namespace WaveEditor
             Type[] tpArg = { typeof(T) };
             Type construct = tpBase.MakeGenericType(tpArg);
             return (IInterpolate<T>)Activator.CreateInstance(construct);
+        }
+
+        /// <summary>
+        /// Find the id of Interpolator
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="inst"></param>
+        /// <returns></returns>
+        public static int GetIdByInstance<T>(IInterpolate<T> inst)
+            where T : IComparable, IEquatable<T>, IConvertible
+        {
+            Type tpBase = inst.GetType().GetGenericTypeDefinition();
+            int i = 0;
+            foreach(IInterpolate<uint> jw in dwInterpolate)
+            {
+                if (jw.GetType().GetGenericTypeDefinition() == tpBase)
+                    break;
+                i++;
+            }
+            if (i == dwInterpolate.Count())
+                return -1;
+            else
+                return i;
         }
     }
 }

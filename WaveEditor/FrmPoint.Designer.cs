@@ -52,7 +52,6 @@
             this.splitCtl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitCtl.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitCtl.Location = new System.Drawing.Point(0, 0);
-            this.splitCtl.Margin = new System.Windows.Forms.Padding(2);
             this.splitCtl.Name = "splitCtl";
             this.splitCtl.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -64,18 +63,17 @@
             // 
             this.splitCtl.Panel2.Controls.Add(this.btnCancel);
             this.splitCtl.Panel2.Controls.Add(this.btnSave);
-            this.splitCtl.Size = new System.Drawing.Size(443, 218);
-            this.splitCtl.SplitterDistance = 167;
-            this.splitCtl.SplitterWidth = 3;
+            this.splitCtl.Size = new System.Drawing.Size(591, 291);
+            this.splitCtl.SplitterDistance = 240;
             this.splitCtl.TabIndex = 0;
             // 
             // tblPoint
             // 
             this.tblPoint.ColumnCount = 5;
             this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
+            this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 113F));
             this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152F));
+            this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 203F));
             this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tblPoint.Controls.Add(this.lbTime, 1, 1);
             this.tblPoint.Controls.Add(this.lbValue, 1, 3);
@@ -87,17 +85,16 @@
             this.tblPoint.Controls.Add(this.chkGroup, 4, 5);
             this.tblPoint.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblPoint.Location = new System.Drawing.Point(0, 0);
-            this.tblPoint.Margin = new System.Windows.Forms.Padding(2);
             this.tblPoint.Name = "tblPoint";
             this.tblPoint.RowCount = 7;
             this.tblPoint.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tblPoint.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this.tblPoint.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tblPoint.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tblPoint.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this.tblPoint.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tblPoint.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tblPoint.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this.tblPoint.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tblPoint.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tblPoint.Size = new System.Drawing.Size(443, 167);
+            this.tblPoint.Size = new System.Drawing.Size(591, 240);
             this.tblPoint.TabIndex = 0;
             // 
             // lbTime
@@ -105,10 +102,9 @@
             this.lbTime.AutoSize = true;
             this.lbTime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTime.Location = new System.Drawing.Point(94, 25);
-            this.lbTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbTime.Location = new System.Drawing.Point(126, 38);
             this.lbTime.Name = "lbTime";
-            this.lbTime.Size = new System.Drawing.Size(81, 22);
+            this.lbTime.Size = new System.Drawing.Size(107, 29);
             this.lbTime.TabIndex = 7;
             this.lbTime.Text = "Time:";
             this.lbTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -118,10 +114,9 @@
             this.lbValue.AutoSize = true;
             this.lbValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbValue.Location = new System.Drawing.Point(94, 72);
-            this.lbValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbValue.Location = new System.Drawing.Point(126, 105);
             this.lbValue.Name = "lbValue";
-            this.lbValue.Size = new System.Drawing.Size(81, 22);
+            this.lbValue.Size = new System.Drawing.Size(107, 29);
             this.lbValue.TabIndex = 8;
             this.lbValue.Text = "Value:";
             this.lbValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -129,20 +124,18 @@
             // txtTime
             // 
             this.txtTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtTime.Location = new System.Drawing.Point(199, 27);
-            this.txtTime.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTime.Location = new System.Drawing.Point(266, 41);
             this.txtTime.Name = "txtTime";
-            this.txtTime.Size = new System.Drawing.Size(148, 21);
+            this.txtTime.Size = new System.Drawing.Size(197, 22);
             this.txtTime.TabIndex = 1;
             this.txtTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDoubleVal_KeyPress);
             // 
             // txtValue
             // 
             this.txtValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtValue.Location = new System.Drawing.Point(199, 74);
-            this.txtValue.Margin = new System.Windows.Forms.Padding(2);
+            this.txtValue.Location = new System.Drawing.Point(266, 108);
             this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(148, 21);
+            this.txtValue.Size = new System.Drawing.Size(197, 22);
             this.txtValue.TabIndex = 3;
             this.txtValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDoubleVal_KeyPress);
             // 
@@ -150,10 +143,9 @@
             // 
             this.chkRealTime.AutoSize = true;
             this.chkRealTime.Dock = System.Windows.Forms.DockStyle.Left;
-            this.chkRealTime.Location = new System.Drawing.Point(351, 27);
-            this.chkRealTime.Margin = new System.Windows.Forms.Padding(2);
+            this.chkRealTime.Location = new System.Drawing.Point(469, 41);
             this.chkRealTime.Name = "chkRealTime";
-            this.chkRealTime.Size = new System.Drawing.Size(90, 18);
+            this.chkRealTime.Size = new System.Drawing.Size(117, 23);
             this.chkRealTime.TabIndex = 2;
             this.chkRealTime.Text = "Real Time (&T)";
             this.chkRealTime.UseVisualStyleBackColor = true;
@@ -164,10 +156,9 @@
             this.lbIntp.AutoSize = true;
             this.lbIntp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbIntp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.lbIntp.Location = new System.Drawing.Point(94, 119);
-            this.lbIntp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbIntp.Location = new System.Drawing.Point(126, 172);
             this.lbIntp.Name = "lbIntp";
-            this.lbIntp.Size = new System.Drawing.Size(81, 22);
+            this.lbIntp.Size = new System.Drawing.Size(107, 29);
             this.lbIntp.TabIndex = 9;
             this.lbIntp.Text = "Interpolation:";
             this.lbIntp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -177,30 +168,27 @@
             this.cmbInterpo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbInterpo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInterpo.FormattingEnabled = true;
-            this.cmbInterpo.Location = new System.Drawing.Point(199, 121);
-            this.cmbInterpo.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbInterpo.Location = new System.Drawing.Point(266, 175);
             this.cmbInterpo.Name = "cmbInterpo";
-            this.cmbInterpo.Size = new System.Drawing.Size(148, 20);
+            this.cmbInterpo.Size = new System.Drawing.Size(197, 24);
             this.cmbInterpo.TabIndex = 10;
             // 
             // chkGroup
             // 
             this.chkGroup.AutoSize = true;
             this.chkGroup.Dock = System.Windows.Forms.DockStyle.Left;
-            this.chkGroup.Location = new System.Drawing.Point(351, 121);
-            this.chkGroup.Margin = new System.Windows.Forms.Padding(2);
+            this.chkGroup.Location = new System.Drawing.Point(469, 175);
             this.chkGroup.Name = "chkGroup";
-            this.chkGroup.Size = new System.Drawing.Size(78, 18);
+            this.chkGroup.Size = new System.Drawing.Size(95, 23);
             this.chkGroup.TabIndex = 11;
             this.chkGroup.Text = "Group (&G)";
             this.chkGroup.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(278, 9);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCancel.Location = new System.Drawing.Point(371, 12);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(81, 20);
+            this.btnCancel.Size = new System.Drawing.Size(108, 27);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel (&C)";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -208,10 +196,9 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(184, 9);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSave.Location = new System.Drawing.Point(245, 12);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(81, 20);
+            this.btnSave.Size = new System.Drawing.Size(108, 27);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Save (&S)";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -219,11 +206,10 @@
             // 
             // FrmPoint
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(443, 218);
+            this.ClientSize = new System.Drawing.Size(591, 291);
             this.Controls.Add(this.splitCtl);
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmPoint";
             this.Text = "FrmPoint";
             this.Load += new System.EventHandler(this.FrmPoint_Load);

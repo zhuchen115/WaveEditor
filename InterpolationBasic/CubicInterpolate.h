@@ -75,6 +75,8 @@ namespace InterpolationBasic {
 			{
 				if (start >= stop)
 					throw gcnew ArgumentException("Start Time must smaller than stop time");
+				if (points->Length < 3)
+					throw gcnew ArgumentException("The spline need at least 3 points");
 				std::vector<double> x, y;
 				for (int i = 0; i < points->Length; i++)
 				{
