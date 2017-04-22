@@ -39,7 +39,33 @@ namespace InterpolationBasic {
 				System::Collections::Generic::List<NumType>^ rslt = gcnew System::Collections::Generic::List<NumType>();
 				for (unsigned int i = start; i < stop; i++)
 				{
-					rslt->Add((NumType)((System::Object^)s(i)));
+					double r =s(i);
+					NumType tval;
+					if (NumType::typeid == UInt32::typeid)
+					{
+						tval =(NumType)((Object^)Convert::ToUInt32(r));
+					}
+					else if (NumType::typeid == UInt16::typeid)
+					{
+						tval = (NumType)((Object^)Convert::ToUInt16(r));
+					}
+					else if (NumType::typeid == UInt64::typeid)
+					{
+						tval = (NumType)((Object^)Convert::ToUInt64(r));
+					}
+					else if (NumType::typeid == Byte::typeid)
+					{
+						tval = (NumType)((Object^)Convert::ToByte(r));
+					}
+					else if (NumType::typeid == Double::typeid)
+					{
+						tval = (NumType)((Object^)Convert::ToDouble(r));
+					}
+					else
+					{
+						throw gcnew ArgumentException("Type not supported");
+					}
+					rslt->Add(tval);
 				}
 				return rslt->ToArray();
 				

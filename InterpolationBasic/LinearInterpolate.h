@@ -33,7 +33,32 @@ namespace InterpolationBasic {
 			for (unsigned int i = start; i < stop; i++)
 			{
 				double r = y0 + coef*(i - x0);
-				result[i - start] = (NumType)((System::Object^)r);
+				NumType tval;
+				if (NumType::typeid == UInt32::typeid)
+				{
+					tval = (NumType)((Object^)Convert::ToUInt32(r));
+				}
+				else if (NumType::typeid == UInt16::typeid)
+				{
+					tval = (NumType)((Object^)Convert::ToUInt16(r));
+				}
+				else if (NumType::typeid == UInt64::typeid)
+				{
+					tval = (NumType)((Object^)Convert::ToUInt64(r));
+				}
+				else if (NumType::typeid == Byte::typeid)
+				{
+					tval = (NumType)((Object^)Convert::ToByte(r));
+				}
+				else if (NumType::typeid == Double::typeid)
+				{
+					tval = (NumType)((Object^)Convert::ToDouble(r));
+				}
+				else
+				{
+					throw gcnew ArgumentException("Type not supported");
+				}
+				result[i - start] = tval;
 			}
 			return result;
 		}
