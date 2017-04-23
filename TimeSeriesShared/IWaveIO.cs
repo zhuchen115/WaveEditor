@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace TimeSeriesShared
@@ -65,35 +64,5 @@ namespace TimeSeriesShared
         /// <param name="dataout">the data read</param>
         [Obsolete("The Foreground function may make the UI crash")]
         void ReadWrite(int length, byte[] datain, ref byte[] dataout);
-    }
-
-
-    /// <summary>
-    /// The configuration class for the IWaveIO
-    /// </summary>
-    public class WaveIOConfig
-    {
-        protected Dictionary<string, object> _config = new Dictionary<string, object>();
-
-        public Dictionary<string, object> Config
-        {
-            get { return _config; }
-        }
-
-        public object this[string idx]
-        {
-            get
-            {
-                return _config[idx];
-            }
-            set
-            {
-                _config[idx] = value;
-            }
-        }
-    }
-    public abstract class WaveIOConfigForm : System.Windows.Forms.Form
-    {
-        public WaveIOConfig Config { get; set; }
     }
 }
