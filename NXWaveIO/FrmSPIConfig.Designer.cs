@@ -57,6 +57,10 @@
             this.lbSPIFreq = new System.Windows.Forms.Label();
             this.btnSPIInit = new System.Windows.Forms.Button();
             this.tblDevCmd = new System.Windows.Forms.TableLayoutPanel();
+            this.lbDevTitle = new System.Windows.Forms.Label();
+            this.btnDevReset = new System.Windows.Forms.Button();
+            this.chkDevClosedLp = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -68,6 +72,7 @@
             this.tabOutput.SuspendLayout();
             this.tblSPICfg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numClkDiv)).BeginInit();
+            this.tblDevCmd.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -436,17 +441,73 @@
             // 
             // tblDevCmd
             // 
-            this.tblDevCmd.ColumnCount = 2;
+            this.tblDevCmd.ColumnCount = 6;
             this.tblDevCmd.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblDevCmd.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tblDevCmd.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tblDevCmd.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tblDevCmd.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tblDevCmd.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblDevCmd.Controls.Add(this.lbDevTitle, 0, 0);
+            this.tblDevCmd.Controls.Add(this.btnDevReset, 1, 1);
+            this.tblDevCmd.Controls.Add(this.chkDevClosedLp, 1, 2);
+            this.tblDevCmd.Controls.Add(this.label1, 1, 3);
             this.tblDevCmd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblDevCmd.Location = new System.Drawing.Point(4, 4);
             this.tblDevCmd.Name = "tblDevCmd";
-            this.tblDevCmd.RowCount = 2;
-            this.tblDevCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblDevCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblDevCmd.RowCount = 7;
+            this.tblDevCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0034F));
+            this.tblDevCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.33527F));
+            this.tblDevCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.33226F));
+            this.tblDevCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.33226F));
+            this.tblDevCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.33226F));
+            this.tblDevCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.33226F));
+            this.tblDevCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.33226F));
             this.tblDevCmd.Size = new System.Drawing.Size(1005, 503);
             this.tblDevCmd.TabIndex = 0;
+            // 
+            // lbDevTitle
+            // 
+            this.lbDevTitle.AutoSize = true;
+            this.tblDevCmd.SetColumnSpan(this.lbDevTitle, 2);
+            this.lbDevTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbDevTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDevTitle.Location = new System.Drawing.Point(3, 0);
+            this.lbDevTitle.Name = "lbDevTitle";
+            this.lbDevTitle.Size = new System.Drawing.Size(396, 100);
+            this.lbDevTitle.TabIndex = 0;
+            this.lbDevTitle.Text = "Device Control Panel";
+            this.lbDevTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnDevReset
+            // 
+            this.btnDevReset.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDevReset.Location = new System.Drawing.Point(305, 103);
+            this.btnDevReset.Name = "btnDevReset";
+            this.btnDevReset.Size = new System.Drawing.Size(94, 61);
+            this.btnDevReset.TabIndex = 1;
+            this.btnDevReset.Text = "Reset";
+            this.btnDevReset.UseVisualStyleBackColor = true;
+            // 
+            // chkDevClosedLp
+            // 
+            this.chkDevClosedLp.AutoSize = true;
+            this.tblDevCmd.SetColumnSpan(this.chkDevClosedLp, 2);
+            this.chkDevClosedLp.Location = new System.Drawing.Point(305, 170);
+            this.chkDevClosedLp.Name = "chkDevClosedLp";
+            this.chkDevClosedLp.Size = new System.Drawing.Size(109, 21);
+            this.chkDevClosedLp.TabIndex = 2;
+            this.chkDevClosedLp.Text = "Closed Loop";
+            this.chkDevClosedLp.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(305, 234);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Read ";
             // 
             // FrmSPIConfig
             // 
@@ -470,6 +531,8 @@
             this.tblSPICfg.ResumeLayout(false);
             this.tblSPICfg.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numClkDiv)).EndInit();
+            this.tblDevCmd.ResumeLayout(false);
+            this.tblDevCmd.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -505,5 +568,9 @@
         private System.Windows.Forms.Label lbSPIFreq;
         private System.Windows.Forms.Button btnSPIInit;
         private System.Windows.Forms.TableLayoutPanel tblDevCmd;
+        private System.Windows.Forms.Label lbDevTitle;
+        private System.Windows.Forms.Button btnDevReset;
+        private System.Windows.Forms.CheckBox chkDevClosedLp;
+        private System.Windows.Forms.Label label1;
     }
 }
