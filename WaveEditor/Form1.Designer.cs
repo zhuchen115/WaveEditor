@@ -48,6 +48,11 @@
             this.btnClrPoint = new System.Windows.Forms.Button();
             this.btnGenSeries = new System.Windows.Forms.Button();
             this.tabWaveOut = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.cmbWaveIO = new System.Windows.Forms.ComboBox();
+            this.lbPort = new System.Windows.Forms.Label();
+            this.btnIOSend = new System.Windows.Forms.Button();
+            this.btnWaveIOCfg = new System.Windows.Forms.Button();
             this.tblpProp = new System.Windows.Forms.TableLayoutPanel();
             this.lbSigProp = new System.Windows.Forms.Label();
             this.lbSigSampleRate = new System.Windows.Forms.Label();
@@ -85,6 +90,8 @@
             this.tabWaveFunc.SuspendLayout();
             this.tabWaveEdit.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tabWaveOut.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.tblpProp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSampleR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSampleB)).BeginInit();
@@ -188,7 +195,7 @@
             this.tabWaveFunc.Controls.Add(this.tabWaveOut);
             this.tabWaveFunc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabWaveFunc.Location = new System.Drawing.Point(0, 0);
-            this.tabWaveFunc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabWaveFunc.Margin = new System.Windows.Forms.Padding(2);
             this.tabWaveFunc.Name = "tabWaveFunc";
             this.tabWaveFunc.SelectedIndex = 0;
             this.tabWaveFunc.Size = new System.Drawing.Size(666, 142);
@@ -198,9 +205,9 @@
             // 
             this.tabWaveEdit.Controls.Add(this.tableLayoutPanel1);
             this.tabWaveEdit.Location = new System.Drawing.Point(4, 22);
-            this.tabWaveEdit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabWaveEdit.Margin = new System.Windows.Forms.Padding(2);
             this.tabWaveEdit.Name = "tabWaveEdit";
-            this.tabWaveEdit.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabWaveEdit.Padding = new System.Windows.Forms.Padding(2);
             this.tabWaveEdit.Size = new System.Drawing.Size(658, 116);
             this.tabWaveEdit.TabIndex = 0;
             this.tabWaveEdit.Text = "Wave Edit";
@@ -296,14 +303,83 @@
             // 
             // tabWaveOut
             // 
+            this.tabWaveOut.Controls.Add(this.tableLayoutPanel2);
             this.tabWaveOut.Location = new System.Drawing.Point(4, 22);
-            this.tabWaveOut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabWaveOut.Margin = new System.Windows.Forms.Padding(2);
             this.tabWaveOut.Name = "tabWaveOut";
-            this.tabWaveOut.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabWaveOut.Padding = new System.Windows.Forms.Padding(2);
             this.tabWaveOut.Size = new System.Drawing.Size(658, 116);
             this.tabWaveOut.TabIndex = 1;
             this.tabWaveOut.Text = "Wave Output";
             this.tabWaveOut.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 6;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.44482F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.44481F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.11037F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 36F));
+            this.tableLayoutPanel2.Controls.Add(this.cmbWaveIO, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lbPort, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnIOSend, 4, 1);
+            this.tableLayoutPanel2.Controls.Add(this.btnWaveIOCfg, 3, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 2);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(654, 112);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // cmbWaveIO
+            // 
+            this.cmbWaveIO.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbWaveIO.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbWaveIO.FormattingEnabled = true;
+            this.cmbWaveIO.Location = new System.Drawing.Point(23, 36);
+            this.cmbWaveIO.Name = "cmbWaveIO";
+            this.cmbWaveIO.Size = new System.Drawing.Size(187, 20);
+            this.cmbWaveIO.TabIndex = 0;
+            this.cmbWaveIO.SelectedIndexChanged += new System.EventHandler(this.cmbWaveIO_SelectedIndexChanged);
+            // 
+            // lbPort
+            // 
+            this.lbPort.AutoSize = true;
+            this.lbPort.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbPort.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPort.Location = new System.Drawing.Point(23, 0);
+            this.lbPort.Name = "lbPort";
+            this.lbPort.Size = new System.Drawing.Size(187, 33);
+            this.lbPort.TabIndex = 1;
+            this.lbPort.Text = "Port:";
+            this.lbPort.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // btnIOSend
+            // 
+            this.btnIOSend.Enabled = false;
+            this.btnIOSend.Location = new System.Drawing.Point(429, 36);
+            this.btnIOSend.Name = "btnIOSend";
+            this.btnIOSend.Size = new System.Drawing.Size(88, 23);
+            this.btnIOSend.TabIndex = 3;
+            this.btnIOSend.Text = "Send";
+            this.btnIOSend.UseVisualStyleBackColor = true;
+            this.btnIOSend.Click += new System.EventHandler(this.btnIOSend_Click);
+            // 
+            // btnWaveIOCfg
+            // 
+            this.btnWaveIOCfg.Enabled = false;
+            this.btnWaveIOCfg.Location = new System.Drawing.Point(236, 36);
+            this.btnWaveIOCfg.Name = "btnWaveIOCfg";
+            this.btnWaveIOCfg.Size = new System.Drawing.Size(95, 23);
+            this.btnWaveIOCfg.TabIndex = 2;
+            this.btnWaveIOCfg.Text = "Advanced";
+            this.btnWaveIOCfg.UseVisualStyleBackColor = true;
+            this.btnWaveIOCfg.Click += new System.EventHandler(this.btnWaveIOCfg_Click);
             // 
             // tblpProp
             // 
@@ -555,9 +631,9 @@
             this.tblpProp.SetColumnSpan(this.btnSigInit, 2);
             this.btnSigInit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSigInit.Location = new System.Drawing.Point(2, 255);
-            this.btnSigInit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSigInit.Margin = new System.Windows.Forms.Padding(2);
             this.btnSigInit.Name = "btnSigInit";
-            this.btnSigInit.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSigInit.Padding = new System.Windows.Forms.Padding(4);
             this.btnSigInit.Size = new System.Drawing.Size(383, 30);
             this.btnSigInit.TabIndex = 13;
             this.btnSigInit.Text = "Initialize";
@@ -568,6 +644,7 @@
             // 
             this.lbSigRealT.AutoSize = true;
             this.lbSigRealT.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbSigRealT.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.lbSigRealT.Location = new System.Drawing.Point(2, 287);
             this.lbSigRealT.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbSigRealT.Name = "lbSigRealT";
@@ -582,7 +659,7 @@
             this.chkSigRealT.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkSigRealT.Enabled = false;
             this.chkSigRealT.Location = new System.Drawing.Point(184, 289);
-            this.chkSigRealT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkSigRealT.Margin = new System.Windows.Forms.Padding(2);
             this.chkSigRealT.Name = "chkSigRealT";
             this.chkSigRealT.Size = new System.Drawing.Size(201, 22);
             this.chkSigRealT.TabIndex = 15;
@@ -594,6 +671,7 @@
             // 
             this.lbDispXRange.AutoSize = true;
             this.lbDispXRange.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbDispXRange.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.lbDispXRange.Location = new System.Drawing.Point(2, 313);
             this.lbDispXRange.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbDispXRange.Name = "lbDispXRange";
@@ -606,6 +684,7 @@
             // 
             this.lbDispYRange.AutoSize = true;
             this.lbDispYRange.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbDispYRange.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.lbDispYRange.Location = new System.Drawing.Point(2, 339);
             this.lbDispYRange.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbDispYRange.Name = "lbDispYRange";
@@ -618,7 +697,7 @@
             // 
             this.txtXRange.Enabled = false;
             this.txtXRange.Location = new System.Drawing.Point(184, 315);
-            this.txtXRange.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtXRange.Margin = new System.Windows.Forms.Padding(2);
             this.txtXRange.Name = "txtXRange";
             this.txtXRange.Size = new System.Drawing.Size(121, 21);
             this.txtXRange.TabIndex = 18;
@@ -631,7 +710,7 @@
             // 
             this.txtYRange.Enabled = false;
             this.txtYRange.Location = new System.Drawing.Point(184, 341);
-            this.txtYRange.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtYRange.Margin = new System.Windows.Forms.Padding(2);
             this.txtYRange.Name = "txtYRange";
             this.txtYRange.Size = new System.Drawing.Size(122, 21);
             this.txtYRange.TabIndex = 19;
@@ -666,6 +745,9 @@
             this.tabWaveFunc.ResumeLayout(false);
             this.tabWaveEdit.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tabWaveOut.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.tblpProp.ResumeLayout(false);
             this.tblpProp.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSampleR)).EndInit();
@@ -715,6 +797,11 @@
         private System.Windows.Forms.TabControl tabWaveFunc;
         private System.Windows.Forms.TabPage tabWaveEdit;
         private System.Windows.Forms.TabPage tabWaveOut;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.ComboBox cmbWaveIO;
+        private System.Windows.Forms.Label lbPort;
+        private System.Windows.Forms.Button btnIOSend;
+        private System.Windows.Forms.Button btnWaveIOCfg;
     }
 }
 

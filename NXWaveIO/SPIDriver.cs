@@ -48,5 +48,18 @@ namespace NXWaveIO
         {
             throw new NotImplementedException();
         }
+
+        public string Name
+        {
+            get { return "FTDI SPI driver"; }
+        }
+
+        public Type GetConfigForm
+        {
+            get
+            {
+                return typeof(FrmSPIConfig);
+            }
+        }
     }
 }

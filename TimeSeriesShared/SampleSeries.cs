@@ -532,18 +532,15 @@ namespace TimeSeriesShared
         /// <param name="endtime">the end time</param>
         /// <param name="process">The process to be reported</param>
         /// <param name="done">When the event is done, the result will be passed through result</param>
-        public void GenerateSeries(uint endtime, ProgressChangedEventHandler process = null, RunWorkerCompletedEventHandler done = null)
+        public void GenerateSeries(uint endtime, BackgroundWorker worker)
         {
             
             DoWorkEventArgs es = new DoWorkEventArgs(endtime);
-            worker0 = new BackgroundWorker();
+            worker0 = worker;
             worker0.DoWork += _genseries_background;
             worker0.WorkerSupportsCancellation = true;
             worker0.WorkerReportsProgress = true;
-            if (process != null)
-                worker0.ProgressChanged += process;
-            if (done != null)
-                worker0.RunWorkerCompleted += done;
+            worker0.RunWorkerAsync(es);
 
         }
 
@@ -564,7 +561,8 @@ namespace TimeSeriesShared
             int i = 0;bool end =false;
             while (i<ctrldata.Count())
             {
-                if(worker.CancellationPending)
+                worker.ReportProgress((int)(i /(double) ctrldata.Count()*100),"Generate Series");
+                if (worker.CancellationPending)
                 {
                     e.Cancel = true;
                     break;
