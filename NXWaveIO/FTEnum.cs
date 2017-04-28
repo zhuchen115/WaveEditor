@@ -222,6 +222,8 @@ namespace NXWaveIO
     public enum SPIMode : byte
     {
         MODE0 = 0x31,
-        MODE1 = 0x34
+        MODE1 = 0x34,
+        MODE2 = 0x32,
+        MODE3 = 0x38
     }
 }

@@ -540,7 +540,7 @@ namespace WaveEditor
             {
                 iohandle = WaveIOC.GetInstanceById(cmbWaveIO.SelectedIndex);
                 Type tp = iohandle.GetConfigForm;
-                if(tp.IsAssignableFrom(typeof(IWaveIOConfigForm))&&tp.IsAssignableFrom(typeof(Form)))
+                if(typeof(Form).IsAssignableFrom(tp) && typeof(IWaveIOConfigForm).IsAssignableFrom(tp))
                 {
                     btnWaveIOCfg.Enabled = true;
                 }
@@ -558,7 +558,7 @@ namespace WaveEditor
             if (cmbWaveIO.SelectedIndex < 0)
                 return;
             Type tp = iohandle.GetConfigForm;
-            if (!(tp.IsAssignableFrom(typeof(IWaveIOConfigForm)) && tp.IsAssignableFrom(typeof(Form))))
+            if (!(typeof(Form).IsAssignableFrom(tp) && typeof(IWaveIOConfigForm).IsAssignableFrom(tp)))
             {
                 btnWaveIOCfg.Enabled = false;
                 MessageBox.Show("Configuration instance not found!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);

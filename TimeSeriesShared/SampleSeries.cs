@@ -529,18 +529,17 @@ namespace TimeSeriesShared
         /// <summary>
         /// Interpolate the time series
         /// </summary>
-        /// <param name="endtime">the end time</param>
-        /// <param name="process">The process to be reported</param>
-        /// <param name="done">When the event is done, the result will be passed through result</param>
+        /// <param name="endtime">The end time of time series</param>
+        /// <param name="worker">A background worker can be used to report time</param>
         public void GenerateSeries(uint endtime, BackgroundWorker worker)
         {
             
-            DoWorkEventArgs es = new DoWorkEventArgs(endtime);
+            //DoWorkEventArgs es = new DoWorkEventArgs(endtime);
             worker0 = worker;
             worker0.DoWork += _genseries_background;
             worker0.WorkerSupportsCancellation = true;
             worker0.WorkerReportsProgress = true;
-            worker0.RunWorkerAsync(es);
+            worker0.RunWorkerAsync(endtime);
 
         }
 
@@ -553,7 +552,7 @@ namespace TimeSeriesShared
         private void _genseries_background(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            File.Create("~datacache.tmp");
+            //File.Create("~datacache.tmp");
             ctrldata = ctrldata.Distinct().ToList();
             ctrldata.Sort();
             List<SamplePoint<T>> ctldata = new List<SamplePoint<T>>();

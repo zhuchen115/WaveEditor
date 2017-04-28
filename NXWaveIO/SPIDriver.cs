@@ -9,9 +9,12 @@ namespace NXWaveIO
 {
     public class SPIDriver : IWaveIO
     {
-        IntPtr ftHandle;
+        IntPtr ftHandle = IntPtr.Zero;
         WaveIOConfig cfg;
-        SPIMode mode;
+        SPIMode mode = SPIMode.MODE0;
+
+        public string Name { get { return "SPIDriver"; } }
+        public Type GetConfigForm { get { return typeof(FrmSPIConfig); } }
 
         public SPIDriver()
         {
@@ -57,12 +60,136 @@ namespace NXWaveIO
 
         public void Write(byte[] wdata, int length)
         {
-            throw new NotImplementedException();
+            FTStatus status;
+            if (length > wdata.Length)
+                throw new ArgumentOutOfRangeException("length", "length is over data Length");
+            if (ftHandle == IntPtr.Zero)
+                throw new InvalidOperationException("FTDI device not initialized");
+            byte OpCode = 0x00;
+            switch (mode)
+            {
+                case SPIMode.MODE0:
+                case SPIMode.MODE2:
+                    OpCode = 0x11; //Out Falling Edge
+                    break;
+                case SPIMode.MODE1:
+                case SPIMode.MODE3:
+                    OpCode = 0x10;//Out Rising Edge
+                    break;
+            }
+
+            byte[] datatosend;
+            IntPtr outptr;
+
+            uint szSent = 0, szRealOut = 0;
+            int szToSend, lenremain = length;
+            int i = 0;
+            //First Make CS Low
+            _CS_enable(true);
+            // Then Shift the data out;
+            while (lenremain > 0)
+            {
+                //Separate data in with maxinum 65536 bytes
+                szToSend = (lenremain > 65536) ? 65536 : lenremain;
+                lenremain -= szToSend;
+                datatosend = new byte[szToSend + 3];
+                datatosend[0] = OpCode;
+                // The 2 byte length
+                datatosend[1] = (byte)((szToSend - 1) & 0x00ff);
+                datatosend[2] = (byte)(((szToSend - 1) >> 8) & 0x00ff);
+                Array.Copy(wdata, 65536 * i, datatosend, 3, szToSend);
+                outptr = Marshal.AllocHGlobal(szToSend + 2);
+                Marshal.Copy(datatosend, 0, outptr, szToSend + 3);
+                status = DllWraper.FT_Write(ftHandle, outptr, (uint)szToSend + 3, ref szSent);
+                if (status != FTStatus.OK)
+                    throw new FTDIException(status, "send data Error");
+                szRealOut += szSent;
+                Marshal.FreeHGlobal(outptr);
+                i++;
+                System.Threading.Thread.Sleep(20);
+            }
+            // CS HIGH
+            _CS_enable(false);
+        }
+
+        struct Data_send
+        {
+            public byte[] data;
+            public int len;
         }
 
         public void WriteAsync(byte[] data, int length, ref BackgroundWorker worker)
         {
-            throw new NotImplementedException();
+            if(length>data.Length)
+            {
+                throw new ArgumentOutOfRangeException("length", "length is outof range");
+            }
+            if (ftHandle == IntPtr.Zero)
+                throw new InvalidOperationException("FTDI device not initialized");
+            Data_send send = new Data_send() { data = data, len = length };
+            worker.DoWork += _write_async_background;
+            worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
+            worker.RunWorkerAsync(send);
+        }
+
+        private void _write_async_background(object sender,DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            FTStatus status;
+            byte OpCode = 0x00;
+            switch (mode)
+            {
+                case SPIMode.MODE0:
+                case SPIMode.MODE2:
+                    OpCode = 0x11; //Out Falling Edge
+                    break;
+                case SPIMode.MODE1:
+                case SPIMode.MODE3:
+                    OpCode = 0x10;//Out Rising Edge
+                    break;
+            }
+
+            byte[] datatosend;
+            IntPtr outptr;
+
+            uint szSent = 0, szRealOut = 0;
+            int szToSend, lenremain = ((Data_send)e.Argument).len;
+            byte[] wdata = ((Data_send)e.Argument).data;
+            int i = 0;
+            //First Make CS Low
+            _CS_enable(true);
+            // Then Shift the data out;
+            worker.ReportProgress(0, "SPI Writing");
+            while (lenremain > 0)
+            {
+                if(worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+                //Separate data in with maxinum 65536 bytes
+                szToSend = (lenremain > 65536) ? 65536 : lenremain;
+                lenremain -= szToSend;
+                datatosend = new byte[szToSend + 3];
+                datatosend[0] = OpCode;
+                // The 2 byte length
+                datatosend[1] = (byte)((szToSend - 1) & 0x00ff);
+                datatosend[2] = (byte)(((szToSend - 1) >> 8) & 0x00ff);
+                Array.Copy(wdata, 65536 * i, datatosend, 3, szToSend);
+                outptr = Marshal.AllocHGlobal(szToSend + 2);
+                Marshal.Copy(datatosend, 0, outptr, szToSend + 3);
+                status = DllWraper.FT_Write(ftHandle, outptr, (uint)szToSend + 3, ref szSent);
+                if (status != FTStatus.OK)
+                    throw new FTDIException(status, "send data Error");
+                szRealOut += szSent;
+                Marshal.FreeHGlobal(outptr);
+                i++;
+                worker.ReportProgress((int)(100-(100*lenremain/((double) ((Data_send)e.Argument).len))),"SPI Writing");
+                System.Threading.Thread.Sleep(50);
+            }
+            // CS HIGH
+            _CS_enable(false);
         }
 
         
@@ -186,6 +313,8 @@ namespace NXWaveIO
             Marshal.FreeHGlobal(outptr);
             Marshal.FreeHGlobal(inptr);
         }
+
+
         /// <summary>
         /// Initialize the spi interface
         /// </summary>
@@ -221,6 +350,38 @@ namespace NXWaveIO
 
             Marshal.FreeHGlobal(outptr);
             this.mode = mode;
+        }
+
+        internal bool ConnectTest(int id,ref FTStatus status)
+        {
+            
+            status = DllWraper.FT_Open(id, ref ftHandle);
+            if (status != FTStatus.OK)
+                return false;
+            return true;
+        }
+
+        /// <summary>
+        /// Enable the chip select
+        /// </summary>
+        /// <param name="en">true low,false high</param>
+        private void _CS_enable(bool en)
+        {
+            FTStatus status;
+            uint szSent = 0;
+            byte[] datatosend = new byte[3];
+            datatosend[0] = 0x80;
+            if (en)
+                datatosend[1] = 0x00;
+            else
+                datatosend[1] = 0x08;
+            datatosend[2] = 0xfb;
+            IntPtr outptr = Marshal.AllocHGlobal(3);
+            Marshal.Copy(datatosend, 0, outptr, 3);
+            status = DllWraper.FT_Write(ftHandle, outptr, 3, ref szSent);
+            if (status != FTStatus.OK)
+                throw new FTDIException(status, "send data Error");
+            Marshal.FreeHGlobal(outptr);
         }
     }
 }
