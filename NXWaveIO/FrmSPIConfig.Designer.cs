@@ -47,20 +47,20 @@
             this.lbGeDesc = new System.Windows.Forms.Label();
             this.btnConnect = new System.Windows.Forms.Button();
             this.tabSPICfg = new System.Windows.Forms.TabPage();
-            this.tabOutput = new System.Windows.Forms.TabPage();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.tblSPICfg = new System.Windows.Forms.TableLayoutPanel();
             this.lbSPClkDiv = new System.Windows.Forms.Label();
             this.numClkDiv = new System.Windows.Forms.NumericUpDown();
             this.lbSPIFreqll = new System.Windows.Forms.Label();
             this.lbSPIFreq = new System.Windows.Forms.Label();
             this.btnSPIInit = new System.Windows.Forms.Button();
+            this.tabOutput = new System.Windows.Forms.TabPage();
             this.tblDevCmd = new System.Windows.Forms.TableLayoutPanel();
             this.lbDevTitle = new System.Windows.Forms.Label();
             this.btnDevReset = new System.Windows.Forms.Button();
             this.chkDevClosedLp = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -69,9 +69,9 @@
             this.tabGen.SuspendLayout();
             this.tblGeneral.SuspendLayout();
             this.tabSPICfg.SuspendLayout();
-            this.tabOutput.SuspendLayout();
             this.tblSPICfg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numClkDiv)).BeginInit();
+            this.tabOutput.SuspendLayout();
             this.tblDevCmd.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,6 +108,7 @@
             this.tabConfig.SelectedIndex = 0;
             this.tabConfig.Size = new System.Drawing.Size(1021, 540);
             this.tabConfig.TabIndex = 0;
+            this.tabConfig.Visible = false;
             // 
             // tabGen
             // 
@@ -190,6 +191,7 @@
             this.btnDevRefresh.TabIndex = 2;
             this.btnDevRefresh.Text = "Refresh";
             this.btnDevRefresh.UseVisualStyleBackColor = true;
+            this.btnDevRefresh.Click += new System.EventHandler(this.btnDevRefresh_Click);
             // 
             // lbGeOp
             // 
@@ -329,38 +331,6 @@
             this.tabSPICfg.Text = "SPI";
             this.tabSPICfg.UseVisualStyleBackColor = true;
             // 
-            // tabOutput
-            // 
-            this.tabOutput.Controls.Add(this.tblDevCmd);
-            this.tabOutput.Location = new System.Drawing.Point(4, 25);
-            this.tabOutput.Margin = new System.Windows.Forms.Padding(4);
-            this.tabOutput.Name = "tabOutput";
-            this.tabOutput.Padding = new System.Windows.Forms.Padding(4);
-            this.tabOutput.Size = new System.Drawing.Size(1013, 511);
-            this.tabOutput.TabIndex = 2;
-            this.tabOutput.Text = "Device";
-            this.tabOutput.UseVisualStyleBackColor = true;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(595, 7);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(100, 31);
-            this.btnClose.TabIndex = 1;
-            this.btnClose.Text = "Close (&C)";
-            this.btnClose.UseVisualStyleBackColor = true;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(451, 7);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 31);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "Save (&S)";
-            this.btnSave.UseVisualStyleBackColor = true;
-            // 
             // tblSPICfg
             // 
             this.tblSPICfg.ColumnCount = 5;
@@ -438,6 +408,19 @@
             this.btnSPIInit.TabIndex = 4;
             this.btnSPIInit.Text = "Initialize";
             this.btnSPIInit.UseVisualStyleBackColor = true;
+            this.btnSPIInit.Click += new System.EventHandler(this.btnSPIInit_Click);
+            // 
+            // tabOutput
+            // 
+            this.tabOutput.Controls.Add(this.tblDevCmd);
+            this.tabOutput.Location = new System.Drawing.Point(4, 25);
+            this.tabOutput.Margin = new System.Windows.Forms.Padding(4);
+            this.tabOutput.Name = "tabOutput";
+            this.tabOutput.Padding = new System.Windows.Forms.Padding(4);
+            this.tabOutput.Size = new System.Drawing.Size(1013, 511);
+            this.tabOutput.TabIndex = 2;
+            this.tabOutput.Text = "Device";
+            this.tabOutput.UseVisualStyleBackColor = true;
             // 
             // tblDevCmd
             // 
@@ -509,6 +492,26 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Read ";
             // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(595, 7);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(100, 31);
+            this.btnClose.TabIndex = 1;
+            this.btnClose.Text = "Close (&C)";
+            this.btnClose.UseVisualStyleBackColor = true;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(451, 7);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(100, 31);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "Save (&S)";
+            this.btnSave.UseVisualStyleBackColor = true;
+            // 
             // FrmSPIConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -527,10 +530,10 @@
             this.tblGeneral.ResumeLayout(false);
             this.tblGeneral.PerformLayout();
             this.tabSPICfg.ResumeLayout(false);
-            this.tabOutput.ResumeLayout(false);
             this.tblSPICfg.ResumeLayout(false);
             this.tblSPICfg.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numClkDiv)).EndInit();
+            this.tabOutput.ResumeLayout(false);
             this.tblDevCmd.ResumeLayout(false);
             this.tblDevCmd.PerformLayout();
             this.ResumeLayout(false);

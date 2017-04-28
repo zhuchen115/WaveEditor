@@ -18,8 +18,7 @@ using System.Runtime.InteropServices;
 
 namespace NXWaveIO
 {
-    internal class DllWeaper
-    {
+    
         /// <summary>
         /// Wrapping the ftd2xx.dll
         /// Import all the functions in the dll
@@ -142,5 +141,5 @@ namespace NXWaveIO
             [DllImport(DllName, CallingConvention = CallingConvention.Winapi)]
             public static extern FTStatus FT_SetBitMode(IntPtr handle, byte mask, byte mode);
         }
-    }
+    
 }

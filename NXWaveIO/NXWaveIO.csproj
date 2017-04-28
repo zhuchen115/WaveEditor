@@ -79,13 +79,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DllWeaper.cs" />
+    <Compile Include="DllWraper.cs" />
     <Compile Include="FrmSPIConfig.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmSPIConfig.Designer.cs">
       <DependentUpon>FrmSPIConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="FTDIException.cs" />
     <Compile Include="FTEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SPIDriver.cs" />
@@ -100,9 +101,6 @@
     <EmbeddedResource Include="FrmSPIConfig.resx">
       <DependentUpon>FrmSPIConfig.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

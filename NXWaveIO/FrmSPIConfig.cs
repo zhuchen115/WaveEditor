@@ -10,8 +10,9 @@ using System.Windows.Forms;
 
 namespace NXWaveIO
 {
-    public partial class FrmSPIConfig : Form
+    public partial class FrmSPIConfig : /*TimeSeriesShared.WaveIOConfigForm*/ Form
     {
+        SPIDriver drv = new SPIDriver();
         public FrmSPIConfig()
         {
             InitializeComponent();
@@ -19,7 +20,32 @@ namespace NXWaveIO
 
         private void numClkDiv_ValueChanged(object sender, EventArgs e)
         {
+
             lbSPIFreq.Text = String.Format("{0}MHz", (60 / (numClkDiv.Value + 1)));
+        }
+
+        private void btnDevRefresh_Click(object sender, EventArgs e)
+        {
+            FTDeviceListInfoNode[] nodes = drv.GetDeviceList();
+            if(nodes ==null)
+            {
+                cmbDevices.Items.Clear();
+                return;
+            }
+            foreach(FTDeviceListInfoNode node in nodes)
+            {
+                cmbDevices.Items.Add(node.Description);
+            }
+        }
+
+        private void btnSPIInit_Click(object sender, EventArgs e)
+        {
+            TimeSeriesShared.WaveIOConfig cfg = drv.GetConfigs();
+            if(cmbDevices.SelectedIndex>=0)
+            {
+                cfg.Config["devid"] = cmbDevices.SelectedIndex;
+            }
+            cfg.Config["clkdiv"] = (ushort)numClkDiv.Value;
         }
     }
 }
