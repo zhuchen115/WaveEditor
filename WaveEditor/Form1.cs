@@ -29,6 +29,7 @@ namespace WaveEditor
             DispRange[2] = 0;
             DispRange[3] = 5;
             cmbDataType.SelectedIndex = 1;
+            cmbWaveIO.Items.AddRange(WaveIOC.GetNames());
         }
 
         private void txtDoubleVal_TextChanged(object sender, EventArgs e)
@@ -500,7 +501,7 @@ namespace WaveEditor
 
         private void btnGenSeries_Click(object sender, EventArgs e)
         {
-            
+            RefreshDisp();
         }
 
         private void btnClrPoint_Click(object sender, EventArgs e)
@@ -520,6 +521,64 @@ namespace WaveEditor
             txtXRange.Enabled = false;
             txtYRange.Enabled = false;
             cmbDataType.Enabled = true;
+            chartSignal.Series[0].Points.Clear();
+            chartSignal.Series[1].Points.Clear();
+        }
+        IWaveIO iohandle = null;
+
+        private void cmbWaveIO_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbWaveIO.SelectedIndex < 0)
+            {
+                btnIOSend.Enabled = false;
+                btnWaveIOCfg.Enabled = false;
+                iohandle = null;
+                return;
+            }
+            
+            try
+            {
+                iohandle = WaveIOC.GetInstanceById(cmbWaveIO.SelectedIndex);
+                Type tp = iohandle.GetConfigForm;
+                if(tp.IsAssignableFrom(typeof(IWaveIOConfigForm))&&tp.IsAssignableFrom(typeof(Form)))
+                {
+                    btnWaveIOCfg.Enabled = true;
+                }
+                btnIOSend.Enabled = true;
+                io_inited = false;
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        bool io_inited = false;
+        private void btnWaveIOCfg_Click(object sender, EventArgs e)
+        {
+            if (cmbWaveIO.SelectedIndex < 0)
+                return;
+            Type tp = iohandle.GetConfigForm;
+            if (!(tp.IsAssignableFrom(typeof(IWaveIOConfigForm)) && tp.IsAssignableFrom(typeof(Form))))
+            {
+                btnWaveIOCfg.Enabled = false;
+                MessageBox.Show("Configuration instance not found!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            object iocfgform = Activator.CreateInstance(tp);
+            if(((Form)iocfgform).ShowDialog() == DialogResult.OK)
+            {
+                iohandle.Init(((IWaveIOConfigForm)iocfgform).Config);
+                io_inited = false;
+            }
+        }
+
+        private void btnIOSend_Click(object sender, EventArgs e)
+        {
+            if(!io_inited)
+            {
+                iohandle.Init(iohandle.GetConfigs());
+            }
+
         }
     }
 }

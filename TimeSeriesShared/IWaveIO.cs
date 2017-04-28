@@ -64,5 +64,15 @@ namespace TimeSeriesShared
         /// <param name="dataout">the data read</param>
         [Obsolete("The Foreground function may make the UI crash")]
         void ReadWrite(int length, byte[] datain, ref byte[] dataout);
+
+        /// <summary>
+        /// The IO should have a name
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
+        /// Get the type of a form contains configuration
+        /// </summary>
+        Type GetConfigForm { get; }
     }
 }

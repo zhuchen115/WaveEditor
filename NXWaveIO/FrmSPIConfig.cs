@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TimeSeriesShared;
 
 namespace NXWaveIO
 {
@@ -16,6 +17,16 @@ namespace NXWaveIO
         public FrmSPIConfig()
         {
             InitializeComponent();
+        }
+
+        WaveIOConfig _config = new WaveIOConfig();
+
+        public WaveIOConfig Config
+        {
+            get
+            {
+                return _config;
+            }
         }
 
         private void numClkDiv_ValueChanged(object sender, EventArgs e)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 using InterpolationBasic;
 using TimeSeriesShared;
 
@@ -18,6 +18,23 @@ namespace WaveEditor
             dwInterpolate.Add(new LinearInterpolate<uint>());
             dwInterpolate.Add(new SplineInterpolate<uint>());
             dwInterpolate.Add(new SinInterpolate<uint>());
+            if(Properties.Settings.Default.InterpolateDll!=null)
+            {
+                string[] clsname = new string[Properties.Settings.Default.InterpolateClass.Count];
+                Properties.Settings.Default.InterpolateClass.CopyTo(clsname, 0);
+                foreach (string dllname in Properties.Settings.Default.InterpolateDll)
+                {
+                    List<string> ns =clsname.ToList().FindAll((x) => { return x.StartsWith(dllname); });
+                    List<string> clstoload = new List<string>();
+                    foreach (string cls in ns)
+                    {
+                        string[] d = cls.Split(',');
+                        clstoload.Add(d[1]);
+                    }
+                    LoadFromDll(dllname, clstoload.ToArray());
+
+                }
+            }
         }
 
         /// <summary>
@@ -72,6 +89,48 @@ namespace WaveEditor
                 return -1;
             else
                 return i;
+        }
+        public static void LoadFromDll(string dllName,string[] classname)
+        {
+            Assembly ass = Assembly.LoadFile(dllName);
+            foreach (string name in classname)
+            {
+                Type tpbase = ass.GetType(name);
+                Type[] gtype = { typeof(uint) };
+                Type tp = tpbase.MakeGenericType(gtype);
+                if (!tp.IsAssignableFrom(typeof(IInterpolate<uint>)))
+                {
+                    throw new InvalidProgramException("The class is not implement IInterpolate");
+                }
+                IInterpolate<uint> iterobj = (IInterpolate<uint>)Activator.CreateInstance(tp);
+                dwInterpolate.Add(iterobj);
+            }
+        }
+
+        
+
+        public static void SaveLoadDll(string dllName,string[] classname)
+        {
+            Assembly ass = Assembly.LoadFile(dllName);
+            List<string> clsname = new List<string>();
+            foreach (string name in classname)
+            {
+                Type tpbase = ass.GetType(name);
+                Type[] gtype = { typeof(uint) };
+                Type tp = tpbase.MakeGenericType(gtype);
+                if (!tp.IsAssignableFrom(typeof(IInterpolate<uint>)))
+                {
+                    throw new InvalidProgramException("The class is not implement IInterpolate");
+                }
+                clsname.Add(dllName + "," + name);
+            }
+            if (Properties.Settings.Default.InterpolateDll == null)
+                Properties.Settings.Default.InterpolateDll = new System.Collections.Specialized.StringCollection();
+            Properties.Settings.Default.InterpolateDll.Add(dllName);
+            if (Properties.Settings.Default.InterpolateClass == null)
+                Properties.Settings.Default.InterpolateClass = new System.Collections.Specialized.StringCollection();
+            Properties.Settings.Default.InterpolateClass.AddRange(clsname.ToArray());
+            Properties.Settings.Default.Save();
         }
     }
 }

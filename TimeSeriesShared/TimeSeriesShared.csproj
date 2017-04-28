@@ -81,15 +81,10 @@
   <ItemGroup>
     <Compile Include="IInterpolate.cs" />
     <Compile Include="IWaveIO.cs" />
+    <Compile Include="IWaveIOConfigForm.cs" />
     <Compile Include="SampleSeries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WaveIOConfig.cs" />
-    <Compile Include="WaveIOConfigForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WaveIOConfigForm.Designer.cs">
-      <DependentUpon>WaveIOConfigForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="ZOH.cs" />
   </ItemGroup>
   <ItemGroup>
