@@ -76,6 +76,31 @@ namespace WaveEditor
                     return;
                 }
             }
+
+            uint szmem = 0;
+            switch(cmbDataType.SelectedIndex)
+            {
+                case 0:
+                    szmem = 1;
+                    break;
+                case 1:
+                    szmem = 2;
+                    break;
+                case 2:
+                    szmem = 4;
+                    break;
+                case 3:
+                case 4:
+                    szmem = 8;
+                    break;
+            }
+            double memuse = (szmem * (uint)numSampleR.Value * Double.Parse(txtSampleT.Text));
+            if(memuse > Properties.Settings.Default.CacheNum)
+            {
+                if (MessageBox.Show(String.Format("The size of data exceed memory caching size, Do you want to continue?\n memory required {0}MB",memuse/1048576),"Large Memory Warning",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning) == DialogResult.Cancel)
+                    return;
+            }
+
             //Init the sample series
             switch(cmbDataType.SelectedIndex)
             {
@@ -567,18 +592,54 @@ namespace WaveEditor
             object iocfgform = Activator.CreateInstance(tp);
             if(((Form)iocfgform).ShowDialog() == DialogResult.OK)
             {
-                iohandle.Init(((IWaveIOConfigForm)iocfgform).Config);
-                io_inited = false;
+                io_cfg = ((IWaveIOConfigForm)iocfgform).Config;
+                iohandle.Init(io_cfg);
+                io_inited = true;
             }
         }
 
+        WaveIOConfig io_cfg = null;
         private void btnIOSend_Click(object sender, EventArgs e)
         {
             if(!io_inited)
             {
                 iohandle.Init(iohandle.GetConfigs());
             }
+            BackgroundWorker worker = new BackgroundWorker();
+            FormStatus status = new FormStatus(worker);
+            worker.RunWorkerCompleted += GenSeriesCompleted;
+            status.Show();
+            _sample_series_object.GenerateSeries(UInt32.Parse(txtSampleT.Text), worker);
+        }
 
+        private void GenSeriesCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show(e.Error.Message + "\n" + e.Error.StackTrace, "Interpolation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (e.Cancelled)
+                return;
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.RunWorkerCompleted += IOSeriesCompleted;
+            byte[] data = _sample_series_object.ResultToByte();
+            FormStatus status = new FormStatus(worker);
+            status.Show();
+            iohandle.WriteAsync(data, data.Length, ref worker);
+            
+        }
+
+        private void IOSeriesCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show(e.Error.Message + "\n" + e.Error.StackTrace, "IO Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (e.Cancelled)
+                return;
+            MessageBox.Show("Data Sending Completed");
         }
     }
 }

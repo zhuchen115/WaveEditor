@@ -36,6 +36,11 @@ namespace WaveEditor
             worker.WorkerReportsProgress = true;
             worker.ProgressChanged += background_process_change;
             worker.WorkerSupportsCancellation = true;
+            worker.RunWorkerCompleted += WorkFinsihed;
+        }
+        private void WorkFinsihed(object sender,RunWorkerCompletedEventArgs e)
+        {
+            Close();
         }
     }
 }

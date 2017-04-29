@@ -543,6 +543,7 @@ namespace TimeSeriesShared
 
         }
 
+        T[] result_array;
 
         /// <summary>
         /// The background task for signal generation
@@ -604,8 +605,52 @@ namespace TimeSeriesShared
                 }
             }
             e.Result = result;
+            result_array = result.ToArray();
         }
 
+        public byte[] ResultToByte(bool littleendian)
+        {
+            List<byte> btarry = new List<byte>();
+            foreach (object d0 in result_array)
+            {
+                if (typeof(T) == typeof(byte))
+                    btarry.Add((byte)d0);
+                else if (typeof(T)== typeof(ushort))
+                {
+                    byte[] atrr = BitConverter.GetBytes((ushort)d0);
+                    if (!(littleendian && BitConverter.IsLittleEndian))
+                        Array.Reverse(atrr);
+                    btarry.AddRange(atrr);
+                }
+                else if(typeof(T)==typeof(uint))
+                {
+                    byte[] atrr = BitConverter.GetBytes((uint)d0);
+                    if (!(littleendian && BitConverter.IsLittleEndian))
+                        Array.Reverse(atrr);
+                    btarry.AddRange(atrr);
+                }
+                else if (typeof(T) == typeof(ulong))
+                {
+                    byte[] atrr = BitConverter.GetBytes((ulong)d0);
+                    if (!(littleendian && BitConverter.IsLittleEndian))
+                        Array.Reverse(atrr);
+                    btarry.AddRange(atrr);
+                }
+                else if (typeof(T) == typeof(double))
+                {
+                    byte[] atrr = BitConverter.GetBytes((double)d0);
+                    if (!(littleendian && BitConverter.IsLittleEndian))
+                        Array.Reverse(atrr);
+                    btarry.AddRange(atrr);
+                }
+                else
+                {
+                    throw new ArgumentException("Type not support");
+                }
+            }
+
+            return btarry.ToArray();
+        }
 
         public double[] GenerateDispSeries(uint start, uint stop,int DispNum=1000)
         {
