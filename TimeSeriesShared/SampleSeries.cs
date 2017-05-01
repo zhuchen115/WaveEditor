@@ -555,6 +555,7 @@ namespace TimeSeriesShared
             BackgroundWorker worker = sender as BackgroundWorker;
             //File.Create("~datacache.tmp");
             ctrldata = ctrldata.Distinct().ToList();
+            ctrldata.Add(new SamplePoint<T>((uint)e.Argument, ctrldata.Last().Value, false, ctrldata.Last().MinValue, ctrldata.Last().MaxValue, ctrldata.Last().SampleBits) { Tag = new ZeroOrderHolder<T>() });
             ctrldata.Sort();
             List<SamplePoint<T>> ctldata = new List<SamplePoint<T>>();
             List<T> result = new List<T>();
@@ -568,7 +569,7 @@ namespace TimeSeriesShared
                     break;
                 }
                 ctldata.Add(ctrldata[i]);
-                if(ctrldata.Count()==0)
+                if(ctldata.Count()==1)
                 {
                     end = false;
                     i++;

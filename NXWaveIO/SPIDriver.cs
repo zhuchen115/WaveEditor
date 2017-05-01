@@ -22,6 +22,7 @@ namespace NXWaveIO
             cfg.Config.Add("clkdiv", Convert.ToUInt16(0x0000));
             cfg.Config.Add("SPIMode", SPIMode.MODE0);
             cfg.Config.Add("devid", 0);
+            cfg.Config.Add("lendian", true);
         }
         public WaveIOConfig GetConfigs()
         {
@@ -29,6 +30,7 @@ namespace NXWaveIO
             cfg.Config.Add("clkdiv", Convert.ToUInt16(0x0000));
             cfg.Config.Add("SPIMode", SPIMode.MODE0);
             cfg.Config.Add("devid", 0);
+            cfg.Config.Add("lendian", true);
             return cfg;
         }
 
@@ -177,7 +179,7 @@ namespace NXWaveIO
                 datatosend[1] = (byte)((szToSend - 1) & 0x00ff);
                 datatosend[2] = (byte)(((szToSend - 1) >> 8) & 0x00ff);
                 Array.Copy(wdata, 65536 * i, datatosend, 3, szToSend);
-                outptr = Marshal.AllocHGlobal(szToSend + 2);
+                outptr = Marshal.AllocHGlobal(szToSend + 4);
                 Marshal.Copy(datatosend, 0, outptr, szToSend + 3);
                 status = DllWraper.FT_Write(ftHandle, outptr, (uint)szToSend + 3, ref szSent);
                 if (status != FTStatus.OK)
@@ -186,7 +188,7 @@ namespace NXWaveIO
                 Marshal.FreeHGlobal(outptr);
                 i++;
                 worker.ReportProgress((int)(100-(100*lenremain/((double) ((Data_send)e.Argument).len))),"SPI Writing");
-                System.Threading.Thread.Sleep(50);
+                System.Threading.Thread.Sleep(20);
             }
             // CS HIGH
             _CS_enable(false);
@@ -357,7 +359,12 @@ namespace NXWaveIO
             
             status = DllWraper.FT_Open(id, ref ftHandle);
             if (status != FTStatus.OK)
+            {
+                
                 return false;
+            }
+            DllWraper.FT_Close(ftHandle);
+            ftHandle = IntPtr.Zero;
             return true;
         }
 

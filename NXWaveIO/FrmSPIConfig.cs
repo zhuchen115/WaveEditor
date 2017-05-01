@@ -17,6 +17,7 @@ namespace NXWaveIO
         public FrmSPIConfig()
         {
             InitializeComponent();
+            KeyPreview = true;
         }
 
         WaveIOConfig _config = new WaveIOConfig();
@@ -69,6 +70,7 @@ namespace NXWaveIO
             _config.Config["clkdiv"] = (ushort)numClkDiv.Value;
             _config.Config["lendian"] = chkSPILittleEnd.Checked;
             _config.Config["devid"] = cmbDevices.SelectedIndex;
+            _config.Config["SPIMode"] = (SPIMode)cmbSPIMode.SelectedIndex;
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -121,6 +123,7 @@ namespace NXWaveIO
             {
                 cmbDevices.Items.Add(node.Description);
             }
+            cmbSPIMode.SelectedIndex = 0;
         }
 
         private void cmbDevices_SelectedIndexChanged(object sender, EventArgs e)

@@ -20,5 +20,8 @@
     <Setting Name="IOClass" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="YAxisName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Voltage (V)</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

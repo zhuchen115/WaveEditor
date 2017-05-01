@@ -20,6 +20,7 @@ namespace WaveEditor
         public FrmEditor()
         {
             InitializeComponent();
+            
         }
 
         private void FrmEditor_Load(object sender, EventArgs e)
@@ -27,9 +28,10 @@ namespace WaveEditor
             DispRange[0] = 0;
             DispRange[1] = 1000;
             DispRange[2] = 0;
-            DispRange[3] = 5;
+            DispRange[3] = 65;
             cmbDataType.SelectedIndex = 1;
             cmbWaveIO.Items.AddRange(WaveIOC.GetNames());
+            chartSignal.ChartAreas[0].AxisY.Title = Properties.Settings.Default.YAxisName;
         }
 
         private void txtDoubleVal_TextChanged(object sender, EventArgs e)
@@ -272,7 +274,7 @@ namespace WaveEditor
                 if (rslt.Series.Name == "TSCtrl")
                 {
                     if(point_click!=null)
-                        point_click.MarkerSize = 5;
+                        point_click.MarkerSize = 10;
                     point_click = rslt.Series.Points[rslt.PointIndex];
                     btnDelPoint.Enabled = true;
                     btnEditPoint.Enabled = true;
@@ -281,7 +283,7 @@ namespace WaveEditor
                 else
                 {
                     if (point_click != null)
-                        point_click.MarkerSize = 5;
+                        point_click.MarkerSize = 10;
                     btnDelPoint.Enabled = false;
                     btnEditPoint.Enabled = false;
                 }
@@ -391,8 +393,8 @@ namespace WaveEditor
                 double max = Double.Parse(chm[1]);
                 if (min > max)
                     throw new FormatException("Min > Max");
-                DispRange[2] = min;
-                DispRange[3] = max;
+                DispRange[0] = min;
+                DispRange[1] = max;
             }
             catch (FormatException ex)
             {
@@ -476,7 +478,7 @@ namespace WaveEditor
         {
             try
             {
-                string[] chm = txtYRange.Text.Split(',');
+                string[] chm = txtXRange.Text.Split(',');
                 if (chm.Count() != 2)
                     throw new FormatException("Expression Error, the number are not 2");
                 double min = Double.Parse(chm[0]);
@@ -505,10 +507,12 @@ namespace WaveEditor
                 if(chkSigRealT.Checked)
                 {
                     dp.XValue = dp.XValue / (double)numSampleR.Value;
+                    chartSignal.ChartAreas[0].AxisX.Title = "Time (s)";
                 }
                 else
                 {
                     dp.XValue = dp.XValue * (double)numSampleR.Value;
+                    chartSignal.ChartAreas[0].AxisX.Title = "Sample (k)";
                 }
             }
             foreach (DataPoint dp in chartSignal.Series[1].Points)
@@ -522,6 +526,10 @@ namespace WaveEditor
                     dp.XValue = dp.XValue * (double)numSampleR.Value;
                 }
             }
+            //Refresh Axis
+            txtXRange_TextChanged(null, null);
+            txtYRange_TextChanged(null, null);
+            
         }
 
         private void btnGenSeries_Click(object sender, EventArgs e)
@@ -603,13 +611,14 @@ namespace WaveEditor
         {
             if(!io_inited)
             {
-                iohandle.Init(iohandle.GetConfigs());
+                io_cfg = iohandle.GetConfigs();
+                iohandle.Init(io_cfg);
             }
             BackgroundWorker worker = new BackgroundWorker();
             FormStatus status = new FormStatus(worker);
             worker.RunWorkerCompleted += GenSeriesCompleted;
             status.Show();
-            _sample_series_object.GenerateSeries(UInt32.Parse(txtSampleT.Text), worker);
+            _sample_series_object.GenerateSeries(UInt32.Parse(txtSampleT.Text)*(uint)numSampleR.Value, worker);
         }
 
         private void GenSeriesCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -623,7 +632,7 @@ namespace WaveEditor
                 return;
             BackgroundWorker worker = new BackgroundWorker();
             worker.RunWorkerCompleted += IOSeriesCompleted;
-            byte[] data = _sample_series_object.ResultToByte();
+            byte[] data = _sample_series_object.ResultToByte((bool)io_cfg.Config["lendian"]);
             FormStatus status = new FormStatus(worker);
             status.Show();
             iohandle.WriteAsync(data, data.Length, ref worker);

@@ -27,9 +27,9 @@ namespace InterpolationBasic {
 			
 			// dy/dx
 			double coef = (point[1]->Value->ToDouble(nullptr)-point[0]->Value->ToDouble(nullptr))/(point[1]->time-point[0]->time);
-			double y0 = (double)point[0]->Value;
+			double y0 = point[0]->Value->ToDouble(nullptr);
 			unsigned int x0 = point[0]->time;
-			array<NumType, 1> ^result = gcnew array<NumType, 1>(stop-start+1);
+			array<NumType, 1> ^result = gcnew array<NumType, 1>(stop-start);
 			for (unsigned int i = start; i < stop; i++)
 			{
 				double r = y0 + coef*(i - x0);
