@@ -1,7 +1,6 @@
 #pragma once
 #pragma warning( disable: 4484)
 #include <cmath>
-#include <cliext\vector>
 #include <vector>
 #include "Stdafx.h"
 #include "spline2.h"
@@ -32,7 +31,7 @@ namespace InterpolationBasic {
 				for (int i = 0; i < point->Length; i++)
 				{
 					x.push_back((double)(point[i]->time));
-					y.push_back((double)(point[i]->Value));
+					y.push_back(point[i]->Value->ToDouble(nullptr));
 				}
 				spline s;
 				s.set_points(x, y);

@@ -10,14 +10,37 @@ using System.Windows.Forms;
 
 namespace WaveEditor
 {
+    /// <summary>
+    /// The form to edit a point
+    /// </summary>
     public partial class FrmPoint : Form
     {
+        /// <summary>
+        /// Form Operation Mode
+        /// </summary>
         public enum OpMode
         {
+            /// <summary>
+            /// Add Point
+            /// </summary>
             Add,
+            /// <summary>
+            /// Change Point
+            /// </summary>
             Change,
+            /// <summary>
+            /// Delete Point
+            /// </summary>
             Delete
         }
+
+        /// <summary>
+        /// Create instance of form editing
+        /// </summary>
+        /// <param name="mode">Indicate the action</param>
+        /// <param name="time">The time of a point, work on edit and delete</param>
+        /// <param name="value">The original value</param>
+        /// <param name="SampleRate">The sample rate of time series</param>
         public FrmPoint(OpMode mode= OpMode.Add,uint time=0,double value = 0,uint SampleRate = 1000000)
         {
             InitializeComponent();
@@ -28,8 +51,18 @@ namespace WaveEditor
         }
 
         OpMode mode;
+
+        /// <summary>
+        /// The time of Sample point
+        /// </summary>
         public uint Time { get; set; }
+        /// <summary>
+        /// The value of sample point
+        /// </summary>
         public double Value { get; set; }
+        /// <summary>
+        /// Whether it should be grouped
+        /// </summary>
         public bool Group {
             get
             {
@@ -41,6 +74,10 @@ namespace WaveEditor
             }
         }
         private int interpolate_init = -1;
+
+        /// <summary>
+        /// The interpolation index
+        /// </summary>
         public int Interpolate
         {
             get

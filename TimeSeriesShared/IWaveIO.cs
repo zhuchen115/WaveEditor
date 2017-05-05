@@ -3,6 +3,9 @@ using System.ComponentModel;
 
 namespace TimeSeriesShared
 {
+    /// <summary>
+    /// Interface for Signal Input and Output
+    /// </summary>
     public interface IWaveIO
     {
         /// <summary>
@@ -14,7 +17,7 @@ namespace TimeSeriesShared
         /// <summary>
         /// Get the initial configuration.
         /// </summary>
-        /// <returns>The configure hashtable</returns>
+        /// <returns>The configure hash table</returns>
         WaveIOConfig GetConfigs();
 
         /// <summary>
@@ -30,7 +33,7 @@ namespace TimeSeriesShared
         /// </summary>
         /// <param name="data">The data to be send out</param>
         /// <param name="length">The bytes of data to be write</param>
-        /// <param name="worker">BackgroundWorker woth callback</param>
+        /// <param name="worker">BackgroundWorker with callback</param>
         void WriteAsync(byte[] data, int length, ref BackgroundWorker worker);
 
         /// <summary>

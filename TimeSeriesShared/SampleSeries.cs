@@ -29,8 +29,18 @@ namespace TimeSeriesShared
         /// </summary>
         public object Tag;
 
+        /// <summary>
+        /// MiniValue of Series
+        /// </summary>
         public double MinValue { get; set; }
+        /// <summary>
+        /// Maximum Value of Series
+        /// </summary>
         public double MaxValue { get; set; }
+
+        /// <summary>
+        /// Bits of data
+        /// </summary>
         public ushort SampleBits {
             get { return _sample_bits; }
             set {
@@ -64,6 +74,9 @@ namespace TimeSeriesShared
 
         private ushort _sample_bits;
 
+        /// <summary>
+        /// Get the value of point
+        /// </summary>
         public T Value
         {
             get
@@ -88,7 +101,7 @@ namespace TimeSeriesShared
                     return (T)t;
                 }else
                 {
-                    throw new ArgumentException("Typr not supported");
+                    throw new ArgumentException("Type not supported");
                 }
             }
             set
@@ -116,6 +129,9 @@ namespace TimeSeriesShared
             }
         }
 
+        /// <summary>
+        /// Get the Value in Real
+        /// </summary>
         public double RealValue
         {
             get
@@ -144,7 +160,7 @@ namespace TimeSeriesShared
                 else
                 {
                     if (value > MaxValue || value < MinValue)
-                        throw new ArgumentOutOfRangeException("Arguments Outof Range");
+                        throw new ArgumentOutOfRangeException("Arguments Out of Range");
                     ulong Tval = (ulong)( value * ((1 << SampleBits) - 1) / (MaxValue - MinValue));
                     this.Value = (T)((Object)Tval);
                 }
@@ -156,6 +172,15 @@ namespace TimeSeriesShared
         /// </summary>
         public bool Group { get; set; }
 
+        /// <summary>
+        /// Initialize the Sample Point
+        /// </summary>
+        /// <param name="time">time of the point</param>
+        /// <param name="data">data of sample point</param>
+        /// <param name="group">whether it should be grouped</param>
+        /// <param name="Min">Minimum value of sample</param>
+        /// <param name="Max"></param>
+        /// <param name="len"></param>
         public SamplePoint(uint time, T data,bool group = false,double Min=0,double Max=5,ushort len=1)
         {
             MinValue = Min;
@@ -255,6 +280,10 @@ namespace TimeSeriesShared
             return this.time == other.time;
         }
 
+        /// <summary>
+        /// Only for compare
+        /// </summary>
+        /// <returns>Hash Code</returns>
         public override int GetHashCode()
         {
             return time.GetHashCode();
@@ -265,14 +294,14 @@ namespace TimeSeriesShared
 
 
     /// <summary>
-    /// The time sample seroes
+    /// The time sample series
     /// </summary>
     /// <typeparam name="T">
     /// THe type represent the time series. The type can only be Scalar Number, except decimal
     /// </typeparam>
     /// <remarks>
-    /// If the type is unsigned interger, the value can represent the linear value from min to max.
-    /// If the type is signed interger, the value can only be fixed point.
+    /// If the type is unsigned integer, the value can represent the linear value from min to max.
+    /// If the type is signed integer, the value can only be fixed point.
     /// If the type is a real number (float, double) Min Max is the range of data.
     /// </remarks>
     public class SampleSeries<T>
@@ -307,19 +336,19 @@ namespace TimeSeriesShared
             set
             {
                 if (value > 64)
-                    throw new ArgumentOutOfRangeException("SampleBits", "The Samplebits cannot over 32bits");
+                    throw new ArgumentOutOfRangeException("SampleBits", "The Sample bits cannot over 32bits");
                 _sample_bits = value;
             }
         }
 
         /// <summary>
-        /// The maxinum value of the sample series
+        /// The maximum value of the sample series
         /// </summary>
         public double MaxValue
         { get; set; }
 
         /// <summary>
-        /// The mninimum value of the sample series
+        /// The minimum value of the sample series
         /// </summary>
         public double MinValue
         { get; set; }
@@ -330,14 +359,14 @@ namespace TimeSeriesShared
         /// Initial a Sample Series
         /// </summary>
         /// <param name="samplerate">The Sample Rate, default 250kSPS</param>
-        /// <param name="datalength">Default 10 bit data, the datalength cannot more than 32</param>
-        /// <param name="min">The mininum value of data, default: 0 </param>
-        /// <param name="max">The maxinum value of data, default: 5</param>
+        /// <param name="datalength">Default 10 bit data, the data length cannot more than 32</param>
+        /// <param name="min">The minimum value of data, default: 0 </param>
+        /// <param name="max">The maximum value of data, default: 5</param>
         public SampleSeries(uint samplerate = 250000, UInt16 datalength = 10,double min = 0,double max = 5)
         {
             SampleRate = samplerate;
             if (datalength > 32)
-                throw new ArgumentOutOfRangeException("datalength", "The data cannot over 32 bits length");
+                throw new ArgumentOutOfRangeException("data length", "The data cannot over 32 bits length");
             _sample_bits = datalength;
             MaxValue= max;
             MinValue = min;
@@ -345,15 +374,17 @@ namespace TimeSeriesShared
         }
 
         /// <summary>
-        /// Put a control Point (linear sample)
+        /// Put a control Point
         /// </summary>
-        /// <param name="time"></param>
-        /// <param name="value"></param>
+        /// <param name="time">time of control point</param>
+        /// <param name="value">value of control point</param>
+        /// <param name="group">Whether it should be grouped for interpolation</param>
+        /// <param name="interp">The instance of interpolation class</param>
         public void AddCtrlPoint(uint time, T value,bool group = false,IInterpolate<T> interp = null)
         {
             //Check the value can be expressed
             if (value.ToDouble(null) > MaxValue)
-                throw new ArgumentOutOfRangeException("value", "Value is outof the sample bits");
+                throw new ArgumentOutOfRangeException("value", "Value is out of the sample bits");
             //if (time == 0)
               //  throw new ArgumentOutOfRangeException("time", "Time cannot be zero");
             SamplePoint<T> sp = new SamplePoint<T>(time, value, group, MinValue, MaxValue, SampleBits)
@@ -367,11 +398,19 @@ namespace TimeSeriesShared
             ctrldata = ctrldata.Distinct().ToList();
             
         }
+
+        /// <summary>
+        /// Put a control Point in real value
+        /// </summary>
+        /// <param name="time">time of control point</param>
+        /// <param name="value">value of control point</param>
+        /// <param name="group">Whether it should be grouped for interpolation</param>
+        /// <param name="interp">The instance of interpolation class</param>
         public void AddCtrlPointD(uint time, double value, bool group = false, IInterpolate<T> interp = null)
         {
             //Check the value can be expressed
             if (value > MaxValue)
-                throw new ArgumentOutOfRangeException("value", "Value is outof the sample bits");
+                throw new ArgumentOutOfRangeException("value", "Value is out of the sample bits");
             if (time == 0)
                 throw new ArgumentOutOfRangeException("time", "Time cannot be zero");
             
@@ -446,7 +485,7 @@ namespace TimeSeriesShared
         public void EditCtrlPoint(uint time, T value,bool group = false)
         {
             if (value.ToUInt64(null) >= ((ulong)1 << _sample_bits))
-                throw new ArgumentOutOfRangeException("value", "Value is outof the sample bits");
+                throw new ArgumentOutOfRangeException("value", "Value is out of the sample bits");
             if (time == 0)
                 throw new ArgumentOutOfRangeException("time", "Time cannot be zero");
             int loc = ctrldata.FindIndex((SamplePoint<T> point) => { return point.time == time; });
@@ -458,6 +497,13 @@ namespace TimeSeriesShared
             
         }
 
+        /// <summary>
+        /// Change a control point in real value
+        /// </summary>
+        /// <param name="time">the time(k)</param>
+        /// <param name="value">The value to be changed to</param>
+        /// <param name="group">Whether the value should grouped</param>
+        /// <param name="interp">Interpolation method</param>
         public void EditCtrlPointD(uint time, double value, bool group = false,IInterpolate < T > interp = null)
         {
             //if (time == 0)
@@ -590,7 +636,7 @@ namespace TimeSeriesShared
                     {
                         if (sr.MultiPoint > 0 && sr.MultiPoint < ctldata.Count())
                         {
-                            throw new ArgumentException(String.Format("Group member exceed maxinum value in {0}", i));
+                            throw new ArgumentException(String.Format("Group member exceed maximum value in {0}", i));
                         }
                         else
                         {
@@ -609,6 +655,11 @@ namespace TimeSeriesShared
             result_array = result.ToArray();
         }
 
+        /// <summary>
+        /// Get the byte array of interpolated signal
+        /// </summary>
+        /// <param name="littleendian">The character order</param>
+        /// <returns>The interpolated data byte array</returns>
         public byte[] ResultToByte(bool littleendian)
         {
             List<byte> btarry = new List<byte>();
@@ -653,6 +704,13 @@ namespace TimeSeriesShared
             return btarry.ToArray();
         }
 
+        /// <summary>
+        /// Generate the series for display
+        /// </summary>
+        /// <param name="start">The beginning time</param>
+        /// <param name="stop">The ending time</param>
+        /// <param name="DispNum">No. of points to be displayed</param>
+        /// <returns>The double array</returns>
         public double[] GenerateDispSeries(uint start, uint stop,int DispNum=1000)
         {
 
@@ -675,7 +733,6 @@ namespace TimeSeriesShared
                              orderby disppoint.time
                              select disppoint;
             List<SamplePoint<T>> dispctrl = dispctrl_e.ToList();
-            //bool injl = false;
             if (dispctrl.Count() >= 1)
             {
                 if (dispctrl.First().time > start)
@@ -685,7 +742,6 @@ namespace TimeSeriesShared
                     if (idx < 1) //This can never happen,except the series is not initialized correctly.
                         throw new Exception();
                     dispctrl.Insert(0, ctrldata[idx - 1]);
-                    //injl = true;
                 }
 
                 if (dispctrl.Last().time < stop)
@@ -715,7 +771,6 @@ namespace TimeSeriesShared
                     dispctrl.Add(new SamplePoint<T>(stop, ctrldata[idx].Value,false,MinValue,MaxValue,SampleBits));
                 else
                     dispctrl.Add(ctrldata[idx + 1]);
-                //injl = true;
             }
             // Now start interpolate
             dispctrl.Sort();
@@ -747,12 +802,12 @@ namespace TimeSeriesShared
                     {
                         if (sr.MultiPoint > 0 && sr.MultiPoint < ctldata.Count())
                         {
-                            throw new ArgumentException(String.Format("Group member exceed maxinum value in {0}", i));
+                            throw new ArgumentException(String.Format("Group member exceed maximum value in {0}", i));
                         }
                         else
                         {
                             int num = 0;
-                            //Calculate No of points in this reigon
+                            //Calculate No of points in this region
                             while(j<DispNum)
                             {
                                 if (start + ts * j >= ctldata.Last().time)
@@ -773,7 +828,7 @@ namespace TimeSeriesShared
                     }
                     else
                     {
-                        //The interp not initialized.
+                        //The interpolation not initialized.
                         throw new InvalidOperationException();
                     }
                 }

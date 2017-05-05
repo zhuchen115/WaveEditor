@@ -10,16 +10,24 @@ using System.Windows.Forms;
 
 namespace WaveEditor
 {
+    /// <summary>
+    /// The form to display progress
+    /// </summary>
     public partial class FormStatus : Form
     {
         BackgroundWorker worker;
+
+        /// <summary>
+        /// Instance with background worker
+        /// </summary>
+        /// <param name="wkr">a Background Worker</param>
         public FormStatus(BackgroundWorker wkr)
         {
             InitializeComponent();
             worker = wkr;
         }
 
-        public void background_process_change(object sender,ProgressChangedEventArgs e)
+        private void background_process_change(object sender,ProgressChangedEventArgs e)
         {
             procTask.Invoke( (MethodInvoker)delegate(){ procTask.Value = e.ProgressPercentage; });
             lbTaskName.Invoke((MethodInvoker)delegate () { lbTaskName.Text = e.UserState.ToString(); });

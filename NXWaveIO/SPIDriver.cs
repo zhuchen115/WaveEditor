@@ -7,15 +7,27 @@ using TimeSeriesShared;
 
 namespace NXWaveIO
 {
+    /// <summary>
+    /// Implement SPI driver on FTDI MPSSE
+    /// </summary>
     public class SPIDriver : IWaveIO
     {
         IntPtr ftHandle = IntPtr.Zero;
         WaveIOConfig cfg;
         SPIMode mode = SPIMode.MODE0;
 
+        /// <summary>
+        /// Get the class name
+        /// </summary>
         public string Name { get { return "SPIDriver"; } }
+        /// <summary>
+        /// The type of Configuration Form
+        /// </summary>
         public Type GetConfigForm { get { return typeof(FrmSPIConfig); } }
 
+        /// <summary>
+        /// Initialize configuration
+        /// </summary>
         public SPIDriver()
         {
             cfg = new WaveIOConfig();
@@ -24,16 +36,24 @@ namespace NXWaveIO
             cfg.Config.Add("devid", 0);
             cfg.Config.Add("lendian", true);
         }
+
+        /// <summary>
+        /// The  default configuration
+        /// </summary>
+        /// <returns><see cref="WaveIOConfig"/></returns>
         public WaveIOConfig GetConfigs()
         {
             WaveIOConfig cfg = new WaveIOConfig();
             cfg.Config.Add("clkdiv", Convert.ToUInt16(0x0000));
             cfg.Config.Add("SPIMode", SPIMode.MODE0);
-            cfg.Config.Add("devid", 0);
+            cfg.Config.Add("devid", 1);
             cfg.Config.Add("lendian", true);
             return cfg;
         }
-
+        /// <summary>
+        /// Initialize the SPI driver
+        /// </summary>
+        /// <param name="config"></param>
         public void Init(WaveIOConfig config)
         {
             FT_MPSSE_Init((int)config.Config["devid"]);
@@ -60,6 +80,12 @@ namespace NXWaveIO
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Write data to SPI foreground
+        /// </summary>
+        /// <remarks> The function may cause GUI down</remarks>
+        /// <param name="wdata">data to be sent</param>
+        /// <param name="length">length of data to be sent</param>
         public void Write(byte[] wdata, int length)
         {
             FTStatus status;
@@ -120,6 +146,12 @@ namespace NXWaveIO
             public int len;
         }
 
+        /// <summary>
+        /// Write data to SPI in background
+        /// </summary>
+        /// <param name="data">The data to be sent</param>
+        /// <param name="length">The length of data to be sent</param>
+        /// <param name="worker">a background worker contains callback</param>
         public void WriteAsync(byte[] data, int length, ref BackgroundWorker worker)
         {
             if(length>data.Length)
@@ -170,7 +202,7 @@ namespace NXWaveIO
                     e.Cancel = true;
                     break;
                 }
-                //Separate data in with maxinum 65536 bytes
+                //Separate data in with maximum 65536 bytes
                 szToSend = (lenremain > 65536) ? 65536 : lenremain;
                 lenremain -= szToSend;
                 datatosend = new byte[szToSend + 3];
@@ -194,7 +226,10 @@ namespace NXWaveIO
             _CS_enable(false);
         }
 
-        
+        /// <summary>
+        /// Get the list of devices
+        /// </summary>
+        /// <returns>The device information nodes <see cref="FTDeviceListInfoNode"/></returns>
         public FTDeviceListInfoNode[] GetDeviceList()
         {
             FTStatus status;
@@ -226,6 +261,10 @@ namespace NXWaveIO
         }
         private void FT_MPSSE_Init(int index = 0)
         {
+            if(index>GetDeviceList().Count()-1)
+            {
+                throw new ArgumentException("Device not found!");
+            }
             FTStatus status;
             status = DllWraper.FT_Open(index, ref ftHandle);
             if (status != FTStatus.OK)
@@ -354,6 +393,13 @@ namespace NXWaveIO
             this.mode = mode;
         }
 
+        /// <summary>
+        /// Test the connection of FTDI Device 
+        /// </summary>
+        /// <remarks>The function can only be called by configuration form</remarks>
+        /// <param name="id">The id of device</param>
+        /// <param name="status">return status</param>
+        /// <returns>success or not</returns>
         internal bool ConnectTest(int id,ref FTStatus status)
         {
             

@@ -11,9 +11,16 @@ using TimeSeriesShared;
 
 namespace NXWaveIO
 {
+    /// <summary>
+    /// The configuration Form for SPI Driver
+    /// </summary>
     public partial class FrmSPIConfig : Form,IWaveIOConfigForm
     {
         SPIDriver drv = new SPIDriver();
+
+        /// <summary>
+        /// Create Instance for Configuration Form
+        /// </summary>
         public FrmSPIConfig()
         {
             InitializeComponent();
@@ -22,6 +29,9 @@ namespace NXWaveIO
 
         WaveIOConfig _config = new WaveIOConfig();
 
+        /// <summary>
+        /// Get the configuration from the form
+        /// </summary>
         public WaveIOConfig Config
         {
             get
@@ -30,6 +40,12 @@ namespace NXWaveIO
             }
         }
 
+#region Form Events Response
+        /// <summary>
+        /// Update the clock of divider
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void numClkDiv_ValueChanged(object sender, EventArgs e)
         {
             double freq = 60 / (((double)numClkDiv.Value + 1) * 2);
@@ -40,6 +56,11 @@ namespace NXWaveIO
 
         }
 
+        /// <summary>
+        /// Refresh the device lists
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDevRefresh_Click(object sender, EventArgs e)
         {
             nodes = drv.GetDeviceList();
@@ -54,6 +75,11 @@ namespace NXWaveIO
             }
         }
 
+        /// <summary>
+        /// Initialize the SPI Driver
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSPIInit_Click(object sender, EventArgs e)
         {
             _config = drv.GetConfigs();
@@ -169,5 +195,6 @@ namespace NXWaveIO
         {
             _config.Config["lendian"] = chkSPILittleEnd.Checked;
         }
+#endregion
     }
 }

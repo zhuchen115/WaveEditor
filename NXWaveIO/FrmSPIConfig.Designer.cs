@@ -52,8 +52,10 @@
             this.numClkDiv = new System.Windows.Forms.NumericUpDown();
             this.lbSPIFreqll = new System.Windows.Forms.Label();
             this.lbSPIFreq = new System.Windows.Forms.Label();
-            this.btnSPIInit = new System.Windows.Forms.Button();
             this.chkSPILittleEnd = new System.Windows.Forms.CheckBox();
+            this.btnSPIInit = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbSPIMode = new System.Windows.Forms.ComboBox();
             this.tabOutput = new System.Windows.Forms.TabPage();
             this.tblDevCmd = new System.Windows.Forms.TableLayoutPanel();
             this.lbDevTitle = new System.Windows.Forms.Label();
@@ -62,8 +64,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbSPIMode = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -82,7 +82,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -106,7 +106,7 @@
             this.tabConfig.Controls.Add(this.tabOutput);
             this.tabConfig.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabConfig.Location = new System.Drawing.Point(0, 0);
-            this.tabConfig.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabConfig.Margin = new System.Windows.Forms.Padding(4);
             this.tabConfig.Name = "tabConfig";
             this.tabConfig.SelectedIndex = 0;
             this.tabConfig.Size = new System.Drawing.Size(1021, 540);
@@ -116,9 +116,9 @@
             // 
             this.tabGen.Controls.Add(this.tblGeneral);
             this.tabGen.Location = new System.Drawing.Point(4, 25);
-            this.tabGen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabGen.Margin = new System.Windows.Forms.Padding(4);
             this.tabGen.Name = "tabGen";
-            this.tabGen.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabGen.Padding = new System.Windows.Forms.Padding(4);
             this.tabGen.Size = new System.Drawing.Size(1013, 511);
             this.tabGen.TabIndex = 0;
             this.tabGen.Text = "General";
@@ -148,7 +148,7 @@
             this.tblGeneral.Controls.Add(this.btnConnect, 3, 6);
             this.tblGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblGeneral.Location = new System.Drawing.Point(4, 4);
-            this.tblGeneral.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tblGeneral.Margin = new System.Windows.Forms.Padding(4);
             this.tblGeneral.Name = "tblGeneral";
             this.tblGeneral.RowCount = 8;
             this.tblGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
@@ -179,7 +179,7 @@
             this.cmbDevices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDevices.FormattingEnabled = true;
             this.cmbDevices.Location = new System.Drawing.Point(325, 31);
-            this.cmbDevices.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbDevices.Margin = new System.Windows.Forms.Padding(4);
             this.cmbDevices.Name = "cmbDevices";
             this.cmbDevices.Size = new System.Drawing.Size(299, 24);
             this.cmbDevices.TabIndex = 1;
@@ -188,7 +188,7 @@
             // btnDevRefresh
             // 
             this.btnDevRefresh.Location = new System.Drawing.Point(632, 31);
-            this.btnDevRefresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDevRefresh.Margin = new System.Windows.Forms.Padding(4);
             this.btnDevRefresh.Name = "btnDevRefresh";
             this.btnDevRefresh.Size = new System.Drawing.Size(100, 31);
             this.btnDevRefresh.TabIndex = 2;
@@ -315,7 +315,7 @@
             // 
             this.btnConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConnect.Location = new System.Drawing.Point(671, 420);
-            this.btnConnect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnConnect.Margin = new System.Windows.Forms.Padding(4);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(141, 47);
             this.btnConnect.TabIndex = 13;
@@ -327,9 +327,9 @@
             // 
             this.tabSPICfg.Controls.Add(this.tblSPICfg);
             this.tabSPICfg.Location = new System.Drawing.Point(4, 25);
-            this.tabSPICfg.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabSPICfg.Margin = new System.Windows.Forms.Padding(4);
             this.tabSPICfg.Name = "tabSPICfg";
-            this.tabSPICfg.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabSPICfg.Padding = new System.Windows.Forms.Padding(4);
             this.tabSPICfg.Size = new System.Drawing.Size(1013, 511);
             this.tabSPICfg.TabIndex = 1;
             this.tabSPICfg.Text = "SPI";
@@ -408,16 +408,6 @@
             this.lbSPIFreq.TabIndex = 3;
             this.lbSPIFreq.Text = "30MHz";
             // 
-            // btnSPIInit
-            // 
-            this.btnSPIInit.Location = new System.Drawing.Point(558, 368);
-            this.btnSPIInit.Name = "btnSPIInit";
-            this.btnSPIInit.Size = new System.Drawing.Size(107, 53);
-            this.btnSPIInit.TabIndex = 4;
-            this.btnSPIInit.Text = "Initialize";
-            this.btnSPIInit.UseVisualStyleBackColor = true;
-            this.btnSPIInit.Click += new System.EventHandler(this.btnSPIInit_Click);
-            // 
             // chkSPILittleEnd
             // 
             this.chkSPILittleEnd.AutoSize = true;
@@ -431,13 +421,46 @@
             this.chkSPILittleEnd.UseVisualStyleBackColor = true;
             this.chkSPILittleEnd.CheckedChanged += new System.EventHandler(this.chkSPILittleEnd_CheckedChanged);
             // 
+            // btnSPIInit
+            // 
+            this.btnSPIInit.Location = new System.Drawing.Point(558, 368);
+            this.btnSPIInit.Name = "btnSPIInit";
+            this.btnSPIInit.Size = new System.Drawing.Size(107, 53);
+            this.btnSPIInit.TabIndex = 4;
+            this.btnSPIInit.Text = "Initialize";
+            this.btnSPIInit.UseVisualStyleBackColor = true;
+            this.btnSPIInit.Click += new System.EventHandler(this.btnSPIInit_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(227, 250);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 17);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "SPI Mode:";
+            // 
+            // cmbSPIMode
+            // 
+            this.cmbSPIMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSPIMode.FormattingEnabled = true;
+            this.cmbSPIMode.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3"});
+            this.cmbSPIMode.Location = new System.Drawing.Point(358, 253);
+            this.cmbSPIMode.Name = "cmbSPIMode";
+            this.cmbSPIMode.Size = new System.Drawing.Size(131, 24);
+            this.cmbSPIMode.TabIndex = 7;
+            // 
             // tabOutput
             // 
             this.tabOutput.Controls.Add(this.tblDevCmd);
             this.tabOutput.Location = new System.Drawing.Point(4, 25);
-            this.tabOutput.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tabOutput.Margin = new System.Windows.Forms.Padding(5);
             this.tabOutput.Name = "tabOutput";
-            this.tabOutput.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tabOutput.Padding = new System.Windows.Forms.Padding(5);
             this.tabOutput.Size = new System.Drawing.Size(1013, 511);
             this.tabOutput.TabIndex = 2;
             this.tabOutput.Text = "Device";
@@ -516,7 +539,7 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(793, 9);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(5);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(133, 41);
             this.btnClose.TabIndex = 1;
@@ -527,7 +550,7 @@
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(601, 9);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(5);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(133, 41);
             this.btnSave.TabIndex = 0;
@@ -535,36 +558,13 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(227, 250);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 17);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "SPI Mode:";
-            // 
-            // cmbSPIMode
-            // 
-            this.cmbSPIMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSPIMode.FormattingEnabled = true;
-            this.cmbSPIMode.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3"});
-            this.cmbSPIMode.Location = new System.Drawing.Point(358, 253);
-            this.cmbSPIMode.Name = "cmbSPIMode";
-            this.cmbSPIMode.Size = new System.Drawing.Size(131, 24);
-            this.cmbSPIMode.TabIndex = 7;
-            // 
             // FrmSPIConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1021, 600);
             this.Controls.Add(this.splitContainer1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmSPIConfig";
             this.Text = "SPI Config";
             this.Load += new System.EventHandler(this.FrmSPIConfig_Load);

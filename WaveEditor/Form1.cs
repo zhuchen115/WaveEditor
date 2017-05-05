@@ -12,11 +12,17 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WaveEditor
 {
+    /// <summary>
+    /// Main Form
+    /// </summary>
     public partial class FrmEditor : Form
     {
         dynamic _sample_series_object = null;
         int dataType = 4;
         
+        /// <summary>
+        /// Give instance of Main Form
+        /// </summary>
         public FrmEditor()
         {
             InitializeComponent();
@@ -58,12 +64,12 @@ namespace WaveEditor
         {
             if(!Double.TryParse(txtSMaxVal.Text, out double maxval))
             {
-                MessageBox.Show("Cannot Prase Maxinum Value!");
+                MessageBox.Show("Cannot Parse Maximum Value!");
                 return;
             }
             if(!Double.TryParse(txtSMinVal.Text, out double minval))
             {
-                MessageBox.Show("Cannot Prase Mininum Value!");
+                MessageBox.Show("Cannot Parse Minimum Value!");
                 return;
             }
             if(minval>maxval)
@@ -73,7 +79,7 @@ namespace WaveEditor
             }
             if(_sample_series_object!=null)
             {
-                if(MessageBox.Show("Sure to reinitialize the time series? This will delete all data","Initialization Comfirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                if(MessageBox.Show("Sure to reinitialize the time series? This will delete all data","Initialization Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 {
                     return;
                 }
@@ -103,7 +109,7 @@ namespace WaveEditor
                     return;
             }
 
-            //Init the sample series
+            //Initialize the sample series
             switch(cmbDataType.SelectedIndex)
             {
                 case 0:
@@ -364,7 +370,7 @@ namespace WaveEditor
 
             } catch(ArgumentException ex)
             {
-                MessageBox.Show("An Error occurred when genenerating series!\n"+ex.Message+"\n Did you forget groupping the points?","Time Series Generation Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("An Error occurred when generating series!\n"+ex.Message+"\n Did you forget grouping the points?","Time Series Generation Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
             
@@ -609,11 +615,19 @@ namespace WaveEditor
         WaveIOConfig io_cfg = null;
         private void btnIOSend_Click(object sender, EventArgs e)
         {
-            if(!io_inited)
+            try
             {
-                io_cfg = iohandle.GetConfigs();
-                iohandle.Init(io_cfg);
+                if (!io_inited)
+                {
+                    io_cfg = iohandle.GetConfigs();
+                    iohandle.Init(io_cfg);
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace, "Error during Operation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
             BackgroundWorker worker = new BackgroundWorker();
             FormStatus status = new FormStatus(worker);
             worker.RunWorkerCompleted += GenSeriesCompleted;

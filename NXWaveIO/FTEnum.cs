@@ -64,35 +64,6 @@ namespace NXWaveIO
         LIST_ALL = 0x20000000
     }
 
-    public enum FTBaudRate
-    {
-        BAUD_300 = 300,
-        BAUD_600 = 600,
-        BAUD_1200 = 1200,
-        BAUD_2400 = 2400,
-        BAUD_4800 = 4800,
-        BAUD_9600 = 9600,
-        BAUD_14400 = 14400,
-        BAUD_19200 = 19200,
-        BAUD_38400 = 38400,
-        BAUD_57600 = 57600,
-        BAUD_115200 = 115200,
-        BAUD_230400 = 230400,
-        BAUD_460800 = 460800,
-        BAUD_921600 = 921600
-    }
-
-    public enum BitMode : byte
-    {
-        RESET = 00,
-        ASYNC_BITBANG = 01,
-        MPSSE = 02,
-        SYNC_BITBANG = 04,
-        MCU_HOST = 08,
-        FAST_SERIAL = 10,
-        CBUS_BITBANG = 20,
-        SYNC_FIFO = 40
-    }
 
     [Flags]
     public enum FTFlowControl : UInt16
@@ -174,7 +145,7 @@ namespace NXWaveIO
         public uint ClockRate;
 
         /// <summary>
-        /// The latency time of spi communication in ms
+        /// The latency time of SPI communication in ms
         /// </summary>
         public byte LatencyTimer;
 
@@ -202,28 +173,74 @@ namespace NXWaveIO
                         /*BIT15 -BIT8:   Initial values of the pins		*/
                         /*BIT23 -BIT16: Final direction of the pins		*/
                         /*BIT31 -BIT24: Final values of the pins		*/
+        /// <summary>
+        /// Do not use
+        /// </summary>
         public UInt16 reserved;
     }
 
+    /// <summary>
+    /// FTDI Device Info
+    /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct FTDeviceListInfoNode
     {
+        /// <summary>
+        /// Opened or not
+        /// </summary>
         public UInt32 Flags;
+        /// <summary>
+        /// Device Type 
+        /// </summary>
+        /// <remarks><see cref="FTDeviceType"/></remarks>
         public UInt32 Type;
+        /// <summary>
+        /// The ID of Device
+        /// </summary>
         public UInt32 ID;
+        /// <summary>
+        /// LocID of Device
+        /// </summary>
         public UInt32 LocId;
+        /// <summary>
+        /// Serial Number of Device
+        /// </summary>
+        /// <remarks>The length is 16 bytes without \0 </remarks>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
         public string SerialNumber;
+        /// <summary>
+        /// Description of Device
+        /// </summary>
+        /// <remarks>64 bytes of description without \0</remarks>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
         public string Description;
+        /// <summary>
+        /// Handle Pointer
+        /// </summary>
         public IntPtr ftHandle;
     }
 
+    /// <summary>
+    /// Definition of SPI Mode
+    /// </summary>
+    /// <remarks><c>https://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus</c></remarks>
     public enum SPIMode : byte
     {
+        /// <summary>
+        /// Mode 0
+        /// </summary>
         MODE0 = 0,
+        /// <summary>
+        /// Mode 1
+        /// </summary>
         MODE1 = 1,
+        /// <summary>
+        /// Mode 2
+        /// </summary>
         MODE2 = 2,
+        /// <summary>
+        /// Mode 3
+        /// </summary>
         MODE3 = 3
     }
 }
