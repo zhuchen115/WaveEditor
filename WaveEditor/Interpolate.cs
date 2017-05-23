@@ -38,7 +38,7 @@ namespace WaveEditor
         }
 
         /// <summary>
-        /// Get the names of Interplation Method
+        /// Get the names of Interpolation Method
         /// </summary>
         /// <returns></returns>
         public static string[] GetNames()
@@ -52,6 +52,16 @@ namespace WaveEditor
         }
 
         /// <summary>
+        /// Find the id of Interpolation by name
+        /// </summary>
+        /// <param name="name">The name of Interpolation</param>
+        /// <returns>The registered ID</returns>
+        public static int GetIdByName(string name)
+        {
+           return dwInterpolate.FindIndex((x)=>{ return x.Name == name; });
+        }
+
+        /// <summary>
         /// Get an instance of the Interpolator
         /// </summary>
         /// <typeparam name="T">The type of number</typeparam>
@@ -62,6 +72,24 @@ namespace WaveEditor
         {
             if (id > (dwInterpolate.Count() - 1))
                 throw new ArgumentException("id out of range, type not found");
+            Type tpBase = dwInterpolate[id].GetType().GetGenericTypeDefinition();
+            Type[] tpArg = { typeof(T) };
+            Type construct = tpBase.MakeGenericType(tpArg);
+            return (IInterpolate<T>)Activator.CreateInstance(construct);
+        }
+
+        /// <summary>
+        /// Create a instance by name
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static IInterpolate<T> GetInstanceByName<T>(string name)
+            where T : IComparable, IEquatable<T>, IConvertible
+        {
+            int id = GetIdByName(name);
+            if (id < 0)
+                throw new ArgumentException("name not found");
             Type tpBase = dwInterpolate[id].GetType().GetGenericTypeDefinition();
             Type[] tpArg = { typeof(T) };
             Type construct = tpBase.MakeGenericType(tpArg);

@@ -10,7 +10,7 @@ namespace NXWaveIO
     /// <summary>
     /// Implement SPI driver on FTDI MPSSE
     /// </summary>
-    public class SPIDriver : IWaveIO
+    public class SPIDriver : IWaveIO,IDisposable
     {
         IntPtr ftHandle = IntPtr.Zero;
         WaveIOConfig cfg;
@@ -59,22 +59,47 @@ namespace NXWaveIO
             FT_MPSSE_Init((int)config.Config["devid"]);
             SPI_Init((ushort)config.Config["clkdiv"], (SPIMode)config.Config["SPIMode"]);
         }
-
+        
+        /// <summary>
+        /// Read Data From SPI
+        /// </summary>
+        /// <remarks>
+        /// Not Implemented
+        /// </remarks>
+        /// <param name="data"></param>
+        /// <param name="length"></param>
         public void Read(ref byte[] data, int length)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Read Data in Background
+        /// </summary>
+        /// <param name="length"></param>
+        /// <param name="worker"></param>
         public void ReadAsync(int length, ref BackgroundWorker worker)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Read and Write on SPI
+        /// </summary>
+        /// <param name="length"></param>
+        /// <param name="datain"></param>
+        /// <param name="dataout"></param>
         public void ReadWrite(int length, byte[] datain, ref byte[] dataout)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Read and Write on SPI in background
+        /// </summary>
+        /// <param name="length"></param>
+        /// <param name="data"></param>
+        /// <param name="worker"></param>
         public void ReadWriteAsync(int length, byte[] data, ref BackgroundWorker worker)
         {
             throw new NotImplementedException();
@@ -117,7 +142,7 @@ namespace NXWaveIO
             // Then Shift the data out;
             while (lenremain > 0)
             {
-                //Separate data in with maxinum 65536 bytes
+                //Separate data in with maximum 65536 bytes
                 szToSend = (lenremain > 65536) ? 65536 : lenremain;
                 lenremain -= szToSend;
                 datatosend = new byte[szToSend + 3];
@@ -156,7 +181,7 @@ namespace NXWaveIO
         {
             if(length>data.Length)
             {
-                throw new ArgumentOutOfRangeException("length", "length is outof range");
+                throw new ArgumentOutOfRangeException("length", "length is out of range");
             }
             if (ftHandle == IntPtr.Zero)
                 throw new InvalidOperationException("FTDI device not initialized");
@@ -290,13 +315,13 @@ namespace NXWaveIO
             status = DllWraper.FT_Purge(ftHandle, 3);
             if (status != FTStatus.OK)
                 throw new FTDIException(status, "Cannot Initialize MPSSE on FTDI");
-            // Config MPSSE
+            // Configure MPSSE
             byte[] outBuf = new byte[8];
             byte[] inBuf = new byte[8];
             uint szSent = 0, szRead = 0;
             IntPtr inptr = Marshal.AllocHGlobal(inBuf.Length);
             IntPtr outptr = Marshal.AllocHGlobal(outBuf.Length);
-            outBuf[0] = 0x84; //Loopback
+            outBuf[0] = 0x84; //Loop-back
             Marshal.Copy(outBuf, 0, outptr, 8);
             status = DllWraper.FT_Write(ftHandle, outptr, 1, ref szSent);
             //Check Receive Data
@@ -357,7 +382,7 @@ namespace NXWaveIO
 
 
         /// <summary>
-        /// Initialize the spi interface
+        /// Initialize the SPI interface
         /// </summary>
         /// <param name="clkdiv">The clock division of clock</param>
         /// <param name="mode">SPI Operation Mode</param>
@@ -435,6 +460,37 @@ namespace NXWaveIO
             if (status != FTStatus.OK)
                 throw new FTDIException(status, "send data Error");
             Marshal.FreeHGlobal(outptr);
+        }
+
+        /// <summary>
+        /// Force Recycle the unmanaged Resource
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+
+        /// <summary>
+        /// Dispose implementation
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if(ftHandle!=IntPtr.Zero)
+            {
+                if(disposing)
+                {
+                    cfg = null;
+                }
+                DllWraper.FT_Close(ftHandle);
+                ftHandle = IntPtr.Zero;
+            }
+        }
+        ~SPIDriver()
+        {
+            Dispose(false);
         }
     }
 }

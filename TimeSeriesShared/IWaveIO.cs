@@ -6,7 +6,7 @@ namespace TimeSeriesShared
     /// <summary>
     /// Interface for Signal Input and Output
     /// </summary>
-    public interface IWaveIO
+    public interface IWaveIO :IDisposable
     {
         /// <summary>
         /// Initialize the IO port

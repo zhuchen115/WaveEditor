@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TimeSeriesShared;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace WaveEditor
 {
@@ -606,9 +605,17 @@ namespace WaveEditor
             object iocfgform = Activator.CreateInstance(tp);
             if(((Form)iocfgform).ShowDialog() == DialogResult.OK)
             {
-                io_cfg = ((IWaveIOConfigForm)iocfgform).Config;
-                iohandle.Init(io_cfg);
-                io_inited = true;
+                try
+                {
+                    io_cfg = ((IWaveIOConfigForm)iocfgform).Config;
+                    if (io_inited)
+                        iohandle.Dispose();
+                    iohandle.Init(io_cfg);
+                    io_inited = true;
+                }catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -663,6 +670,122 @@ namespace WaveEditor
             if (e.Cancelled)
                 return;
             MessageBox.Show("Data Sending Completed");
+        }
+
+        private void saveSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(_sample_series_object==null)
+            {
+                MessageBox.Show("The Sample Series is not initialized!", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            Stream stm;
+            SaveFileDialog savediag = new SaveFileDialog()
+            {
+                Filter = "Binary Format (*.wb)|*.wb",
+                FilterIndex = 1,
+                RestoreDirectory = true
+            };
+            if (savediag.ShowDialog() == DialogResult.OK)
+            {
+                if((stm = savediag.OpenFile())!=null)
+                {
+                    BinaryFormatter format = new BinaryFormatter();
+                    format.Serialize(stm, _sample_series_object);
+                    stm.Close();
+                }
+            }
+        }
+
+        private void openOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Stream stm;
+                OpenFileDialog opendiag = new OpenFileDialog() {
+                    Filter = "Binary Format (*.wb)|*.wb",
+                    FilterIndex = 1,
+                    RestoreDirectory = true
+                };
+                if(opendiag.ShowDialog()==DialogResult.OK)
+                {
+                    if((stm = opendiag.OpenFile())!=null)
+                    {
+                        BinaryFormatter format = new BinaryFormatter();
+                        _sample_series_object =  format.Deserialize(stm);
+                        if(_sample_series_object.GenType == typeof(byte))
+                        {
+                            SampleSeries<byte>.RestoreInterpolate < byte > inst = InterpolateC.GetInstanceByName<byte>;
+                            _sample_series_object.InterpolationRebuilder = inst;
+                        } else if(_sample_series_object.GenType == typeof(ushort))
+                        {
+                            SampleSeries<ushort>.RestoreInterpolate<ushort> inst = InterpolateC.GetInstanceByName<ushort>;
+                            _sample_series_object.InterpolationRebuilder = inst;
+                        }
+                        else if (_sample_series_object.GenType == typeof(uint))
+                        {
+                            SampleSeries<uint>.RestoreInterpolate<uint> inst = InterpolateC.GetInstanceByName<uint>;
+                            _sample_series_object.InterpolationRebuilder = inst;
+                        }
+                        else if (_sample_series_object.GenType == typeof(ulong))
+                        {
+                            SampleSeries<ulong>.RestoreInterpolate<ulong> inst = InterpolateC.GetInstanceByName<ulong>;
+                            _sample_series_object.InterpolationRebuilder = inst;
+                        }
+                        else if (_sample_series_object.GenType == typeof(double))
+                        {
+                            SampleSeries<double>.RestoreInterpolate<double> inst = InterpolateC.GetInstanceByName<double>;
+                            _sample_series_object.InterpolationRebuilder = inst;
+                        }
+                        else if (_sample_series_object.GenType == typeof(float))
+                        {
+                            SampleSeries<float>.RestoreInterpolate<float> inst = InterpolateC.GetInstanceByName<float>;
+                            _sample_series_object.InterpolationRebuilder = inst;
+                        }
+                        else
+                        {
+                            throw new ArgumentException("Argument Type not supported");
+                        }
+                        _sample_series_object.RebuildInterpolation();
+                        numSampleR.Value = _sample_series_object.SampleRate;
+                        numSampleB.Value = _sample_series_object.SampleBits;
+                        txtSMaxVal.Text = _sample_series_object.MaxValue.ToString();
+                        txtSMinVal.Text = _sample_series_object.MinValue.ToString();
+                        btnAddPoint.Enabled = true;
+                        btnClrPoint.Enabled = true;
+                        btnGenSeries.Enabled = true;
+                        chkSigRealT.Enabled = true;
+                        txtXRange.Enabled = true;
+                        txtYRange.Enabled = true;
+                        btnSigInit.Enabled = false;
+                        numSampleB.Enabled = false;
+                        numSampleR.Enabled = false;
+                        txtSampleT.Enabled = false;
+                        txtSMaxVal.Enabled = false;
+                        txtSMinVal.Enabled = false;
+                        txtXRange.Enabled = true;
+                        txtYRange.Enabled = true;
+                        cmbDataType.Enabled = false;
+                        RefreshDisp();
+                    }
+                    
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Cannot Load File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void generalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmSettings setfrm = new FrmSettings();
+            setfrm.Show();
+        }
+
+        private void pluginsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -3,180 +3,190 @@ using System.Runtime.InteropServices;
 
 namespace NXWaveIO
 {
+    /// <summary>
+    /// FTDI Status
+    /// </summary>
     public enum FTStatus : uint
     {
+        /// <summary>
+        /// 
+        /// </summary>
         OK,
+        /// <summary>
+        /// 
+        /// </summary>
         INVALID_HANDLE,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_NOT_FOUND,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_NOT_OPENED,
+        /// <summary>
+        /// 
+        /// </summary>
         IO_ERROR,
+        /// <summary>
+        /// 
+        /// </summary>
         INSUFFICIENT_RESOURCES,
+        /// <summary>
+        /// 
+        /// </summary>
         INVALID_PARAMETER,
+        /// <summary>
+        /// 
+        /// </summary>
         INVALID_BAUD_RATE,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_NOT_OPENED_FOR_ERASE,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_NOT_OPENED_FOR_WRITE,
+        /// <summary>
+        /// 
+        /// </summary>
         FAILED_TO_WRITE_DEVICE,
+        /// <summary>
+        /// 
+        /// </summary>
         EEPROM_READ_FAILED,
+        /// <summary>
+        /// 
+        /// </summary>
         EEPROM_WRITE_FAILED,
+        /// <summary>
+        /// 
+        /// </summary>
         EEPROM_ERASE_FAILED,
+        /// <summary>
+        /// 
+        /// </summary>
         EEPROM_NOT_PRESENT,
+        /// <summary>
+        /// 
+        /// </summary>
         EEPROM_NOT_PROGRAMMED,
+        /// <summary>
+        /// 
+        /// </summary>
         INVALID_ARGS,
+        /// <summary>
+        /// 
+        /// </summary>
         NOT_SUPPORTED,
+        /// <summary>
+        /// 
+        /// </summary>
         OTHER_ERROR,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_LIST_NOT_READY
     }
+
+    /// <summary>
+    /// For FT_OpenEx
+    /// </summary>
     [Flags]
     public enum FTOpenExFlags
     {
+        /// <summary>
+        /// 
+        /// </summary>
         OPEN_BY_SERIAL_NUMBER = 1,
+        /// <summary>
+        /// 
+        /// </summary>
         OPEN_BY_DESCRIPTION = 2,
+        /// <summary>
+        /// 
+        /// </summary>
         OPEN_BY_LOCATION = 4,
+        /// <summary>
+        /// 
+        /// </summary>
         OPEN_MASK = 7
     }
 
+    /// <summary>
+    /// FT Device Type Name
+    /// </summary>
     public enum FTDeviceType : uint
     {
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_BM,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_AM,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_100AX,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_UNKNOWN,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_2232C,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_232R,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_2232H,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_4232H,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_232H,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_X_SERIES,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_4222H_0,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_4222H_1_2,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_4222H_3,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_4222_PROG,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_900,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_930,
+        /// <summary>
+        /// 
+        /// </summary>
         DEVICE_UMFTPD3A
-    }
-
-    [Flags]
-    public enum FTListDeviceFlags : uint
-    {
-        LIST_NUMBER_ONLY = 0x80000000,
-        LIST_BY_INDEX = 0x40000000,
-        LIST_ALL = 0x20000000
-    }
-
-
-    [Flags]
-    public enum FTFlowControl : UInt16
-    {
-        NONE = 0x0000,
-        RTS_CTS = 0x0100,
-        DTR_DSR = 0x0200,
-        XON_XOFF = 0x0400
-    }
-
-    public enum FTParity : byte
-    {
-        NONE = 0,
-        ODD = 1,
-        EVEN = 2,
-        MARK = 3,
-        SPACE = 4
-    }
-
-    public enum FTPurgeBuffer
-    {
-        RX = 1,
-        TX = 2
-    }
-
-    [Flags]
-    public enum FTEvent
-    {
-        RXCHAR = 1,
-        MODEM_STATUS = 2,
-        LINE_STATUS = 4,
-    }
-
-    /// <summary>
-    /// The SPI Transfer Option
-    /// Use "|" Operator to link them
-    /// </summary>
-    [Flags]
-    public enum SPITransferOption : uint
-    {
-        SIZE_IN_BYTES = 0x00000000,
-        SIZE_IN_BITS = 0x00000001,
-        CHIPSELECT_ENABLE = 0x00000002,
-        CHIPSELECT_DISABLE = 0x00000004
-    }
-
-    /// <summary>
-    ///  The SPI Configuration Option
-    /// </summary>
-    [Flags]
-    public enum SPIConfigOption : uint
-    {
-        MODE_MASK = 0x00000003,
-        MODE0 = 0x00000000,
-        MODE1 = 0x00000001,
-        MODE2 = 0x00000002,
-        MODE3 = 0x00000003,
-        CS_MASK = 0x0000001C,       /*111 00*/
-        CS_DBUS3 = 0x00000000,      /*000 00*/
-        CS_DBUS4 = 0x00000004,      /*001 00*/
-        CS_DBUS5 = 0x00000008,      /*010 00*/
-        CS_DBUS6 = 0x0000000C,      /*011 00*/
-        CS_DBUS7 = 0x00000010,      /*100 00*/
-        CS_ACTIVELOW = 0x00000020
-    }
-
-    /// <summary>
-    /// SPI Channel Initialization Configuration
-    /// </summary>
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct ChannelConfig
-    {
-        /// <summary>
-        /// The clock frequency of SPI in Hz
-        /// </summary>
-        /// <remarks>
-        /// The clock rate support by driver range from 0 to 30MHz
-        /// </remarks>
-        public uint ClockRate;
-
-        /// <summary>
-        /// The latency time of SPI communication in ms
-        /// </summary>
-        public byte LatencyTimer;
-
-        /// <summary>
-        /// Configuration of SPI<see cref="SPIConfigOption"/> 
-        /// </summary>
-        public uint configOptions;   /*This member provides a way to enable/disable features
-	specific to the protocol that are implemented in the chip
-	BIT1-0=CPOL-CPHA:	00 - MODE0 - data captured on rising edge, propagated on falling
- 						01 - MODE1 - data captured on falling edge, propagated on rising
- 						10 - MODE2 - data captured on falling edge, propagated on rising
- 						11 - MODE3 - data captured on rising edge, propagated on falling
-	BIT4-BIT2: 000 - A/B/C/D_DBUS3=ChipSelect
-			 : 001 - A/B/C/D_DBUS4=ChipSelect
- 			 : 010 - A/B/C/D_DBUS5=ChipSelect
- 			 : 011 - A/B/C/D_DBUS6=ChipSelect
- 			 : 100 - A/B/C/D_DBUS7=ChipSelect
- 	BIT5: ChipSelect is active high if this bit is 0
-	BIT6 -BIT31		: Reserved
-	*/
-        /// <summary>
-        /// Configuration for FTDI IO port
-        /// </summary>
-        public uint Pin;/*BIT7   -BIT0:   Initial direction of the pins	*/
-                        /*BIT15 -BIT8:   Initial values of the pins		*/
-                        /*BIT23 -BIT16: Final direction of the pins		*/
-                        /*BIT31 -BIT24: Final values of the pins		*/
-        /// <summary>
-        /// Do not use
-        /// </summary>
-        public UInt16 reserved;
     }
 
     /// <summary>

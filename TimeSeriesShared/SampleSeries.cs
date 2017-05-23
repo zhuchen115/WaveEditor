@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace TimeSeriesShared
 {
@@ -13,6 +14,7 @@ namespace TimeSeriesShared
     /// <remarks>
     /// Define the Type of data when initialize
     /// </remarks>
+    [Serializable]
     public class SamplePoint<T> : IComparable, IEquatable<SamplePoint<T>>
         where T: IComparable,IEquatable<T>,IConvertible
     {
@@ -289,6 +291,17 @@ namespace TimeSeriesShared
             return time.GetHashCode();
         }
 
+        [OnSerializing]
+        public void OnserializeMethod(StreamingContext context)
+        {
+            if(Tag is IInterpolate<T>)
+            {
+                Tag = ((IInterpolate<T>)Tag).Name;
+            }else
+            {
+                Tag = null;
+            }
+        }
 
     }
 
@@ -304,6 +317,7 @@ namespace TimeSeriesShared
     /// If the type is signed integer, the value can only be fixed point.
     /// If the type is a real number (float, double) Min Max is the range of data.
     /// </remarks>
+    [Serializable]
     public class SampleSeries<T>
         where T: IComparable,IEquatable<T>,IConvertible,IFormattable,new()
     {
@@ -323,6 +337,14 @@ namespace TimeSeriesShared
         }
 
         UInt16 _sample_bits;
+
+        public Type GenType
+        {
+            get
+            {
+                return typeof(T);
+            }
+        }
 
         /// <summary>
         /// The bits / accuracy of Sample
@@ -570,6 +592,7 @@ namespace TimeSeriesShared
             return ((double)time / SampleRate);
         }
 
+        [NonSerialized]
         BackgroundWorker worker0 = null;
 
         /// <summary>
@@ -748,8 +771,11 @@ namespace TimeSeriesShared
                 {
                     // Find out the next point
                     int idx = ctrldata.FindIndex((SamplePoint<T> point) => { return point.time == dispctrl.Last().time; });
-                    if (idx < 1) //This can never happen
+                    if (idx < 1)//There are no point after
+                    {
                         throw new Exception();
+                    }
+                        
                     if (idx == ctrldata.Count() - 1) //The last point
                     {
                         dispctrl.Add(new SamplePoint<T>(stop, dispctrl.Last().Value, false, MinValue, MaxValue, SampleBits) { Tag = new ZeroOrderHolder<T>()});
@@ -835,5 +861,20 @@ namespace TimeSeriesShared
             }
             return result.ToArray();
         }
+
+        public delegate IInterpolate<T> RestoreInterpolate<Ty>(string name);
+
+        public RestoreInterpolate<T> InterpolationRebuilder { get; set; }
+
+        public void RebuildInterpolation()
+        {
+            foreach(SamplePoint<T> sp in ctrldata)
+            {
+                if(sp.Tag is string)
+                    sp.Tag = InterpolationRebuilder((string)sp.Tag);
+            }
+        }
+        
+
     }
 }

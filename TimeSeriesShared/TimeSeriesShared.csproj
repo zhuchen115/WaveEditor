@@ -87,9 +87,6 @@
     <Compile Include="WaveIOConfig.cs" />
     <Compile Include="ZOH.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -123,6 +123,12 @@
     <Compile Include="FrmPoint.Designer.cs">
       <DependentUpon>FrmPoint.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSettings.Designer.cs">
+      <DependentUpon>FrmSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interpolate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -136,6 +142,9 @@
     <EmbeddedResource Include="FrmPoint.resx">
       <DependentUpon>FrmPoint.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmSettings.resx">
+      <DependentUpon>FrmSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -146,7 +155,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -192,10 +200,13 @@
       <Name>TimeSeriesShared</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\警告 %281%29.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-xcopy /s /y "$(SolutionDir)packages\NLua.1.3.2.1\lib\native\*.*" "$(TargetDir)"</PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

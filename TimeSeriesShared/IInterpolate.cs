@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TimeSeriesShared
-{   
+{
     /// <summary>
     /// Interpolation class that can accept any numeric type
     /// </summary>
