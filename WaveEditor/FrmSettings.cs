@@ -10,8 +10,14 @@ using System.Windows.Forms;
 
 namespace WaveEditor
 {
+    /// <summary>
+    /// The setting forms for the Wave Editor
+    /// </summary>
     public partial class FrmSettings : Form
     {
+        /// <summary>
+        /// Initialize the Setting Form
+        /// </summary>
         public FrmSettings()
         {
             InitializeComponent();

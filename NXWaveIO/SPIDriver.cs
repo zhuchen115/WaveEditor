@@ -488,6 +488,9 @@ namespace NXWaveIO
                 ftHandle = IntPtr.Zero;
             }
         }
+        /// <summary>
+        /// Destruct Function only for GC
+        /// </summary>
         ~SPIDriver()
         {
             Dispose(false);

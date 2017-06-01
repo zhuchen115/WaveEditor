@@ -291,6 +291,11 @@ namespace TimeSeriesShared
             return time.GetHashCode();
         }
 
+        /// <summary>
+        /// Serialization Function
+        /// </summary>
+        /// <remarks>Do not call this function directly </remarks>
+        /// <param name="context"></param>
         [OnSerializing]
         public void OnserializeMethod(StreamingContext context)
         {
@@ -338,6 +343,9 @@ namespace TimeSeriesShared
 
         UInt16 _sample_bits;
 
+        /// <summary>
+        /// Get the type of generic
+        /// </summary>
         public Type GenType
         {
             get
@@ -419,6 +427,14 @@ namespace TimeSeriesShared
             // Make sure the data has no distinct.
             ctrldata = ctrldata.Distinct().ToList();
             
+        }
+
+        /// <summary>
+        /// The number of control point
+        /// </summary>
+        public int Size
+        {
+            get { return ctrldata.Count(); }
         }
 
         /// <summary>
@@ -736,7 +752,8 @@ namespace TimeSeriesShared
         /// <returns>The double array</returns>
         public double[] GenerateDispSeries(uint start, uint stop,int DispNum=1000)
         {
-
+            if (ctrldata.Count < 2)
+                return new double[0];
             double[] disp = new double[DispNum];
             if (stop <= start)
                 throw new InvalidOperationException("Time Start must smaller than Time Stop");
@@ -862,10 +879,22 @@ namespace TimeSeriesShared
             return result.ToArray();
         }
 
+        /// <summary>
+        /// Create a function pointer to restore the interpolation
+        /// </summary>
+        /// <typeparam name="Ty">Same as T</typeparam>
+        /// <param name="name">The name from SamplePoint</param>
+        /// <returns>Interpolation Class</returns>
         public delegate IInterpolate<T> RestoreInterpolate<Ty>(string name);
 
+        /// <summary>
+        /// Rebuild Interpolation
+        /// </summary>
         public RestoreInterpolate<T> InterpolationRebuilder { get; set; }
 
+        /// <summary>
+        /// Rebuild Interpolation
+        /// </summary>
         public void RebuildInterpolation()
         {
             foreach(SamplePoint<T> sp in ctrldata)

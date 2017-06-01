@@ -118,6 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAEkSURBVEhLtZTREYIwDIYzghvqCG4AI7gBHvgOGzACjOAE1g0wSYOWEGh4MHff2Wt+fmITClsR
+        KjiFB5xDAy0yIJNA65ZzqBF5PtiwgSLUEBIzm6gpsi8Q07Q6L8OmOZt6qtyCntXmjkpH1kTdU+VSlpXj
+        RqkEmlKkpL2pnCZquYr8EaTG+0XMR4KLiylY4jcm0JOMOzO55KhxR8JxlVhzzBibSEIroTlqPP3V2HMU
+        d/H16kdv86ghFf7ShWTnU7h5vnGbXg28CSu3gscNhzn7AFUgQWtTI7DX/Fnjxn5DariyEIPWpubHt9Hz
+        JbTXlJ41UderXApfVmIbgzbcZ2iwOAIdUpFnnDTrSnWIeempXjRl1jQNfgGNYpyC9F+MvEe5TUOAD8nK
+        w+LbqLd7AAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="lbWarn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -130,17 +141,6 @@
 </value>
   </data>
   <data name="label4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAEkSURBVEhLtZTREYIwDIYzghvqCG4AI7gBHvgOGzACjOAE1g0wSYOWEGh4MHff2Wt+fmITClsR
-        KjiFB5xDAy0yIJNA65ZzqBF5PtiwgSLUEBIzm6gpsi8Q07Q6L8OmOZt6qtyCntXmjkpH1kTdU+VSlpXj
-        RqkEmlKkpL2pnCZquYr8EaTG+0XMR4KLiylY4jcm0JOMOzO55KhxR8JxlVhzzBibSEIroTlqPP3V2HMU
-        d/H16kdv86ghFf7ShWTnU7h5vnGbXg28CSu3gscNhzn7AFUgQWtTI7DX/Fnjxn5DariyEIPWpubHt9Hz
-        JbTXlJ41UderXApfVmIbgzbcZ2iwOAIdUpFnnDTrSnWIeempXjRl1jQNfgGNYpyC9F+MvEe5TUOAD8nK
-        w+LbqLd7AAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="label5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAEkSURBVEhLtZTREYIwDIYzghvqCG4AI7gBHvgOGzACjOAE1g0wSYOWEGh4MHff2Wt+fmITClsR

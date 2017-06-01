@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("WaveEditor")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Wave Editor")]
+[assembly: AssemblyDescription("This is the software internally used in NXP Semiconductors.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("greatqq.com")]
-[assembly: AssemblyProduct("WaveEditor")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCompany("NXP Semiconductors Nijmegen")]
+[assembly: AssemblyProduct("dV/dt Signal Generator Test")]
+[assembly: AssemblyCopyright("Copyright © greatqq.com 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

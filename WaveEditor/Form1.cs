@@ -787,5 +787,11 @@ namespace WaveEditor
         {
 
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox bfrm = new AboutBox();
+            bfrm.ShowDialog();
+        }
     }
 }

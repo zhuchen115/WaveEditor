@@ -82,6 +82,8 @@
             this.txtXRange = new System.Windows.Forms.TextBox();
             this.txtYRange = new System.Windows.Forms.TextBox();
             this.toolChart = new System.Windows.Forms.ToolTip(this.components);
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -107,7 +109,8 @@
             this.menuTop.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuTop.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.settingsToolStripMenuItem});
+            this.settingsToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuTop.Location = new System.Drawing.Point(0, 0);
             this.menuTop.Name = "menuTop";
             this.menuTop.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
@@ -180,7 +183,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tblpProp);
             this.splitContainer1.Size = new System.Drawing.Size(1409, 691);
-            this.splitContainer1.SplitterDistance = 1002;
+            this.splitContainer1.SplitterDistance = 1001;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -200,8 +203,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tabWaveFunc);
-            this.splitContainer2.Size = new System.Drawing.Size(1002, 691);
-            this.splitContainer2.SplitterDistance = 529;
+            this.splitContainer2.Size = new System.Drawing.Size(1001, 691);
+            this.splitContainer2.SplitterDistance = 528;
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -238,7 +241,7 @@
             series2.Name = "TSEdit";
             this.chartSignal.Series.Add(series1);
             this.chartSignal.Series.Add(series2);
-            this.chartSignal.Size = new System.Drawing.Size(1002, 529);
+            this.chartSignal.Size = new System.Drawing.Size(1001, 528);
             this.chartSignal.TabIndex = 0;
             this.chartSignal.Text = "chart1";
             this.chartSignal.GetToolTipText += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs>(this.chartSignal_GetToolTipText);
@@ -253,7 +256,7 @@
             this.tabWaveFunc.Location = new System.Drawing.Point(0, 0);
             this.tabWaveFunc.Name = "tabWaveFunc";
             this.tabWaveFunc.SelectedIndex = 0;
-            this.tabWaveFunc.Size = new System.Drawing.Size(1002, 157);
+            this.tabWaveFunc.Size = new System.Drawing.Size(1001, 158);
             this.tabWaveFunc.TabIndex = 5;
             // 
             // tabWaveEdit
@@ -262,7 +265,7 @@
             this.tabWaveEdit.Location = new System.Drawing.Point(4, 25);
             this.tabWaveEdit.Name = "tabWaveEdit";
             this.tabWaveEdit.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWaveEdit.Size = new System.Drawing.Size(994, 128);
+            this.tabWaveEdit.Size = new System.Drawing.Size(993, 129);
             this.tabWaveEdit.TabIndex = 0;
             this.tabWaveEdit.Text = "Wave Edit";
             this.tabWaveEdit.UseVisualStyleBackColor = true;
@@ -288,7 +291,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(988, 122);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(987, 123);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // btnAddPoint
@@ -298,7 +301,7 @@
             this.btnAddPoint.Location = new System.Drawing.Point(11, 28);
             this.btnAddPoint.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
             this.btnAddPoint.Name = "btnAddPoint";
-            this.btnAddPoint.Size = new System.Drawing.Size(175, 40);
+            this.btnAddPoint.Size = new System.Drawing.Size(175, 41);
             this.btnAddPoint.TabIndex = 0;
             this.btnAddPoint.Text = "Add Point (&A)";
             this.btnAddPoint.UseVisualStyleBackColor = true;
@@ -311,7 +314,7 @@
             this.btnEditPoint.Location = new System.Drawing.Point(208, 28);
             this.btnEditPoint.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
             this.btnEditPoint.Name = "btnEditPoint";
-            this.btnEditPoint.Size = new System.Drawing.Size(175, 40);
+            this.btnEditPoint.Size = new System.Drawing.Size(175, 41);
             this.btnEditPoint.TabIndex = 1;
             this.btnEditPoint.Text = "Edit Point (&E)";
             this.btnEditPoint.UseVisualStyleBackColor = true;
@@ -324,7 +327,7 @@
             this.btnDelPoint.Location = new System.Drawing.Point(405, 28);
             this.btnDelPoint.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
             this.btnDelPoint.Name = "btnDelPoint";
-            this.btnDelPoint.Size = new System.Drawing.Size(175, 40);
+            this.btnDelPoint.Size = new System.Drawing.Size(175, 41);
             this.btnDelPoint.TabIndex = 2;
             this.btnDelPoint.Text = "Delete Point (&D)";
             this.btnDelPoint.UseVisualStyleBackColor = true;
@@ -337,7 +340,7 @@
             this.btnClrPoint.Location = new System.Drawing.Point(602, 28);
             this.btnClrPoint.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
             this.btnClrPoint.Name = "btnClrPoint";
-            this.btnClrPoint.Size = new System.Drawing.Size(175, 40);
+            this.btnClrPoint.Size = new System.Drawing.Size(175, 41);
             this.btnClrPoint.TabIndex = 3;
             this.btnClrPoint.Text = "Clear All (&C)";
             this.btnClrPoint.UseVisualStyleBackColor = true;
@@ -350,7 +353,7 @@
             this.btnGenSeries.Location = new System.Drawing.Point(799, 28);
             this.btnGenSeries.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
             this.btnGenSeries.Name = "btnGenSeries";
-            this.btnGenSeries.Size = new System.Drawing.Size(178, 40);
+            this.btnGenSeries.Size = new System.Drawing.Size(177, 41);
             this.btnGenSeries.TabIndex = 4;
             this.btnGenSeries.Text = "Generate (&G)";
             this.btnGenSeries.UseVisualStyleBackColor = true;
@@ -362,7 +365,7 @@
             this.tabWaveOut.Location = new System.Drawing.Point(4, 25);
             this.tabWaveOut.Name = "tabWaveOut";
             this.tabWaveOut.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWaveOut.Size = new System.Drawing.Size(995, 128);
+            this.tabWaveOut.Size = new System.Drawing.Size(994, 129);
             this.tabWaveOut.TabIndex = 1;
             this.tabWaveOut.Text = "Wave Output";
             this.tabWaveOut.UseVisualStyleBackColor = true;
@@ -375,7 +378,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.44481F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.11037F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
             this.tableLayoutPanel2.Controls.Add(this.cmbWaveIO, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.lbPort, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnIOSend, 4, 1);
@@ -388,7 +391,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(989, 122);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(988, 123);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // cmbWaveIO
@@ -399,7 +402,7 @@
             this.cmbWaveIO.Location = new System.Drawing.Point(31, 40);
             this.cmbWaveIO.Margin = new System.Windows.Forms.Padding(4);
             this.cmbWaveIO.Name = "cmbWaveIO";
-            this.cmbWaveIO.Size = new System.Drawing.Size(274, 24);
+            this.cmbWaveIO.Size = new System.Drawing.Size(273, 24);
             this.cmbWaveIO.TabIndex = 0;
             this.cmbWaveIO.SelectedIndexChanged += new System.EventHandler(this.cmbWaveIO_SelectedIndexChanged);
             // 
@@ -411,7 +414,7 @@
             this.lbPort.Location = new System.Drawing.Point(31, 0);
             this.lbPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbPort.Name = "lbPort";
-            this.lbPort.Size = new System.Drawing.Size(274, 36);
+            this.lbPort.Size = new System.Drawing.Size(273, 36);
             this.lbPort.TabIndex = 1;
             this.lbPort.Text = "Port:";
             this.lbPort.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -419,7 +422,7 @@
             // btnIOSend
             // 
             this.btnIOSend.Enabled = false;
-            this.btnIOSend.Location = new System.Drawing.Point(622, 40);
+            this.btnIOSend.Location = new System.Drawing.Point(620, 40);
             this.btnIOSend.Margin = new System.Windows.Forms.Padding(4);
             this.btnIOSend.Name = "btnIOSend";
             this.btnIOSend.Size = new System.Drawing.Size(117, 29);
@@ -431,7 +434,7 @@
             // btnWaveIOCfg
             // 
             this.btnWaveIOCfg.Enabled = false;
-            this.btnWaveIOCfg.Location = new System.Drawing.Point(340, 40);
+            this.btnWaveIOCfg.Location = new System.Drawing.Point(339, 40);
             this.btnWaveIOCfg.Margin = new System.Windows.Forms.Padding(4);
             this.btnWaveIOCfg.Name = "btnWaveIOCfg";
             this.btnWaveIOCfg.Size = new System.Drawing.Size(127, 29);
@@ -486,7 +489,7 @@
             this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tblpProp.Size = new System.Drawing.Size(402, 691);
+            this.tblpProp.Size = new System.Drawing.Size(403, 691);
             this.tblpProp.TabIndex = 0;
             // 
             // lbSigProp
@@ -499,7 +502,7 @@
             this.lbSigProp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 3);
             this.lbSigProp.Name = "lbSigProp";
             this.lbSigProp.Padding = new System.Windows.Forms.Padding(0, 0, 0, 7);
-            this.lbSigProp.Size = new System.Drawing.Size(394, 57);
+            this.lbSigProp.Size = new System.Drawing.Size(395, 57);
             this.lbSigProp.TabIndex = 0;
             this.lbSigProp.Text = "Discrete Signal Property";
             this.lbSigProp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -665,7 +668,7 @@
             this.lbSampleTimeVal.Location = new System.Drawing.Point(193, 270);
             this.lbSampleTimeVal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSampleTimeVal.Name = "lbSampleTimeVal";
-            this.lbSampleTimeVal.Size = new System.Drawing.Size(205, 35);
+            this.lbSampleTimeVal.Size = new System.Drawing.Size(206, 35);
             this.lbSampleTimeVal.TabIndex = 0;
             this.lbSampleTimeVal.Text = "1E-0006";
             this.lbSampleTimeVal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -706,7 +709,7 @@
             this.btnSigInit.Location = new System.Drawing.Point(3, 343);
             this.btnSigInit.Name = "btnSigInit";
             this.btnSigInit.Padding = new System.Windows.Forms.Padding(5);
-            this.btnSigInit.Size = new System.Drawing.Size(396, 39);
+            this.btnSigInit.Size = new System.Drawing.Size(397, 39);
             this.btnSigInit.TabIndex = 13;
             this.btnSigInit.Text = "Initialize";
             this.btnSigInit.UseVisualStyleBackColor = true;
@@ -731,7 +734,7 @@
             this.chkSigRealT.Enabled = false;
             this.chkSigRealT.Location = new System.Drawing.Point(192, 388);
             this.chkSigRealT.Name = "chkSigRealT";
-            this.chkSigRealT.Size = new System.Drawing.Size(207, 29);
+            this.chkSigRealT.Size = new System.Drawing.Size(208, 29);
             this.chkSigRealT.TabIndex = 15;
             this.chkSigRealT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkSigRealT.UseVisualStyleBackColor = true;
@@ -784,6 +787,21 @@
             this.toolChart.SetToolTip(this.txtYRange, "Expression: Min,Max");
             this.txtYRange.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtYRange_KeyDown);
             this.txtYRange.Leave += new System.EventHandler(this.txtYRange_TextChanged);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // FrmEditor
             // 
@@ -874,6 +892,8 @@
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pluginsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 
