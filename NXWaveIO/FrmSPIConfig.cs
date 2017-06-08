@@ -69,6 +69,7 @@ namespace NXWaveIO
                 cmbDevices.Items.Clear();
                 return;
             }
+            cmbDevices.Items.Clear();
             foreach(FTDeviceListInfoNode node in nodes)
             {
                 cmbDevices.Items.Add(node.Description);
@@ -187,7 +188,7 @@ namespace NXWaveIO
             }
             else
             {
-                MessageBox.Show(String.Format("Failure\n Library Returned: {0}"));
+                MessageBox.Show(String.Format("Failure\n Library Returned: {0}",status));
             }
         }
 

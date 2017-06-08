@@ -41,6 +41,8 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.chartSignal = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -58,6 +60,7 @@
             this.lbPort = new System.Windows.Forms.Label();
             this.btnIOSend = new System.Windows.Forms.Button();
             this.btnWaveIOCfg = new System.Windows.Forms.Button();
+            this.btnDisCon = new System.Windows.Forms.Button();
             this.tblpProp = new System.Windows.Forms.TableLayoutPanel();
             this.lbSigProp = new System.Windows.Forms.Label();
             this.lbSigSampleRate = new System.Windows.Forms.Label();
@@ -82,8 +85,6 @@
             this.txtXRange = new System.Windows.Forms.TextBox();
             this.txtYRange = new System.Windows.Forms.TextBox();
             this.toolChart = new System.Windows.Forms.ToolTip(this.components);
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -167,6 +168,21 @@
             this.pluginsToolStripMenuItem.Text = "Plugins";
             this.pluginsToolStripMenuItem.Click += new System.EventHandler(this.pluginsToolStripMenuItem_Click);
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -183,7 +199,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tblpProp);
             this.splitContainer1.Size = new System.Drawing.Size(1409, 691);
-            this.splitContainer1.SplitterDistance = 1001;
+            this.splitContainer1.SplitterDistance = 998;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -203,8 +219,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tabWaveFunc);
-            this.splitContainer2.Size = new System.Drawing.Size(1001, 691);
-            this.splitContainer2.SplitterDistance = 528;
+            this.splitContainer2.Size = new System.Drawing.Size(998, 691);
+            this.splitContainer2.SplitterDistance = 525;
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -241,7 +257,7 @@
             series2.Name = "TSEdit";
             this.chartSignal.Series.Add(series1);
             this.chartSignal.Series.Add(series2);
-            this.chartSignal.Size = new System.Drawing.Size(1001, 528);
+            this.chartSignal.Size = new System.Drawing.Size(998, 525);
             this.chartSignal.TabIndex = 0;
             this.chartSignal.Text = "chart1";
             this.chartSignal.GetToolTipText += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs>(this.chartSignal_GetToolTipText);
@@ -256,7 +272,7 @@
             this.tabWaveFunc.Location = new System.Drawing.Point(0, 0);
             this.tabWaveFunc.Name = "tabWaveFunc";
             this.tabWaveFunc.SelectedIndex = 0;
-            this.tabWaveFunc.Size = new System.Drawing.Size(1001, 158);
+            this.tabWaveFunc.Size = new System.Drawing.Size(998, 161);
             this.tabWaveFunc.TabIndex = 5;
             // 
             // tabWaveEdit
@@ -265,7 +281,7 @@
             this.tabWaveEdit.Location = new System.Drawing.Point(4, 25);
             this.tabWaveEdit.Name = "tabWaveEdit";
             this.tabWaveEdit.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWaveEdit.Size = new System.Drawing.Size(993, 129);
+            this.tabWaveEdit.Size = new System.Drawing.Size(990, 132);
             this.tabWaveEdit.TabIndex = 0;
             this.tabWaveEdit.Text = "Wave Edit";
             this.tabWaveEdit.UseVisualStyleBackColor = true;
@@ -291,17 +307,17 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(987, 123);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(984, 126);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // btnAddPoint
             // 
             this.btnAddPoint.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnAddPoint.Enabled = false;
-            this.btnAddPoint.Location = new System.Drawing.Point(11, 28);
+            this.btnAddPoint.Location = new System.Drawing.Point(11, 29);
             this.btnAddPoint.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
             this.btnAddPoint.Name = "btnAddPoint";
-            this.btnAddPoint.Size = new System.Drawing.Size(175, 41);
+            this.btnAddPoint.Size = new System.Drawing.Size(174, 42);
             this.btnAddPoint.TabIndex = 0;
             this.btnAddPoint.Text = "Add Point (&A)";
             this.btnAddPoint.UseVisualStyleBackColor = true;
@@ -311,10 +327,10 @@
             // 
             this.btnEditPoint.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnEditPoint.Enabled = false;
-            this.btnEditPoint.Location = new System.Drawing.Point(208, 28);
+            this.btnEditPoint.Location = new System.Drawing.Point(207, 29);
             this.btnEditPoint.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
             this.btnEditPoint.Name = "btnEditPoint";
-            this.btnEditPoint.Size = new System.Drawing.Size(175, 41);
+            this.btnEditPoint.Size = new System.Drawing.Size(174, 42);
             this.btnEditPoint.TabIndex = 1;
             this.btnEditPoint.Text = "Edit Point (&E)";
             this.btnEditPoint.UseVisualStyleBackColor = true;
@@ -324,10 +340,10 @@
             // 
             this.btnDelPoint.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDelPoint.Enabled = false;
-            this.btnDelPoint.Location = new System.Drawing.Point(405, 28);
+            this.btnDelPoint.Location = new System.Drawing.Point(403, 29);
             this.btnDelPoint.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
             this.btnDelPoint.Name = "btnDelPoint";
-            this.btnDelPoint.Size = new System.Drawing.Size(175, 41);
+            this.btnDelPoint.Size = new System.Drawing.Size(174, 42);
             this.btnDelPoint.TabIndex = 2;
             this.btnDelPoint.Text = "Delete Point (&D)";
             this.btnDelPoint.UseVisualStyleBackColor = true;
@@ -337,10 +353,10 @@
             // 
             this.btnClrPoint.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnClrPoint.Enabled = false;
-            this.btnClrPoint.Location = new System.Drawing.Point(602, 28);
+            this.btnClrPoint.Location = new System.Drawing.Point(599, 29);
             this.btnClrPoint.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
             this.btnClrPoint.Name = "btnClrPoint";
-            this.btnClrPoint.Size = new System.Drawing.Size(175, 41);
+            this.btnClrPoint.Size = new System.Drawing.Size(174, 42);
             this.btnClrPoint.TabIndex = 3;
             this.btnClrPoint.Text = "Clear All (&C)";
             this.btnClrPoint.UseVisualStyleBackColor = true;
@@ -350,10 +366,10 @@
             // 
             this.btnGenSeries.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnGenSeries.Enabled = false;
-            this.btnGenSeries.Location = new System.Drawing.Point(799, 28);
+            this.btnGenSeries.Location = new System.Drawing.Point(795, 29);
             this.btnGenSeries.Margin = new System.Windows.Forms.Padding(11, 4, 11, 4);
             this.btnGenSeries.Name = "btnGenSeries";
-            this.btnGenSeries.Size = new System.Drawing.Size(177, 41);
+            this.btnGenSeries.Size = new System.Drawing.Size(178, 42);
             this.btnGenSeries.TabIndex = 4;
             this.btnGenSeries.Text = "Generate (&G)";
             this.btnGenSeries.UseVisualStyleBackColor = true;
@@ -365,24 +381,26 @@
             this.tabWaveOut.Location = new System.Drawing.Point(4, 25);
             this.tabWaveOut.Name = "tabWaveOut";
             this.tabWaveOut.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWaveOut.Size = new System.Drawing.Size(994, 129);
+            this.tabWaveOut.Size = new System.Drawing.Size(990, 132);
             this.tabWaveOut.TabIndex = 1;
             this.tabWaveOut.Text = "Wave Output";
             this.tabWaveOut.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 6;
+            this.tableLayoutPanel2.ColumnCount = 7;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.44482F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.44481F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.11037F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 99F));
             this.tableLayoutPanel2.Controls.Add(this.cmbWaveIO, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.lbPort, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnIOSend, 4, 1);
             this.tableLayoutPanel2.Controls.Add(this.btnWaveIOCfg, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.btnDisCon, 5, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
@@ -391,7 +409,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(988, 123);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(984, 126);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // cmbWaveIO
@@ -399,10 +417,10 @@
             this.cmbWaveIO.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbWaveIO.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbWaveIO.FormattingEnabled = true;
-            this.cmbWaveIO.Location = new System.Drawing.Point(31, 40);
+            this.cmbWaveIO.Location = new System.Drawing.Point(31, 41);
             this.cmbWaveIO.Margin = new System.Windows.Forms.Padding(4);
             this.cmbWaveIO.Name = "cmbWaveIO";
-            this.cmbWaveIO.Size = new System.Drawing.Size(273, 24);
+            this.cmbWaveIO.Size = new System.Drawing.Size(241, 24);
             this.cmbWaveIO.TabIndex = 0;
             this.cmbWaveIO.SelectedIndexChanged += new System.EventHandler(this.cmbWaveIO_SelectedIndexChanged);
             // 
@@ -414,7 +432,7 @@
             this.lbPort.Location = new System.Drawing.Point(31, 0);
             this.lbPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbPort.Name = "lbPort";
-            this.lbPort.Size = new System.Drawing.Size(273, 36);
+            this.lbPort.Size = new System.Drawing.Size(241, 37);
             this.lbPort.TabIndex = 1;
             this.lbPort.Text = "Port:";
             this.lbPort.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -422,7 +440,7 @@
             // btnIOSend
             // 
             this.btnIOSend.Enabled = false;
-            this.btnIOSend.Location = new System.Drawing.Point(620, 40);
+            this.btnIOSend.Location = new System.Drawing.Point(514, 41);
             this.btnIOSend.Margin = new System.Windows.Forms.Padding(4);
             this.btnIOSend.Name = "btnIOSend";
             this.btnIOSend.Size = new System.Drawing.Size(117, 29);
@@ -434,7 +452,7 @@
             // btnWaveIOCfg
             // 
             this.btnWaveIOCfg.Enabled = false;
-            this.btnWaveIOCfg.Location = new System.Drawing.Point(339, 40);
+            this.btnWaveIOCfg.Location = new System.Drawing.Point(307, 41);
             this.btnWaveIOCfg.Margin = new System.Windows.Forms.Padding(4);
             this.btnWaveIOCfg.Name = "btnWaveIOCfg";
             this.btnWaveIOCfg.Size = new System.Drawing.Size(127, 29);
@@ -442,6 +460,17 @@
             this.btnWaveIOCfg.Text = "Advanced";
             this.btnWaveIOCfg.UseVisualStyleBackColor = true;
             this.btnWaveIOCfg.Click += new System.EventHandler(this.btnWaveIOCfg_Click);
+            // 
+            // btnDisCon
+            // 
+            this.btnDisCon.Enabled = false;
+            this.btnDisCon.Location = new System.Drawing.Point(720, 40);
+            this.btnDisCon.Name = "btnDisCon";
+            this.btnDisCon.Size = new System.Drawing.Size(114, 30);
+            this.btnDisCon.TabIndex = 4;
+            this.btnDisCon.Text = "Disconnect";
+            this.btnDisCon.UseVisualStyleBackColor = true;
+            this.btnDisCon.Click += new System.EventHandler(this.btnDisCon_Click);
             // 
             // tblpProp
             // 
@@ -489,7 +518,7 @@
             this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tblpProp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tblpProp.Size = new System.Drawing.Size(403, 691);
+            this.tblpProp.Size = new System.Drawing.Size(406, 691);
             this.tblpProp.TabIndex = 0;
             // 
             // lbSigProp
@@ -502,7 +531,7 @@
             this.lbSigProp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 3);
             this.lbSigProp.Name = "lbSigProp";
             this.lbSigProp.Padding = new System.Windows.Forms.Padding(0, 0, 0, 7);
-            this.lbSigProp.Size = new System.Drawing.Size(395, 57);
+            this.lbSigProp.Size = new System.Drawing.Size(398, 57);
             this.lbSigProp.TabIndex = 0;
             this.lbSigProp.Text = "Discrete Signal Property";
             this.lbSigProp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -516,14 +545,14 @@
             this.lbSigSampleRate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 3);
             this.lbSigSampleRate.Name = "lbSigSampleRate";
             this.lbSigSampleRate.Padding = new System.Windows.Forms.Padding(0, 0, 0, 7);
-            this.lbSigSampleRate.Size = new System.Drawing.Size(181, 32);
+            this.lbSigSampleRate.Size = new System.Drawing.Size(182, 32);
             this.lbSigSampleRate.TabIndex = 0;
             this.lbSigSampleRate.Text = "Sample Rate (SPS)";
             this.lbSigSampleRate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // numSampleR
             // 
-            this.numSampleR.Location = new System.Drawing.Point(193, 99);
+            this.numSampleR.Location = new System.Drawing.Point(194, 99);
             this.numSampleR.Margin = new System.Windows.Forms.Padding(4);
             this.numSampleR.Maximum = new decimal(new int[] {
             100000000,
@@ -548,14 +577,14 @@
             this.lbSigSampleTime.Location = new System.Drawing.Point(4, 130);
             this.lbSigSampleTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSigSampleTime.Name = "lbSigSampleTime";
-            this.lbSigSampleTime.Size = new System.Drawing.Size(181, 35);
+            this.lbSigSampleTime.Size = new System.Drawing.Size(182, 35);
             this.lbSigSampleTime.TabIndex = 2;
             this.lbSigSampleTime.Text = "Total Time (s)";
             this.lbSigSampleTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtSampleT
             // 
-            this.txtSampleT.Location = new System.Drawing.Point(193, 134);
+            this.txtSampleT.Location = new System.Drawing.Point(194, 134);
             this.txtSampleT.Margin = new System.Windows.Forms.Padding(4);
             this.txtSampleT.Name = "txtSampleT";
             this.txtSampleT.Size = new System.Drawing.Size(159, 22);
@@ -572,14 +601,14 @@
             this.lbSampleB.Location = new System.Drawing.Point(4, 165);
             this.lbSampleB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSampleB.Name = "lbSampleB";
-            this.lbSampleB.Size = new System.Drawing.Size(181, 35);
+            this.lbSampleB.Size = new System.Drawing.Size(182, 35);
             this.lbSampleB.TabIndex = 4;
             this.lbSampleB.Text = "Sample Bits (bit)";
             this.lbSampleB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // numSampleB
             // 
-            this.numSampleB.Location = new System.Drawing.Point(193, 169);
+            this.numSampleB.Location = new System.Drawing.Point(194, 169);
             this.numSampleB.Margin = new System.Windows.Forms.Padding(4);
             this.numSampleB.Maximum = new decimal(new int[] {
             32,
@@ -608,14 +637,14 @@
             this.lbSampleMin.Location = new System.Drawing.Point(4, 200);
             this.lbSampleMin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSampleMin.Name = "lbSampleMin";
-            this.lbSampleMin.Size = new System.Drawing.Size(181, 35);
+            this.lbSampleMin.Size = new System.Drawing.Size(182, 35);
             this.lbSampleMin.TabIndex = 6;
             this.lbSampleMin.Text = "Mininum Value";
             this.lbSampleMin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtSMinVal
             // 
-            this.txtSMinVal.Location = new System.Drawing.Point(193, 204);
+            this.txtSMinVal.Location = new System.Drawing.Point(194, 204);
             this.txtSMinVal.Margin = new System.Windows.Forms.Padding(4);
             this.txtSMinVal.Name = "txtSMinVal";
             this.txtSMinVal.Size = new System.Drawing.Size(159, 22);
@@ -632,14 +661,14 @@
             this.lbSampleMax.Location = new System.Drawing.Point(4, 235);
             this.lbSampleMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSampleMax.Name = "lbSampleMax";
-            this.lbSampleMax.Size = new System.Drawing.Size(181, 35);
+            this.lbSampleMax.Size = new System.Drawing.Size(182, 35);
             this.lbSampleMax.TabIndex = 8;
             this.lbSampleMax.Text = "Maxinum Value";
             this.lbSampleMax.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtSMaxVal
             // 
-            this.txtSMaxVal.Location = new System.Drawing.Point(193, 239);
+            this.txtSMaxVal.Location = new System.Drawing.Point(194, 239);
             this.txtSMaxVal.Margin = new System.Windows.Forms.Padding(4);
             this.txtSMaxVal.Name = "txtSMaxVal";
             this.txtSMaxVal.Size = new System.Drawing.Size(159, 22);
@@ -656,7 +685,7 @@
             this.lbSampleTime.Location = new System.Drawing.Point(4, 270);
             this.lbSampleTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSampleTime.Name = "lbSampleTime";
-            this.lbSampleTime.Size = new System.Drawing.Size(181, 35);
+            this.lbSampleTime.Size = new System.Drawing.Size(182, 35);
             this.lbSampleTime.TabIndex = 10;
             this.lbSampleTime.Text = "Sample Time Ts";
             this.lbSampleTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -665,10 +694,10 @@
             // 
             this.lbSampleTimeVal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbSampleTimeVal.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSampleTimeVal.Location = new System.Drawing.Point(193, 270);
+            this.lbSampleTimeVal.Location = new System.Drawing.Point(194, 270);
             this.lbSampleTimeVal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSampleTimeVal.Name = "lbSampleTimeVal";
-            this.lbSampleTimeVal.Size = new System.Drawing.Size(206, 35);
+            this.lbSampleTimeVal.Size = new System.Drawing.Size(208, 35);
             this.lbSampleTimeVal.TabIndex = 0;
             this.lbSampleTimeVal.Text = "1E-0006";
             this.lbSampleTimeVal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -681,7 +710,7 @@
             this.lbInteropM.Location = new System.Drawing.Point(4, 305);
             this.lbInteropM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbInteropM.Name = "lbInteropM";
-            this.lbInteropM.Size = new System.Drawing.Size(181, 35);
+            this.lbInteropM.Size = new System.Drawing.Size(182, 35);
             this.lbInteropM.TabIndex = 11;
             this.lbInteropM.Text = "Data Type";
             this.lbInteropM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -696,7 +725,7 @@
             "DWORD",
             "QWORD",
             "Real"});
-            this.cmbDataType.Location = new System.Drawing.Point(193, 309);
+            this.cmbDataType.Location = new System.Drawing.Point(194, 309);
             this.cmbDataType.Margin = new System.Windows.Forms.Padding(4);
             this.cmbDataType.Name = "cmbDataType";
             this.cmbDataType.Size = new System.Drawing.Size(159, 24);
@@ -709,7 +738,7 @@
             this.btnSigInit.Location = new System.Drawing.Point(3, 343);
             this.btnSigInit.Name = "btnSigInit";
             this.btnSigInit.Padding = new System.Windows.Forms.Padding(5);
-            this.btnSigInit.Size = new System.Drawing.Size(397, 39);
+            this.btnSigInit.Size = new System.Drawing.Size(400, 39);
             this.btnSigInit.TabIndex = 13;
             this.btnSigInit.Text = "Initialize";
             this.btnSigInit.UseVisualStyleBackColor = true;
@@ -722,7 +751,7 @@
             this.lbSigRealT.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.lbSigRealT.Location = new System.Drawing.Point(3, 385);
             this.lbSigRealT.Name = "lbSigRealT";
-            this.lbSigRealT.Size = new System.Drawing.Size(183, 35);
+            this.lbSigRealT.Size = new System.Drawing.Size(184, 35);
             this.lbSigRealT.TabIndex = 14;
             this.lbSigRealT.Text = "Real Time ";
             this.lbSigRealT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -732,9 +761,9 @@
             this.chkSigRealT.AutoSize = true;
             this.chkSigRealT.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chkSigRealT.Enabled = false;
-            this.chkSigRealT.Location = new System.Drawing.Point(192, 388);
+            this.chkSigRealT.Location = new System.Drawing.Point(193, 388);
             this.chkSigRealT.Name = "chkSigRealT";
-            this.chkSigRealT.Size = new System.Drawing.Size(208, 29);
+            this.chkSigRealT.Size = new System.Drawing.Size(210, 29);
             this.chkSigRealT.TabIndex = 15;
             this.chkSigRealT.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkSigRealT.UseVisualStyleBackColor = true;
@@ -747,7 +776,7 @@
             this.lbDispXRange.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.lbDispXRange.Location = new System.Drawing.Point(3, 420);
             this.lbDispXRange.Name = "lbDispXRange";
-            this.lbDispXRange.Size = new System.Drawing.Size(183, 35);
+            this.lbDispXRange.Size = new System.Drawing.Size(184, 35);
             this.lbDispXRange.TabIndex = 16;
             this.lbDispXRange.Text = "X Range";
             this.lbDispXRange.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -759,7 +788,7 @@
             this.lbDispYRange.Font = new System.Drawing.Font("Calibri", 9.75F);
             this.lbDispYRange.Location = new System.Drawing.Point(3, 455);
             this.lbDispYRange.Name = "lbDispYRange";
-            this.lbDispYRange.Size = new System.Drawing.Size(183, 35);
+            this.lbDispYRange.Size = new System.Drawing.Size(184, 35);
             this.lbDispYRange.TabIndex = 17;
             this.lbDispYRange.Text = "Y Range";
             this.lbDispYRange.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -767,7 +796,7 @@
             // txtXRange
             // 
             this.txtXRange.Enabled = false;
-            this.txtXRange.Location = new System.Drawing.Point(192, 423);
+            this.txtXRange.Location = new System.Drawing.Point(193, 423);
             this.txtXRange.Name = "txtXRange";
             this.txtXRange.Size = new System.Drawing.Size(160, 22);
             this.txtXRange.TabIndex = 18;
@@ -779,7 +808,7 @@
             // txtYRange
             // 
             this.txtYRange.Enabled = false;
-            this.txtYRange.Location = new System.Drawing.Point(192, 458);
+            this.txtYRange.Location = new System.Drawing.Point(193, 458);
             this.txtYRange.Name = "txtYRange";
             this.txtYRange.Size = new System.Drawing.Size(161, 22);
             this.txtYRange.TabIndex = 19;
@@ -787,21 +816,6 @@
             this.toolChart.SetToolTip(this.txtYRange, "Expression: Min,Max");
             this.txtYRange.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtYRange_KeyDown);
             this.txtYRange.Leave += new System.EventHandler(this.txtYRange_TextChanged);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // FrmEditor
             // 
@@ -894,6 +908,7 @@
         private System.Windows.Forms.ToolStripMenuItem pluginsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Button btnDisCon;
     }
 }
 

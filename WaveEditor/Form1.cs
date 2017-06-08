@@ -202,7 +202,11 @@ namespace WaveEditor
                     chartSignal.Series[0].Points.Add(dp);
                 }
                     
-
+                if(DispRange[1]<fmp.Time)
+                {
+                    txtXRange.Text = String.Format("{0},{1}", DispRange[0], fmp.Time * 2);
+                    DispRange[1] = fmp.Time * 2;
+                }
                 if(!fmp.Group)
                     RefreshDisp();
             }
@@ -612,6 +616,7 @@ namespace WaveEditor
                         iohandle.Dispose();
                     iohandle.Init(io_cfg);
                     io_inited = true;
+                    btnDisCon.Enabled = true;
                 }catch(Exception ex)
                 {
                     MessageBox.Show(ex.Message + "\n" + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -628,6 +633,8 @@ namespace WaveEditor
                 {
                     io_cfg = iohandle.GetConfigs();
                     iohandle.Init(io_cfg);
+                    io_inited = true;
+                    btnDisCon.Enabled = true;
                 }
             }catch(Exception ex)
             {
@@ -792,6 +799,18 @@ namespace WaveEditor
         {
             AboutBox bfrm = new AboutBox();
             bfrm.ShowDialog();
+        }
+
+        private void btnDisCon_Click(object sender, EventArgs e)
+        {
+            if (io_inited)
+            {
+                iohandle.Dispose();
+                MessageBox.Show("Closed");
+                btnDisCon.Enabled = false;
+            }
+                
+            io_inited = false;
         }
     }
 }

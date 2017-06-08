@@ -788,14 +788,14 @@ namespace TimeSeriesShared
                 {
                     // Find out the next point
                     int idx = ctrldata.FindIndex((SamplePoint<T> point) => { return point.time == dispctrl.Last().time; });
-                    if (idx < 1)//There are no point after
-                    {
-                        throw new Exception();
-                    }
                         
                     if (idx == ctrldata.Count() - 1) //The last point
                     {
                         dispctrl.Add(new SamplePoint<T>(stop, dispctrl.Last().Value, false, MinValue, MaxValue, SampleBits) { Tag = new ZeroOrderHolder<T>()});
+                    }
+                    else
+                    {
+                        dispctrl.Add(ctrldata[idx + 1]);
                     }
                 }
             }

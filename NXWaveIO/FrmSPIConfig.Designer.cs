@@ -63,9 +63,9 @@
             this.btnDevReset = new System.Windows.Forms.Button();
             this.chkDevClosedLp = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -99,7 +99,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
             this.splitContainer1.Panel2MinSize = 35;
             this.splitContainer1.Size = new System.Drawing.Size(1021, 600);
-            this.splitContainer1.SplitterDistance = 540;
+            this.splitContainer1.SplitterDistance = 538;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -113,7 +113,7 @@
             this.tabConfig.Margin = new System.Windows.Forms.Padding(4);
             this.tabConfig.Name = "tabConfig";
             this.tabConfig.SelectedIndex = 0;
-            this.tabConfig.Size = new System.Drawing.Size(1021, 540);
+            this.tabConfig.Size = new System.Drawing.Size(1021, 538);
             this.tabConfig.TabIndex = 0;
             // 
             // tabGen
@@ -123,7 +123,7 @@
             this.tabGen.Margin = new System.Windows.Forms.Padding(4);
             this.tabGen.Name = "tabGen";
             this.tabGen.Padding = new System.Windows.Forms.Padding(4);
-            this.tabGen.Size = new System.Drawing.Size(1013, 511);
+            this.tabGen.Size = new System.Drawing.Size(1013, 509);
             this.tabGen.TabIndex = 0;
             this.tabGen.Text = "General";
             this.tabGen.UseVisualStyleBackColor = true;
@@ -163,14 +163,14 @@
             this.tblGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tblGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tblGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tblGeneral.Size = new System.Drawing.Size(1005, 503);
+            this.tblGeneral.Size = new System.Drawing.Size(1005, 501);
             this.tblGeneral.TabIndex = 0;
             // 
             // lbGeDev
             // 
             this.lbGeDev.AutoSize = true;
             this.lbGeDev.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbGeDev.Location = new System.Drawing.Point(192, 27);
+            this.lbGeDev.Location = new System.Drawing.Point(211, 27);
             this.lbGeDev.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbGeDev.Name = "lbGeDev";
             this.lbGeDev.Size = new System.Drawing.Size(125, 74);
@@ -182,7 +182,7 @@
             this.cmbDevices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbDevices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDevices.FormattingEnabled = true;
-            this.cmbDevices.Location = new System.Drawing.Point(325, 31);
+            this.cmbDevices.Location = new System.Drawing.Point(344, 31);
             this.cmbDevices.Margin = new System.Windows.Forms.Padding(4);
             this.cmbDevices.Name = "cmbDevices";
             this.cmbDevices.Size = new System.Drawing.Size(299, 24);
@@ -191,10 +191,12 @@
             // 
             // btnDevRefresh
             // 
-            this.btnDevRefresh.Location = new System.Drawing.Point(632, 31);
-            this.btnDevRefresh.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDevRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDevRefresh.Location = new System.Drawing.Point(651, 31);
+            this.btnDevRefresh.Margin = new System.Windows.Forms.Padding(4, 4, 50, 30);
+            this.btnDevRefresh.MinimumSize = new System.Drawing.Size(90, 30);
             this.btnDevRefresh.Name = "btnDevRefresh";
-            this.btnDevRefresh.Size = new System.Drawing.Size(100, 31);
+            this.btnDevRefresh.Size = new System.Drawing.Size(96, 40);
             this.btnDevRefresh.TabIndex = 2;
             this.btnDevRefresh.Text = "Refresh (&R)";
             this.btnDevRefresh.UseVisualStyleBackColor = true;
@@ -204,7 +206,7 @@
             // 
             this.lbGeOp.AutoSize = true;
             this.lbGeOp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbGeOp.Location = new System.Drawing.Point(192, 101);
+            this.lbGeOp.Location = new System.Drawing.Point(211, 101);
             this.lbGeOp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbGeOp.Name = "lbGeOp";
             this.lbGeOp.Size = new System.Drawing.Size(125, 74);
@@ -216,7 +218,7 @@
             // 
             this.lbGeOpened.AutoSize = true;
             this.lbGeOpened.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbGeOpened.Location = new System.Drawing.Point(325, 101);
+            this.lbGeOpened.Location = new System.Drawing.Point(344, 101);
             this.lbGeOpened.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbGeOpened.Name = "lbGeOpened";
             this.lbGeOpened.Size = new System.Drawing.Size(299, 74);
@@ -227,7 +229,7 @@
             // 
             this.lbGeIDII.AutoSize = true;
             this.lbGeIDII.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbGeIDII.Location = new System.Drawing.Point(192, 175);
+            this.lbGeIDII.Location = new System.Drawing.Point(211, 175);
             this.lbGeIDII.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbGeIDII.Name = "lbGeIDII";
             this.lbGeIDII.Size = new System.Drawing.Size(125, 74);
@@ -239,7 +241,7 @@
             // 
             this.lbGeID.AutoSize = true;
             this.lbGeID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbGeID.Location = new System.Drawing.Point(325, 175);
+            this.lbGeID.Location = new System.Drawing.Point(344, 175);
             this.lbGeID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbGeID.Name = "lbGeID";
             this.lbGeID.Size = new System.Drawing.Size(299, 74);
@@ -250,7 +252,7 @@
             // 
             this.lbGeLocIDII.AutoSize = true;
             this.lbGeLocIDII.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbGeLocIDII.Location = new System.Drawing.Point(192, 249);
+            this.lbGeLocIDII.Location = new System.Drawing.Point(211, 249);
             this.lbGeLocIDII.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbGeLocIDII.Name = "lbGeLocIDII";
             this.lbGeLocIDII.Size = new System.Drawing.Size(125, 74);
@@ -262,7 +264,7 @@
             // 
             this.lbGeLocID.AutoSize = true;
             this.lbGeLocID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbGeLocID.Location = new System.Drawing.Point(325, 249);
+            this.lbGeLocID.Location = new System.Drawing.Point(344, 249);
             this.lbGeLocID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbGeLocID.Name = "lbGeLocID";
             this.lbGeLocID.Size = new System.Drawing.Size(299, 74);
@@ -273,7 +275,7 @@
             // 
             this.lbGeSNII.AutoSize = true;
             this.lbGeSNII.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbGeSNII.Location = new System.Drawing.Point(192, 323);
+            this.lbGeSNII.Location = new System.Drawing.Point(211, 323);
             this.lbGeSNII.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbGeSNII.Name = "lbGeSNII";
             this.lbGeSNII.Size = new System.Drawing.Size(125, 74);
@@ -285,7 +287,7 @@
             // 
             this.lbGeSN.AutoSize = true;
             this.lbGeSN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbGeSN.Location = new System.Drawing.Point(325, 323);
+            this.lbGeSN.Location = new System.Drawing.Point(344, 323);
             this.lbGeSN.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbGeSN.Name = "lbGeSN";
             this.lbGeSN.Size = new System.Drawing.Size(299, 74);
@@ -296,7 +298,7 @@
             // 
             this.lbGeDescII.AutoSize = true;
             this.lbGeDescII.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbGeDescII.Location = new System.Drawing.Point(192, 397);
+            this.lbGeDescII.Location = new System.Drawing.Point(211, 397);
             this.lbGeDescII.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbGeDescII.Name = "lbGeDescII";
             this.lbGeDescII.Size = new System.Drawing.Size(125, 74);
@@ -308,7 +310,7 @@
             // 
             this.lbGeDesc.AutoSize = true;
             this.lbGeDesc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbGeDesc.Location = new System.Drawing.Point(325, 397);
+            this.lbGeDesc.Location = new System.Drawing.Point(344, 397);
             this.lbGeDesc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbGeDesc.Name = "lbGeDesc";
             this.lbGeDesc.Size = new System.Drawing.Size(299, 74);
@@ -317,11 +319,11 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConnect.Location = new System.Drawing.Point(671, 420);
-            this.btnConnect.Margin = new System.Windows.Forms.Padding(4);
+            this.btnConnect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnConnect.Location = new System.Drawing.Point(657, 417);
+            this.btnConnect.Margin = new System.Windows.Forms.Padding(10, 20, 10, 6);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(141, 47);
+            this.btnConnect.Size = new System.Drawing.Size(130, 48);
             this.btnConnect.TabIndex = 13;
             this.btnConnect.Text = "Connect Test (&T)";
             this.btnConnect.UseVisualStyleBackColor = true;
@@ -334,7 +336,7 @@
             this.tabSPICfg.Margin = new System.Windows.Forms.Padding(4);
             this.tabSPICfg.Name = "tabSPICfg";
             this.tabSPICfg.Padding = new System.Windows.Forms.Padding(4);
-            this.tabSPICfg.Size = new System.Drawing.Size(1013, 511);
+            this.tabSPICfg.Size = new System.Drawing.Size(1013, 510);
             this.tabSPICfg.TabIndex = 1;
             this.tabSPICfg.Text = "SPI";
             this.tabSPICfg.UseVisualStyleBackColor = true;
@@ -365,7 +367,7 @@
             this.tblSPICfg.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tblSPICfg.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tblSPICfg.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tblSPICfg.Size = new System.Drawing.Size(1005, 503);
+            this.tblSPICfg.Size = new System.Drawing.Size(1005, 502);
             this.tblSPICfg.TabIndex = 0;
             // 
             // lbSPClkDiv
@@ -465,7 +467,7 @@
             this.tabOutput.Margin = new System.Windows.Forms.Padding(5);
             this.tabOutput.Name = "tabOutput";
             this.tabOutput.Padding = new System.Windows.Forms.Padding(5);
-            this.tabOutput.Size = new System.Drawing.Size(1013, 511);
+            this.tabOutput.Size = new System.Drawing.Size(1013, 510);
             this.tabOutput.TabIndex = 2;
             this.tabOutput.Text = "Device";
             this.tabOutput.UseVisualStyleBackColor = true;
@@ -494,7 +496,7 @@
             this.tblDevCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.33226F));
             this.tblDevCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.33226F));
             this.tblDevCmd.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.33226F));
-            this.tblDevCmd.Size = new System.Drawing.Size(1003, 501);
+            this.tblDevCmd.Size = new System.Drawing.Size(1003, 500);
             this.tblDevCmd.TabIndex = 0;
             // 
             // lbDevTitle
@@ -540,30 +542,6 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Read ";
             // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(650, 8);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(8);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(119, 39);
-            this.btnClose.TabIndex = 1;
-            this.btnClose.Text = "Close (&C)";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSave.Location = new System.Drawing.Point(495, 8);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(8);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(119, 39);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "Save (&S)";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 5;
@@ -579,8 +557,33 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1021, 55);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1021, 57);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // btnClose
+            // 
+            this.btnClose.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClose.Location = new System.Drawing.Point(650, 8);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(8);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(119, 41);
+            this.btnClose.TabIndex = 1;
+            this.btnClose.Text = "Close (&C)";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSave.Location = new System.Drawing.Point(495, 8);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(8);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(119, 41);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "Save (&S)";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // FrmSPIConfig
             // 

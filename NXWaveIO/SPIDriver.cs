@@ -216,6 +216,18 @@ namespace NXWaveIO
             int szToSend, lenremain = ((Data_send)e.Argument).len;
             byte[] wdata = ((Data_send)e.Argument).data;
             int i = 0;
+
+            //Make some clocks first
+            datatosend = new byte[3];
+            datatosend[0] = 0x8f;
+            datatosend[1] = 0xff;
+            datatosend[2] = 0xff;
+            outptr = Marshal.AllocHGlobal(3);
+            Marshal.Copy(datatosend, 0, outptr, 3);
+            status = DllWraper.FT_Write(ftHandle, outptr, 3, ref szSent);
+            Marshal.FreeHGlobal(outptr);
+            System.Threading.Thread.Sleep(20);
+
             //First Make CS Low
             _CS_enable(true);
             // Then Shift the data out;
@@ -245,7 +257,7 @@ namespace NXWaveIO
                 Marshal.FreeHGlobal(outptr);
                 i++;
                 worker.ReportProgress((int)(100-(100*lenremain/((double) ((Data_send)e.Argument).len))),"SPI Writing");
-                System.Threading.Thread.Sleep(20);
+                System.Threading.Thread.Sleep(10);
             }
             // CS HIGH
             _CS_enable(false);
@@ -413,6 +425,14 @@ namespace NXWaveIO
             outBuffer[2] = 0x0f;
             Marshal.Copy(outBuffer, 0, outptr, 3);
             status = DllWraper.FT_Write(ftHandle, outptr, 3, ref szWrite);
+            // Generate some clocks to make the PLL synchronous
+            outBuffer[0] = 0x8f;
+            outBuffer[1] = 0xff;
+            outBuffer[2] = 0xff;
+            Marshal.Copy(outBuffer, 0, outptr, 3);
+            status = DllWraper.FT_Write(ftHandle, outptr, 3, ref szWrite);
+
+            System.Threading.Thread.Sleep(50);
 
             Marshal.FreeHGlobal(outptr);
             this.mode = mode;
