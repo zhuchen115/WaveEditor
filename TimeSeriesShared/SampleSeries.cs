@@ -265,8 +265,7 @@ namespace TimeSeriesShared
         {
             if (obj == null)
                 return 1;
-            SamplePoint<T> point = obj as SamplePoint<T>;
-            if (point != null)
+            if (obj is SamplePoint<T> point)
                 return this.time.CompareTo(point.time);
             else
                 throw new ArgumentException("Object Type Error");
@@ -297,7 +296,7 @@ namespace TimeSeriesShared
         /// <remarks>Do not call this function directly </remarks>
         /// <param name="context"></param>
         [OnSerializing]
-        public void OnserializeMethod(StreamingContext context)
+        private void OnserializeMethod(StreamingContext context)
         {
             if(Tag is IInterpolate<T>)
             {

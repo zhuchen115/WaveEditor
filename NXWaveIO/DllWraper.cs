@@ -12,7 +12,7 @@ namespace NXWaveIO
         /// <remarks>
         /// The class is only for MPSSE Initialization not implemented
         /// </remarks>
-        internal class DllWraper
+        internal static class NativeMethods
         {
             public const string DllName = "ftd2xx.dll";
 

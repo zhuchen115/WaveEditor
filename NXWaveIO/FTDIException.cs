@@ -61,7 +61,7 @@ namespace NXWaveIO
         /// <param name="info"></param>
         /// <param name="contex"></param>
         protected FTDIException(System.Runtime.Serialization.SerializationInfo info,
-            System.Runtime.Serialization.StreamingContext contex)
+            System.Runtime.Serialization.StreamingContext context) :base(info,context)
         {
         }
     }

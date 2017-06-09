@@ -17,6 +17,7 @@
             {
                 components.Dispose();
             }
+            drv.Dispose();
             base.Dispose(disposing);
         }
 
