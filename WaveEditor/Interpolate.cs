@@ -18,7 +18,7 @@ namespace WaveEditor
             dwInterpolate.Add(new LinearInterpolate<uint>());
             dwInterpolate.Add(new SplineInterpolate<uint>());
             dwInterpolate.Add(new SinInterpolate<uint>());
-            if(Properties.Settings.Default.InterpolateDll!=null)
+            /*if(Properties.Settings.Default.InterpolateDll!=null)
             {
                 string[] clsname = new string[Properties.Settings.Default.InterpolateClass.Count];
                 Properties.Settings.Default.InterpolateClass.CopyTo(clsname, 0);
@@ -33,6 +33,14 @@ namespace WaveEditor
                     }
                     LoadFromDll(dllname, clstoload.ToArray());
 
+                }
+            }*/
+            if(PluginsConfig.InterpolatePlug.Count>0)
+            {
+                Dictionary<string, string[]>.KeyCollection dllnames = PluginsConfig.InterpolatePlug.Keys;
+                foreach (string dllname in dllnames)
+                {
+                    LoadFromDll(dllname, PluginsConfig.IoPlug[dllname]);
                 }
             }
         }
@@ -120,13 +128,13 @@ namespace WaveEditor
         }
         public static void LoadFromDll(string dllName,string[] classname)
         {
-            Assembly ass = Assembly.LoadFile(dllName);
+            Assembly ass = Assembly.LoadFrom(dllName);
             foreach (string name in classname)
             {
                 Type tpbase = ass.GetType(name);
                 Type[] gtype = { typeof(uint) };
                 Type tp = tpbase.MakeGenericType(gtype);
-                if (!tp.IsAssignableFrom(typeof(IInterpolate<uint>)))
+                if (!typeof(IInterpolate<uint>).IsAssignableFrom(tp))
                 {
                     throw new InvalidProgramException("The class is not implement IInterpolate");
                 }

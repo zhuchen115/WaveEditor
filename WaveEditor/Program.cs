@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace WaveEditor
 {
@@ -13,11 +14,12 @@ namespace WaveEditor
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            Console.WriteLine("Checking Config..");
-            if(Properties.Settings.Default.IODll!=null)
-                foreach (string dll in Properties.Settings.Default.IODll)
+            Console.WriteLine("Checking Configuration..");
+            IntPtr handle = GetConsoleWindow();
+            if(PluginsConfig.IoPlug.Count>0)
+                foreach (string dll in PluginsConfig.IoPlug.Keys)
                 {
                     Console.Write("Searching for IO Library: {0}\t",dll);
                     if (!File.Exists(dll))
@@ -29,8 +31,8 @@ namespace WaveEditor
                         Console.WriteLine("Do you want to remove this module and continue? [y/n]");
                         if(Console.ReadLine().Trim().ToLower()=="y")
                         {
-                            Properties.Settings.Default.IODll.Remove(dll);
-                            Properties.Settings.Default.Save();
+                            PluginsConfig.IoPlug.Remove(dll);
+                            PluginsConfig.Save();
                         }
                         else
                         {
@@ -58,9 +60,9 @@ namespace WaveEditor
                 return;
             }
 
-            if(Properties.Settings.Default.InterpolateDll!=null)
+            if(PluginsConfig.InterpolatePlug.Count>0)
             {
-                foreach (string dll in Properties.Settings.Default.InterpolateDll)
+                foreach (string dll in PluginsConfig.InterpolatePlug.Keys)
                 {
                     Console.Write("Searching for Interpolate Library: {0}\t", dll);
                     if (!File.Exists(dll))
@@ -72,8 +74,8 @@ namespace WaveEditor
                         Console.WriteLine("Do you want to remove this module and continue? [y/n]");
                         if (Console.ReadLine().Trim().ToLower() == "y")
                         {
-                            Properties.Settings.Default.InterpolateDll.Remove(dll);
-                            Properties.Settings.Default.Save();
+                            PluginsConfig.InterpolatePlug.Remove(dll);
+                            PluginsConfig.Save();
                         }
                         else
                         {
@@ -102,9 +104,19 @@ namespace WaveEditor
                 System.Threading.Thread.Sleep(2000);
                 return;
             }
+            ShowWindow(handle, SW_HIDE);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmEditor());
+            Application.Run(new FrmEditor(handle));
         }
+
+        [DllImport("kernel32.dll",CallingConvention=CallingConvention.Winapi)]
+        public static extern IntPtr GetConsoleWindow();
+
+        [DllImport("user32.dll", CallingConvention = CallingConvention.Winapi)]
+        public static extern bool ShowWindow(IntPtr hwnd, int cmdshow);
+
+        public const int SW_HIDE = 0;
+        public const int SW_SHOW = 5;
     }
 }

@@ -37,6 +37,15 @@ namespace NXWaveIO
             cfg.Config.Add("lendian", true);
         }
 
+        static SPIDriver()
+        {
+            if(Environment.UserDomainName.ToLower()!="wbi")
+            {
+                System.Windows.Forms.MessageBox.Show("You are loading an assembly belongs to NXP Semiconductors. \nPlease check whether you have permission to use this module", "Loading Modules", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
+            }
+        }
+
+
         /// <summary>
         /// The  default configuration
         /// </summary>

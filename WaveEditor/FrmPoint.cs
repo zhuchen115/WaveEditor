@@ -117,6 +117,48 @@ namespace WaveEditor
                 btnSave.Text = "Delete";
             }
             
+            switch(Math.Log10(_SampleRate))
+            {
+                case 0:
+                    lbTUnit.Text = "s";
+                    break;
+                case 1:
+                    lbTUnit.Text = "x100ms";
+                    break;
+                case 2:
+                    lbTUnit.Text = "x10ms";
+                    break;
+                case 3:
+                    lbTUnit.Text = "ms";
+                    break;
+                case 4:
+                    lbTUnit.Text = "x100us";
+                    break;
+                case 5:
+                    lbTUnit.Text = "x10us";
+                    break;
+                case 6:
+                    lbTUnit.Text = "us";
+                    break;
+                case 7:
+                    lbTUnit.Text = "x100ns";
+                    break;
+                case 8:
+                    lbTUnit.Text = "x10ns";
+                    break;
+                case 9:
+                    lbTUnit.Text = "ns";
+                    break;
+                case 10:
+                    lbTUnit.Text = "x100ps";
+                    break;
+                case 11:
+                    lbTUnit.Text = "x10ps";
+                    break;
+                case 12:
+                    lbTUnit.Text = "ps";
+                    break;
+            }
         }
         private void chkRealTime_CheckedChanged(object sender, EventArgs e)
         {

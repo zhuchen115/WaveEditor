@@ -9,12 +9,16 @@ namespace WaveEditor
 {
     internal static class PluginsConfig
     {
-        public static Dictionary<string, string[]> ioPlug;
-        public static Dictionary<string, string[]> interpolatePlug;
+        private static Dictionary<string, string[]> ioPlug;
+        private static Dictionary<string, string[]> interpolatePlug;
         static string cfgPath;
+
+        public static Dictionary<string, string[]> IoPlug { get => ioPlug; }
+        public static Dictionary<string, string[]> InterpolatePlug { get => interpolatePlug; }
+
         static PluginsConfig()
         {
-            cfgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Wave Editor","ioconfig.bcfg");
+            cfgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "WaveEditor","ioconfig.bcfg");
             
             if (File.Exists(cfgPath))
             {
@@ -27,7 +31,7 @@ namespace WaveEditor
             {
                 ioPlug = new Dictionary<string, string[]>();
             }
-            cfgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Wave Editor", "intconfig.bcfg");
+            cfgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "WaveEditor", "intconfig.bcfg");
             if (File.Exists(cfgPath))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
@@ -43,12 +47,12 @@ namespace WaveEditor
 
         public static void Save()
         {
-            cfgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Wave Editor", "ioconfig.bcfg");
+            cfgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "WaveEditor", "ioconfig.bcfg");
             BinaryFormatter formatter = new BinaryFormatter();
             Stream fs = new FileStream(cfgPath, FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(fs, ioPlug);
             fs.Close();
-            cfgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Wave Editor", "intconfig.bcfg");
+            cfgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "WaveEditor", "intconfig.bcfg");
             fs = new FileStream(cfgPath, FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(fs, interpolatePlug);
             fs.Close();

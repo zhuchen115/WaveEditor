@@ -42,6 +42,7 @@
             this.tblFCtrl = new System.Windows.Forms.TableLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.lbTUnit = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitCtl)).BeginInit();
             this.splitCtl.Panel1.SuspendLayout();
             this.splitCtl.Panel2.SuspendLayout();
@@ -73,21 +74,23 @@
             // 
             // tblPoint
             // 
-            this.tblPoint.ColumnCount = 6;
-            this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 81.81818F));
+            this.tblPoint.ColumnCount = 7;
+            this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.42633F));
             this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 113F));
-            this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.18182F));
+            this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.53919F));
             this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 203F));
+            this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
-            this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tblPoint.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.03448F));
             this.tblPoint.Controls.Add(this.lbTime, 1, 1);
             this.tblPoint.Controls.Add(this.lbValue, 1, 3);
             this.tblPoint.Controls.Add(this.txtTime, 3, 1);
             this.tblPoint.Controls.Add(this.txtValue, 3, 3);
-            this.tblPoint.Controls.Add(this.chkRealTime, 4, 1);
+            this.tblPoint.Controls.Add(this.chkRealTime, 5, 1);
             this.tblPoint.Controls.Add(this.lbIntp, 1, 5);
             this.tblPoint.Controls.Add(this.cmbInterpo, 3, 5);
-            this.tblPoint.Controls.Add(this.chkGroup, 4, 5);
+            this.tblPoint.Controls.Add(this.chkGroup, 5, 5);
+            this.tblPoint.Controls.Add(this.lbTUnit, 4, 1);
             this.tblPoint.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblPoint.Location = new System.Drawing.Point(0, 0);
             this.tblPoint.Name = "tblPoint";
@@ -107,7 +110,7 @@
             this.lbTime.AutoSize = true;
             this.lbTime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTime.Location = new System.Drawing.Point(92, 38);
+            this.lbTime.Location = new System.Drawing.Point(49, 38);
             this.lbTime.Name = "lbTime";
             this.lbTime.Size = new System.Drawing.Size(107, 29);
             this.lbTime.TabIndex = 7;
@@ -119,7 +122,7 @@
             this.lbValue.AutoSize = true;
             this.lbValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbValue.Location = new System.Drawing.Point(92, 105);
+            this.lbValue.Location = new System.Drawing.Point(49, 105);
             this.lbValue.Name = "lbValue";
             this.lbValue.Size = new System.Drawing.Size(107, 29);
             this.lbValue.TabIndex = 8;
@@ -129,7 +132,7 @@
             // txtTime
             // 
             this.txtTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtTime.Location = new System.Drawing.Point(224, 41);
+            this.txtTime.Location = new System.Drawing.Point(172, 41);
             this.txtTime.Name = "txtTime";
             this.txtTime.Size = new System.Drawing.Size(197, 22);
             this.txtTime.TabIndex = 1;
@@ -138,7 +141,7 @@
             // txtValue
             // 
             this.txtValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtValue.Location = new System.Drawing.Point(224, 108);
+            this.txtValue.Location = new System.Drawing.Point(172, 108);
             this.txtValue.Name = "txtValue";
             this.txtValue.Size = new System.Drawing.Size(197, 22);
             this.txtValue.TabIndex = 3;
@@ -148,7 +151,7 @@
             // 
             this.chkRealTime.AutoSize = true;
             this.chkRealTime.Dock = System.Windows.Forms.DockStyle.Left;
-            this.chkRealTime.Location = new System.Drawing.Point(427, 41);
+            this.chkRealTime.Location = new System.Drawing.Point(450, 41);
             this.chkRealTime.Name = "chkRealTime";
             this.chkRealTime.Size = new System.Drawing.Size(111, 23);
             this.chkRealTime.TabIndex = 2;
@@ -161,7 +164,7 @@
             this.lbIntp.AutoSize = true;
             this.lbIntp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbIntp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.lbIntp.Location = new System.Drawing.Point(92, 172);
+            this.lbIntp.Location = new System.Drawing.Point(49, 172);
             this.lbIntp.Name = "lbIntp";
             this.lbIntp.Size = new System.Drawing.Size(107, 29);
             this.lbIntp.TabIndex = 9;
@@ -173,7 +176,7 @@
             this.cmbInterpo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbInterpo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInterpo.FormattingEnabled = true;
-            this.cmbInterpo.Location = new System.Drawing.Point(224, 175);
+            this.cmbInterpo.Location = new System.Drawing.Point(172, 175);
             this.cmbInterpo.Name = "cmbInterpo";
             this.cmbInterpo.Size = new System.Drawing.Size(197, 24);
             this.cmbInterpo.TabIndex = 10;
@@ -182,7 +185,7 @@
             // 
             this.chkGroup.AutoSize = true;
             this.chkGroup.Dock = System.Windows.Forms.DockStyle.Left;
-            this.chkGroup.Location = new System.Drawing.Point(427, 175);
+            this.chkGroup.Location = new System.Drawing.Point(450, 175);
             this.chkGroup.Name = "chkGroup";
             this.chkGroup.Size = new System.Drawing.Size(95, 23);
             this.chkGroup.TabIndex = 11;
@@ -230,6 +233,16 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // lbTUnit
+            // 
+            this.lbTUnit.AutoSize = true;
+            this.lbTUnit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbTUnit.Location = new System.Drawing.Point(375, 38);
+            this.lbTUnit.Name = "lbTUnit";
+            this.lbTUnit.Size = new System.Drawing.Size(69, 29);
+            this.lbTUnit.TabIndex = 12;
+            this.lbTUnit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // FrmPoint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -266,5 +279,6 @@
         private System.Windows.Forms.ComboBox cmbInterpo;
         private System.Windows.Forms.CheckBox chkGroup;
         private System.Windows.Forms.TableLayoutPanel tblFCtrl;
+        private System.Windows.Forms.Label lbTUnit;
     }
 }

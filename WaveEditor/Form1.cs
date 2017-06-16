@@ -27,6 +27,13 @@ namespace WaveEditor
             InitializeComponent();
             
         }
+        IntPtr console_hwnd;
+
+        public FrmEditor(IntPtr console)
+        {
+            InitializeComponent();
+            console_hwnd = console;
+        }
 
         private void FrmEditor_Load(object sender, EventArgs e)
         {
@@ -209,6 +216,7 @@ namespace WaveEditor
                 }
                 if(!fmp.Group)
                     RefreshDisp();
+                fmp.Dispose();
             }
         }
 
@@ -269,6 +277,7 @@ namespace WaveEditor
                 
                 point_click.YValues[0] = fmp.Value;
                 RefreshDisp();
+                fmp.Dispose();
             }
         }
 
@@ -469,6 +478,7 @@ namespace WaveEditor
                 }
                 RefreshDisp();
             }
+            fmp.Dispose();
         }
 
         private void txtYRange_KeyDown(object sender, KeyEventArgs e)
@@ -565,6 +575,7 @@ namespace WaveEditor
             cmbDataType.Enabled = true;
             chartSignal.Series[0].Points.Clear();
             chartSignal.Series[1].Points.Clear();
+            GC.Collect();
         }
         IWaveIO iohandle = null;
 
@@ -811,6 +822,11 @@ namespace WaveEditor
             }
                 
             io_inited = false;
+        }
+
+        private void showConsoleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.ShowWindow(console_hwnd, Program.SW_SHOW);
         }
     }
 }
