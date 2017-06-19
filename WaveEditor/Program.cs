@@ -21,8 +21,13 @@ namespace WaveEditor
             if(PluginsConfig.IoPlug.Count>0)
                 foreach (string dll in PluginsConfig.IoPlug.Keys)
                 {
-                    Console.Write("Searching for IO Library: {0}\t",dll);
-                    if (!File.Exists(dll))
+                    string dllname;
+                    if (!Path.IsPathRooted(dll))
+                        dllname = Path.Combine(Application.StartupPath, dll);
+                    else
+                        dllname = dll;
+                    Console.Write("Searching for IO Library: {0}\t",dllname);
+                    if (!File.Exists(dllname))
                     {
                         Console.WriteLine("Not Found");
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -64,8 +69,13 @@ namespace WaveEditor
             {
                 foreach (string dll in PluginsConfig.InterpolatePlug.Keys)
                 {
-                    Console.Write("Searching for Interpolate Library: {0}\t", dll);
-                    if (!File.Exists(dll))
+                    string dllname;
+                    if (!Path.IsPathRooted(dll))
+                        dllname = Path.Combine(Application.StartupPath, dll);
+                    else
+                        dllname = dll;
+                    Console.Write("Searching for Interpolate Library: {0}\t", dllname);
+                    if (!File.Exists(dllname))
                     {
                         Console.WriteLine("Not Found");
                         Console.ForegroundColor = ConsoleColor.Red;

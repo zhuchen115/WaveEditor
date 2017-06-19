@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
+using System.IO;
 using TimeSeriesShared;
 using NXWaveIO;
 
@@ -100,6 +101,8 @@ namespace WaveEditor
         /// <param name="classname">the class name</param>
         public static void LoadFromDll(string dllName,string[] classname)
         {
+            if (!Path.IsPathRooted(dllName))
+                dllName = Path.Combine(System.Windows.Forms.Application.StartupPath, dllName);
             Assembly ass = Assembly.LoadFrom(dllName);
             foreach (string name in classname)
             {

@@ -5,6 +5,7 @@ using System.Text;
 using System.Reflection;
 using InterpolationBasic;
 using TimeSeriesShared;
+using System.IO;
 
 namespace WaveEditor
 {
@@ -128,6 +129,8 @@ namespace WaveEditor
         }
         public static void LoadFromDll(string dllName,string[] classname)
         {
+            if (!Path.IsPathRooted(dllName))
+                dllName = Path.Combine(System.Windows.Forms.Application.StartupPath, dllName);
             Assembly ass = Assembly.LoadFrom(dllName);
             foreach (string name in classname)
             {

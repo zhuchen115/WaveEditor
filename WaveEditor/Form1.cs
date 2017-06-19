@@ -409,8 +409,8 @@ namespace WaveEditor
                     throw new FormatException("Expression Error, the number are not 2");
                 double min = Double.Parse(chm[0]);
                 double max = Double.Parse(chm[1]);
-                if (min > max)
-                    throw new FormatException("Min > Max");
+                if (min >= max)
+                    throw new FormatException("Minimum Value is larger than Maximum Value");
                 DispRange[0] = min;
                 DispRange[1] = max;
             }
@@ -432,7 +432,7 @@ namespace WaveEditor
                     throw new FormatException("Expression Error, the number are not 2");
                 double min = Double.Parse(chm[0]);
                 double max = Double.Parse(chm[1]);
-                if (min > max)
+                if (min >= max)
                     throw new FormatException("Min > Max");
                 DispRange[2] = min;
                 DispRange[3] = max;

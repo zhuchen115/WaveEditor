@@ -46,5 +46,13 @@ namespace WaveEditor
         {
             base.Commit(savedState);
         }
+
+        public override void Uninstall(IDictionary savedState)
+        {
+            string fname = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "WaveEditor", "ioconfig.bcfg");
+            FileInfo fi = new FileInfo(fname);
+            DirectoryInfo appdirinfo = fi.Directory;
+            appdirinfo.Delete(true);
+        }
     }
 }
