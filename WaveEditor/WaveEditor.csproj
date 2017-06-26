@@ -220,10 +220,6 @@
       <Project>{527950f3-c099-4ccd-a1ad-cef2aa1b2d38}</Project>
       <Name>InterpolationBasic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NXWaveIO\NXWaveIO.csproj">
-      <Project>{4d52ef4d-a565-4225-ad21-6fa0cbd315cd}</Project>
-      <Name>NXWaveIO</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TimeSeriesShared\TimeSeriesShared.csproj">
       <Project>{6fb83247-bd9b-4724-b77b-70c311a375f5}</Project>
       <Name>TimeSeriesShared</Name>

@@ -35,10 +35,6 @@ namespace WaveEditor
             DirectoryInfo appdirinfo = fi.Directory;
             if (!appdirinfo.Exists)
                 appdirinfo.Create();
-            string[] cls = new string[1];
-            cls[0] = "NXWaveIO.SPIDriver";
-            
-            PluginsConfig.IoPlug.Add("NXWaveIO.dll", cls);
             PluginsConfig.Save();
             base.Install(stateSaver);
         }
