@@ -16,6 +16,9 @@ namespace WaveEditor
     {
         static List<IWaveIO> dwWaveIO = new List<IWaveIO>();
 
+        /// <summary>
+        /// Load all the configured dlls when instance
+        /// </summary>
         static WaveIOC()
         {
             //dwWaveIO.Add(new SPIDriver());
@@ -119,8 +122,8 @@ namespace WaveEditor
         /// <summary>
         /// Save the dll configuration
         /// </summary>
-        /// <param name="dllName"></param>
-        /// <param name="classname"></param>
+        /// <param name="dllName">The dll name</param>
+        /// <param name="classname">The class names to be loaded</param>
         public static void SaveLoadDll(string dllName, string[] classname)
         {
             Assembly ass = Assembly.LoadFile(dllName);

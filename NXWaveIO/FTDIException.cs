@@ -15,7 +15,7 @@ namespace NXWaveIO
         /// <summary>
         /// Instance from FTStatus <see cref="FTStatus"/>
         /// </summary>
-        /// <param name="status"></param>
+        /// <param name="status">The status returned by FTDI API</param>
         public FTDIException(FTStatus status) : base("FTDI Driver Returned Status:" + status + "Type:" + Enum.GetName(typeof(FTStatus), status))
         {
 
@@ -30,7 +30,7 @@ namespace NXWaveIO
         /// <summary>
         /// Instance by message 
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">The constructor from string</param>
         public FTDIException(string message) : base(message)
         {
 
@@ -38,7 +38,7 @@ namespace NXWaveIO
         /// <summary>
         /// Instance by FTStatus and message
         /// </summary>
-        /// <param name="status"><see cref="FTStatus"/></param>
+        /// <param name="status"><see cref="FTStatus"/>The FTStatus from API</param>
         /// <param name="message">Message of Error</param>
         public FTDIException(FTStatus status, string message) : base("FTDI Driver Returned Status:" + status + "Type:" + Enum.GetName(typeof(FTStatus), status) + " Message: " + message)
         {
@@ -58,8 +58,8 @@ namespace NXWaveIO
         /// <summary>
         /// Serialize exception 
         /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
+        /// <param name="info">serialized info</param>
+        /// <param name="context">the serialized context</param>
         protected FTDIException(System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context) :base(info,context)
         {

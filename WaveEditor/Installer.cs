@@ -25,7 +25,8 @@ namespace WaveEditor
         /// <summary>
         /// This will enable the SPI Driver
         /// </summary>
-        /// <param name="stateSaver"></param>
+        /// <param name="stateSaver">An IDictionary used to save information needed to perform a commit, rollback, or uninstall operation.</param>
+        /// <see cref="Installer.Install(IDictionary)"/>
         public override void Install(IDictionary stateSaver)
         {
             //System.Diagnostics.Debugger.Launch();
@@ -42,11 +43,21 @@ namespace WaveEditor
             base.Install(stateSaver);
         }
 
+        /// <summary>
+        /// Execute when completes the install transaction.
+        /// </summary>
+        /// <param name="savedState">An IDictionary that contains the state of the computer after all the installers in the collection have run.</param>
+        /// <see cref="Installer.Commit(IDictionary)"/>
         public override void Commit(IDictionary savedState)
         {
             base.Commit(savedState);
         }
 
+        /// <summary>
+        /// Executed when removes an installation.
+        /// </summary>
+        /// <param name="savedState">An IDictionary that contains the state of the computer after the installation was complete.</param>
+        /// <see cref="Installer.Uninstall(IDictionary)"/>
         public override void Uninstall(IDictionary savedState)
         {
             string fname = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "WaveEditor", "ioconfig.bcfg");

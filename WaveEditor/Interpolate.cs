@@ -18,7 +18,7 @@ namespace WaveEditor
             //Add internal interpolate
             dwInterpolate.Add(new LinearInterpolate<uint>());
             dwInterpolate.Add(new SplineInterpolate<uint>());
-            dwInterpolate.Add(new SinInterpolate<uint>());
+            //dwInterpolate.Add(new SinInterpolate<uint>());
             /*if(Properties.Settings.Default.InterpolateDll!=null)
             {
                 string[] clsname = new string[Properties.Settings.Default.InterpolateClass.Count];

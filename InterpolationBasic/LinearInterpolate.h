@@ -9,15 +9,30 @@ using namespace TimeSeriesShared;
 
 namespace InterpolationBasic {
 	
+	/// <summary> The linear interpolation class</summary>
+	/// <typeparam name="NumType"> A Numeric Type</typeparam>
+	/// <remarks> This class can be convert to pure CLI Class</remarks>
 	generic <typename NumType>
 		where NumType: IConvertible,IComparable,IEquatable<NumType>
-	
 	public ref class LinearInterpolate :IInterpolate<NumType>
 	{
 	public:
-			// Í¨¹ý IInterpolate ¼Ì³Ð
+
+		///<summary> The name of Interpolation</summary>
+		///<value> Always be "Linear"</value>
 		virtual property System::String ^ Name { System::String^ get() { return "Linear"; }}
+		
+		///<summary> The linear only have 2 points</summary>
+		///<value> Always be 2</value>
 		virtual property int MultiPoint { int get() { return 2; }}
+		
+		///<summary>
+		///Calculate the Interpolation Continuously
+		///</summary>
+		///<param name="start">The starting time</param>
+		///<param name="stop">The ending time</param>
+		///<param name="point">The control points</param>
+		///<returns>Return the interpolated time series</returns>
 		virtual array<NumType, 1> ^ Calculate(unsigned int start, unsigned int stop, array<TimeSeriesShared::SamplePoint<NumType> ^, 1> ^point) 
 		{
 			if (point->Length != 2)
@@ -62,6 +77,13 @@ namespace InterpolationBasic {
 			}
 			return result;
 		}
+
+		///<summary>Generate the Display Points</summary>
+		///<param name="start">the begin time of display</param>
+		///<param name="stop">the end time of display</param>
+		///<param name="points">The control points in range</param>
+		///<param name="num"> The number of points to be displayed</param>
+		///<returns>The double array for display</returns>
 		virtual array<double, 1> ^ CalculateDisp(unsigned int start, unsigned int stop, array<TimeSeriesShared::SamplePoint<NumType> ^, 1> ^points, int num)
 		{
 			if (points->Length != 2)

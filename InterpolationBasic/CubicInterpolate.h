@@ -11,22 +11,37 @@ using namespace TimeSeriesShared;
 
 namespace InterpolationBasic {
 
+	/// <summary> Spline Interpolation Class</summary>
+	/// <typeparam name="NumType"> A Numeric Type</typeparam>  
+	/// <remarks>This class using native code for interpolation</remarks>
+	/// <seealso>https://docs.microsoft.com/en-us/cpp/dotnet/mixed-native-and-managed-assemblies </seealso>
 	generic <typename NumType>
 		where NumType: IConvertible, IComparable, IEquatable<NumType>
 	public ref class SplineInterpolate : IInterpolate<NumType>
 	{
 		public:
-
+			
+			///<summary> The name of the Interpolation Method </summary>
+			///<value> Always "spline"</value>
 			virtual property System::String ^ Name { System::String^ get() { return "Spline"; }};
 
+			///<summary> The Spline MultiPoints are disabled </summary>
+			///<value> Always -1</value>
 			virtual property int MultiPoint { int get() { return -1; }};
-
+			
+			///<summary>
+			///Calculate the Interpolation Continuously
+			///</summary>
+			///<param name="start">The starting time</param>
+			///<param name="stop">The ending time</param>
+			///<param name="point">The control points</param>
+			///<returns>Return the interpolated time series</returns>
 			virtual array<NumType, 1> ^ Calculate(unsigned int start, unsigned int stop, array<TimeSeriesShared::SamplePoint<NumType> ^, 1> ^point)
 			{
-				
+				//Begin Time Check
 				if (start >= stop)
 					throw gcnew ArgumentException("Start Time must smaller than stop time");
-				
+				// Std Vector 
 				std::vector<double> x, y;
 				for (int i = 0; i < point->Length; i++)
 				{
@@ -70,6 +85,14 @@ namespace InterpolationBasic {
 				
 			}
 
+			
+			
+			///<summary>Generate the Display Points</summary>
+			///<param name="start">the begin time of display</param>
+			///<param name="stop">the end time of display</param>
+			///<param name="points">The control points in range</param>
+			///<param name="num"> The number of points to be displayed</param>
+			///<returns>The double array for display</returns>
 			virtual array<double, 1> ^ CalculateDisp(unsigned int start, unsigned int stop, array<TimeSeriesShared::SamplePoint<NumType> ^, 1> ^points, int num)
 			{
 				if (start >= stop)

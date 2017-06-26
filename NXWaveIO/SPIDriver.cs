@@ -10,6 +10,9 @@ namespace NXWaveIO
     /// <summary>
     /// Implement SPI driver on FTDI MPSSE
     /// </summary>
+    /// <remarks>
+    /// SPI Data Format: Little Endian
+    /// </remarks>
     public class SPIDriver : IWaveIO,IDisposable
     {
         IntPtr ftHandle = IntPtr.Zero;
@@ -31,9 +34,13 @@ namespace NXWaveIO
         public SPIDriver()
         {
             cfg = new WaveIOConfig();
+            // Clock Divide 0
             cfg.Config.Add("clkdiv", Convert.ToUInt16(0x0000));
+            //SPI Mode 0
             cfg.Config.Add("SPIMode", SPIMode.MODE0);
-            cfg.Config.Add("devid", 0);
+            // The B channel on 4232 Module
+            cfg.Config.Add("devid", 1);
+            // Data sent by little endian
             cfg.Config.Add("lendian", true);
         }
 
@@ -53,16 +60,20 @@ namespace NXWaveIO
         public WaveIOConfig GetConfigs()
         {
             WaveIOConfig cfg = new WaveIOConfig();
+            // Clock Divide 0
             cfg.Config.Add("clkdiv", Convert.ToUInt16(0x0000));
+            //SPI Mode 0
             cfg.Config.Add("SPIMode", SPIMode.MODE0);
+            // The B channel on 4232 Module
             cfg.Config.Add("devid", 1);
+            // Data sent by little endian
             cfg.Config.Add("lendian", true);
             return cfg;
         }
         /// <summary>
         /// Initialize the SPI driver
         /// </summary>
-        /// <param name="config"></param>
+        /// <param name="config">The configuration data <see cref="GetConfigs"/></param>
         public void Init(WaveIOConfig config)
         {
             FT_MPSSE_Init((int)config.Config["devid"]);
@@ -75,8 +86,8 @@ namespace NXWaveIO
         /// <remarks>
         /// Not Implemented
         /// </remarks>
-        /// <param name="data"></param>
-        /// <param name="length"></param>
+        /// <param name="data">data read from spi</param>
+        /// <param name="length">bytes to be read</param>
         public void Read(ref byte[] data, int length)
         {
             throw new NotImplementedException();
@@ -85,8 +96,8 @@ namespace NXWaveIO
         /// <summary>
         /// Read Data in Background
         /// </summary>
-        /// <param name="length"></param>
-        /// <param name="worker"></param>
+        /// <param name="length">length of data to be read</param>
+        /// <param name="worker">a background worker with data returned </param>
         public void ReadAsync(int length, ref BackgroundWorker worker)
         {
             throw new NotImplementedException();
@@ -95,9 +106,9 @@ namespace NXWaveIO
         /// <summary>
         /// Read and Write on SPI
         /// </summary>
-        /// <param name="length"></param>
-        /// <param name="datain"></param>
-        /// <param name="dataout"></param>
+        /// <param name="length">length of data </param>
+        /// <param name="datain">data to be write</param>
+        /// <param name="dataout">data read from spi</param>
         public void ReadWrite(int length, byte[] datain, ref byte[] dataout)
         {
             throw new NotImplementedException();
@@ -106,9 +117,9 @@ namespace NXWaveIO
         /// <summary>
         /// Read and Write on SPI in background
         /// </summary>
-        /// <param name="length"></param>
-        /// <param name="data"></param>
-        /// <param name="worker"></param>
+        /// <param name="length">length of data</param>
+        /// <param name="data">data to be write</param>
+        /// <param name="worker">a background worker</param>
         public void ReadWriteAsync(int length, byte[] data, ref BackgroundWorker worker)
         {
             throw new NotImplementedException();
@@ -226,7 +237,7 @@ namespace NXWaveIO
             byte[] wdata = ((Data_send)e.Argument).data;
             int i = 0;
 
-            //Make some clocks first
+            //Make some clocks first, this may make the pll synchronous
             datatosend = new byte[3];
             datatosend[0] = 0x8f;
             datatosend[1] = 0xff;

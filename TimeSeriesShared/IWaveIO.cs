@@ -39,8 +39,8 @@ namespace TimeSeriesShared
         /// <summary>
         /// Ready from IO port
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="length"></param>
+        /// <param name="data">data read from interface</param>
+        /// <param name="length">bytes of data to be read</param>
         [Obsolete("The Foreground function may make the UI crash")]
         void Read(ref byte[] data, int length);
 

@@ -29,6 +29,10 @@ namespace WaveEditor
         }
         IntPtr console_hwnd;
 
+        /// <summary>
+        /// Create the instance with a console 
+        /// </summary>
+        /// <param name="console">the pointer to a console</param>
         public FrmEditor(IntPtr console)
         {
             InitializeComponent();

@@ -11,6 +11,7 @@ namespace TimeSeriesShared
     /// <summary>
     /// The class to store the sample point
     /// </summary>
+    /// <typeparam name="T">A Numeric Type is ok</typeparam>
     /// <remarks>
     /// Define the Type of data when initialize
     /// </remarks>
@@ -134,6 +135,7 @@ namespace TimeSeriesShared
         /// <summary>
         /// Get the Value in Real
         /// </summary>
+        /// <value>Real Y Value of the Point</value>
         public double RealValue
         {
             get
@@ -181,8 +183,8 @@ namespace TimeSeriesShared
         /// <param name="data">data of sample point</param>
         /// <param name="group">whether it should be grouped</param>
         /// <param name="Min">Minimum value of sample</param>
-        /// <param name="Max"></param>
-        /// <param name="len"></param>
+        /// <param name="Max">The maximum value in series</param>
+        /// <param name="len">The bits of data</param>
         public SamplePoint(uint time, T data,bool group = false,double Min=0,double Max=5,ushort len=1)
         {
             MinValue = Min;
@@ -259,8 +261,9 @@ namespace TimeSeriesShared
         /// Implement IComparable, The time is compared
         /// <see cref="IComparable{UInt32}"/>
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A value that indicates the relative order of the objects being compared.</returns>
+        /// <see cref="IComparable"/>
         public int CompareTo(object obj)
         {
             if (obj == null)
@@ -272,10 +275,11 @@ namespace TimeSeriesShared
         }
 
         /// <summary>
-        /// Implement the IEquatable
+        /// Indicates whether the current object is equal to another object of the same type.
         /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>true if the current object is equal to the other parameter; otherwise, false.</returns>
+        /// <see cref="IEquatable{T}"/>
         public bool Equals(SamplePoint<T> other)
         {
             return this.time == other.time;
@@ -294,7 +298,7 @@ namespace TimeSeriesShared
         /// Serialization Function
         /// </summary>
         /// <remarks>Do not call this function directly </remarks>
-        /// <param name="context"></param>
+        /// <param name="context">Serialization Context</param>
         [OnSerializing]
         private void OnserializeMethod(StreamingContext context)
         {
@@ -496,7 +500,7 @@ namespace TimeSeriesShared
         /// <summary>
         /// Get the Real value from slope value
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">the number in T</param>
         /// <returns>Double value</returns>
         public double RealValue(T value)
         {
